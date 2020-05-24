@@ -12,7 +12,7 @@ import {
   Vertical,
 } from '@res/layouts';
 
-const Element = ({ division, ...props }): JSX.Element => {
+const Element = ({ division, ...props }: ElementProps): JSX.Element => {
   switch (division) {
     case 'horizontal':
       return <Horizontal size={256} {...props} />;
@@ -31,6 +31,10 @@ const Element = ({ division, ...props }): JSX.Element => {
   return <Solid size={256} {...props} />;
 };
 
+type ElementProps = {
+  division: string;
+};
+
 export default (): JSX.Element => {
   const [height, setHeight] = useState(2);
   const [width, setWidth] = useState(3);
@@ -39,7 +43,10 @@ export default (): JSX.Element => {
   return (
     <View style={styles.container}>
       <Header title={'Flag Editor'} />
-      <Element division={Divisions[division]} ratio={height / width} />
+      <Element
+        division={Object.keys(Divisions)[division]}
+        ratio={height / width}
+      />
       <Text H2>{`${height} : ${width}`}</Text>
       <Row height={30}>
         <Text H3>Height</Text>
@@ -64,7 +71,7 @@ export default (): JSX.Element => {
         <Spinner
           value={division}
           setValue={(value: number) => setDivision(value)}
-          list={Divisions}
+          list={Object.values(Divisions).map((d) => d.name)}
         />
       </Row>
       <Footer />
