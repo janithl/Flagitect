@@ -35,12 +35,12 @@ export default ({
         <Path
           d={`M0 ${BASE_SIZE} H${BASE_SIZE}
           L${midpoint} ${midpoint} L0 ${BASE_SIZE}`}
-          fill={divColours[2]}
+          fill={divColours.length > 2 ? divColours[2] : divColours[0]}
         />
         <Path
           d={`M${BASE_SIZE} 0 L${midpoint} ${midpoint}
           L${BASE_SIZE} ${BASE_SIZE} V0`}
-          fill={divColours[3]}
+          fill={divColours.length > 3 ? divColours[3] : divColours[1]}
         />
       </G>
     </Svg>

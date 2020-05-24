@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Footer, Header, NumberSpinner, Row, Spinner, Text } from '@components';
+import colours from '@res/colours';
 import {
   Checked,
   Diagonal,
@@ -33,21 +34,31 @@ const Element = ({ division, ...props }: ElementProps): JSX.Element => {
 
 type ElementProps = {
   division: string;
+  ratio?: number;
+  divColours?: string[];
 };
 
 export default (): JSX.Element => {
   const [height, setHeight] = useState(2);
   const [width, setWidth] = useState(3);
   const [division, setDivision] = useState(0);
+  const [divColours] = useState([
+    colours.primaryBlue,
+    colours.white,
+    colours.salmon,
+  ]);
 
   return (
     <View style={styles.container}>
       <Header title={'Flag Editor'} />
+
       <Element
         division={Object.keys(Divisions)[division]}
         ratio={height / width}
+        divColours={divColours}
       />
       <Text H2>{`${height} : ${width}`}</Text>
+
       <Row height={30}>
         <Text H3>Height</Text>
         <NumberSpinner
