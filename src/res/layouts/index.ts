@@ -4,3 +4,13 @@ export { default as Diagonal } from './Diagonal';
 export { default as PerSaltire } from './PerSaltire';
 export { default as Checked } from './Checked';
 export { default as Solid } from './Solid';
+
+export const Divisions = [
+  'solid',
+  'horizontal',
+  'vertical',
+  'diagonal',
+  'diagonal_to_left',
+  'per_saltire',
+  'checked',
+];

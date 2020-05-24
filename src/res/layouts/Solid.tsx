@@ -8,7 +8,7 @@ const BASE_SIZE = 196;
 export default ({
   size = BASE_SIZE,
   ratio = 1 / 2,
-  divColours = [colours.green],
+  divColours = [colours.primaryBlue],
 }: OwnProps): JSX.Element => (
   <Svg
     height={Math.round(size * ratio)}

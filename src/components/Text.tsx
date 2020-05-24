@@ -1,12 +1,14 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import colours from 'res/colours';
+import { Styles } from 'react-native-svg';
 
 export default ({
   H1 = false,
   H2 = false,
   H3 = false,
   H4 = false,
+  colour,
   children = [],
 }: OwnProps): JSX.Element => {
   let style = styles.paragraph;
@@ -23,7 +25,8 @@ export default ({
     style = styles.heading4;
   }
 
-  return <Text style={style}>{children}</Text>;
+  const textStyle = colour ? [style, { color: colour }] : style;
+  return <Text style={textStyle}>{children}</Text>;
 };
 
 type OwnProps = {
@@ -31,6 +34,7 @@ type OwnProps = {
   H2?: boolean;
   H3?: boolean;
   H4?: boolean;
+  colour?: string;
   children?: JSX.Element[] | JSX.Element | string;
 };
 
