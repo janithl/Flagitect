@@ -1,6 +1,7 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet, Text } from 'react-native';
 
+import Editor from '@components/Editor';
 import colours from '@res/colours';
 import {
   Vertical,
@@ -12,7 +13,8 @@ import {
 
 export default (): JSX.Element => (
   <SafeAreaView style={styles.container}>
-    <Text style={styles.heading}>Hello World!</Text>
+    <Editor />
+    {/* <Text style={styles.heading}>Hello World!</Text>
     <Vertical size={256} />
     <Horizontal size={256} />
     <PerSaltire size={256} />
@@ -22,7 +24,7 @@ export default (): JSX.Element => (
       size={128}
       toLeft={false}
       divColours={[colours.beige, colours.salmon]}
-    />
+    /> */}
   </SafeAreaView>
 );
 

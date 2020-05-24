@@ -3,3 +3,4 @@ export { default as Vertical } from './Vertical';
 export { default as Diagonal } from './Diagonal';
 export { default as PerSaltire } from './PerSaltire';
 export { default as Checked } from './Checked';
+export { default as Solid } from './Solid';
