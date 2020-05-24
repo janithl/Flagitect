@@ -7,7 +7,7 @@ const BASE_SIZE = 196;
 
 export default ({
   size = BASE_SIZE,
-  ratio = 2 / 3,
+  ratio = 7 / 9,
   divsHorizontal = 9,
   divsVertical = 7,
   divColours = [colours.black, colours.white],
