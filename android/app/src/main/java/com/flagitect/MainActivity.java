@@ -1,4 +1,4 @@
-package io.github.janithl.flagitect;
+package com.flagitect;
 
 import com.facebook.react.ReactActivity;
 
