@@ -13,8 +13,10 @@
     "baseUrl": ".",
     "paths": {
       "*": ["src/*"],
+      "@components": ["src/components/index"],
       "@components/*": ["src/components/*"],
-      "@res/*": ["src/res/*"]
+      "@res/*": ["src/res/*"],
+      "@lib/*": ["src/lib/*"]
     }
   },
   "exclude": [

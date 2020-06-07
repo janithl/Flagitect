@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { G, Svg, Rect } from 'react-native-svg';
 
 import { Footer, Header } from '@components';
 import colours from '@res/colours';
+import { serialiseSVG } from '@lib/utils';
 
 const margin = 20;
 const width = Math.round(Dimensions.get('window').width - margin * 2);
@@ -30,34 +30,18 @@ const renderHorizontalDivisions = (divColours: string[]) => {
 };
 
 const renderFlag = () => (
-  <Svg
-    height={propotions * width}
-    width={width}
-    style={{ backgroundColor: '#33AAFF' }}>
+  <Svg height={propotions * width} width={width} style={styles.flag}>
     {renderHorizontalDivisions([colours.black, colours.salmon, colours.beige])}
   </Svg>
 );
 
-const childToWeb = (child: JSX.Element) => {
-  const { type, props } = child;
-  const name = type && type.displayName;
-  const webName = name && name[0].toLowerCase() + name.slice(1);
-  const Tag = webName ? webName : type;
-  return <Tag {...props}>{toWeb(props.children)}</Tag>;
-};
-
-const toWeb = (children: JSX.Element[] | JSX.Element) =>
-  React.Children.map(children, childToWeb);
-
-const serialize = () => {
-  const element = renderFlag();
-  const svgString = ReactDOMServer.renderToStaticMarkup(toWeb(element));
-  console.log(svgString);
+const exportSVG = () => {
+  console.log(serialiseSVG(renderFlag()));
 };
 
 export default (): JSX.Element => (
   <View style={styles.container}>
-    <Header title={'Flagitect'} onShare={serialize} />
+    <Header title={'Flagitect'} onShare={exportSVG} />
     <View style={styles.editor}>{renderFlag()}</View>
     <Footer />
   </View>
@@ -81,5 +65,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  flag: {
+    backgroundColor: colours.offWhite,
   },
 });
