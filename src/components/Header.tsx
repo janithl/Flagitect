@@ -1,12 +1,13 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { Button, SafeAreaView, StyleSheet, View } from 'react-native';
 
 import { Text } from '@components';
 import colours from '@res/colours';
 
-export default ({ title }: OwnProps): JSX.Element => (
+export default ({ title, onShare }: OwnProps): JSX.Element => (
   <View style={styles.header}>
     <SafeAreaView>
+      <Button onPress={onShare} title="Share" />
       <Text H2 colour={colours.white}>
         {title}
       </Text>
@@ -16,6 +17,7 @@ export default ({ title }: OwnProps): JSX.Element => (
 
 type OwnProps = {
   title: string;
+  onShare: () => void;
 };
 
 const styles = StyleSheet.create({

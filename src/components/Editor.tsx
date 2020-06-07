@@ -1,94 +1,67 @@
-import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import React from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { Dimensions, StyleSheet, View } from 'react-native';
+import { G, Svg, Rect } from 'react-native-svg';
 
-import { Footer, Header, NumberSpinner, Row, Spinner, Text } from '@components';
+import { Footer, Header } from '@components';
 import colours from '@res/colours';
-import {
-  Checked,
-  Diagonal,
-  Divisions,
-  Horizontal,
-  PerSaltire,
-  Solid,
-  Vertical,
-} from '@res/layouts';
 
-const Element = ({ division, ...props }: ElementProps): JSX.Element => {
-  switch (division) {
-    case 'horizontal':
-      return <Horizontal size={256} {...props} />;
-    case 'vertical':
-      return <Vertical size={256} {...props} />;
-    case 'diagonal':
-      return <Diagonal size={256} toLeft={false} {...props} />;
-    case 'diagonal_to_left':
-      return <Diagonal size={256} {...props} />;
-    case 'per_saltire':
-      return <PerSaltire size={256} {...props} />;
-    case 'checked':
-      return <Checked size={256} {...props} />;
-  }
+const margin = 20;
+const width = Math.round(Dimensions.get('window').width - margin * 2);
+const propotions = 2 / 3;
+const height = Math.round(propotions * width);
 
-  return <Solid size={256} {...props} />;
-};
-
-type ElementProps = {
-  division: string;
-  ratio?: number;
-  divColours?: string[];
-};
-
-export default (): JSX.Element => {
-  const [height, setHeight] = useState(2);
-  const [width, setWidth] = useState(3);
-  const [division, setDivision] = useState(0);
-  const [divColours] = useState([
-    colours.primaryBlue,
-    colours.white,
-    colours.salmon,
-  ]);
-
+const renderHorizontalDivisions = (divColours: string[]) => {
+  const divHeight = height / divColours.length;
   return (
-    <View style={styles.container}>
-      <Header title={'Flag Editor'} />
-
-      <Element
-        division={Object.keys(Divisions)[division]}
-        ratio={height / width}
-        divColours={divColours}
-      />
-      <Text H2>{`${height} : ${width}`}</Text>
-
-      <Row height={30}>
-        <Text H3>Height</Text>
-        <NumberSpinner
-          value={height}
-          setValue={(value: number) => setHeight(value)}
-          min={1}
-          max={100}
+    <G>
+      {divColours.map((colour: string, i: number) => (
+        <Rect
+          x="0"
+          y={i * divHeight}
+          height={divHeight}
+          width={width}
+          fill={colour}
+          key={i}
         />
-      </Row>
-      <Row height={30}>
-        <Text H3>Width</Text>
-        <NumberSpinner
-          value={width}
-          setValue={(value: number) => setWidth(value)}
-          min={1}
-          max={100}
-        />
-      </Row>
-      <Row height={30}>
-        <Text H3>Division</Text>
-        <Spinner
-          value={division}
-          setValue={(value: number) => setDivision(value)}
-          list={Object.values(Divisions).map((d) => d.name)}
-        />
-      </Row>
-      <Footer />
-    </View>
+      ))}
+    </G>
   );
 };
+
+const renderFlag = () => (
+  <Svg
+    height={propotions * width}
+    width={width}
+    style={{ backgroundColor: '#33AAFF' }}>
+    {renderHorizontalDivisions([colours.black, colours.salmon, colours.beige])}
+  </Svg>
+);
+
+const childToWeb = (child: JSX.Element) => {
+  const { type, props } = child;
+  const name = type && type.displayName;
+  const webName = name && name[0].toLowerCase() + name.slice(1);
+  const Tag = webName ? webName : type;
+  return <Tag {...props}>{toWeb(props.children)}</Tag>;
+};
+
+const toWeb = (children: JSX.Element[] | JSX.Element) =>
+  React.Children.map(children, childToWeb);
+
+const serialize = () => {
+  const element = renderFlag();
+  const svgString = ReactDOMServer.renderToStaticMarkup(toWeb(element));
+  console.log(svgString);
+};
+
+export default (): JSX.Element => (
+  <View style={styles.container}>
+    <Header title={'Flagitect'} onShare={serialize} />
+    <View style={styles.editor}>{renderFlag()}</View>
+    <Footer />
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -103,5 +76,10 @@ const styles = StyleSheet.create({
   slider: {
     width: 150,
     height: 50,
+  },
+  editor: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
