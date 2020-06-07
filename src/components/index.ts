@@ -5,3 +5,4 @@ export { default as NumberSpinner } from './NumberSpinner';
 export { default as Row } from './Row';
 export { default as Spinner } from './Spinner';
 export { default as Text } from './Text';
+export { default as Modal } from './Modal';

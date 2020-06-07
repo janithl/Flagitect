@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
-import { Footer, FooterButton, Header } from '@components';
+import { Footer, FooterButton, Header, Modal } from '@components';
 import colours from '@res/colours';
 import { serialiseSVG } from '@lib/utils';
 import { DivisionList, renderDivisions } from '@lib/divisions';
@@ -14,6 +14,7 @@ const width = Math.round(Dimensions.get('window').width - margin * 2);
 export default (): JSX.Element => {
   const [divisionSelected, selectDivision] = useState(0);
   const [proportionSelected, selectProportion] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
 
   const height = Math.round(ProportionsList[proportionSelected].ratio * width);
 
@@ -58,8 +59,17 @@ export default (): JSX.Element => {
             selectProportion(nextIndex(proportionSelected, ProportionsList))
           }
         />
-        <FooterButton title="Colours" value="x" />
+        <FooterButton
+          title="Colours"
+          value="x"
+          onPress={() => setModalVisible(true)}
+        />
       </Footer>
+      <Modal
+        visible={modalVisible}
+        dismiss={() => setModalVisible(false)}
+        title="Edit Colours"
+      />
     </View>
   );
 };
