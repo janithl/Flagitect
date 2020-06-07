@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
-import { Footer, FooterButton, Header, Modal } from '@components';
+import {
+  ColourSelector,
+  Footer,
+  FooterButton,
+  Header,
+  Modal,
+} from '@components';
 import colours from '@res/colours';
 import { serialiseSVG } from '@lib/utils';
 import { DivisionList, renderDivisions } from '@lib/divisions';
@@ -12,11 +18,42 @@ const margin = 15;
 const width = Math.round(Dimensions.get('window').width - margin * 2);
 
 export default (): JSX.Element => {
-  const [divisionSelected, selectDivision] = useState(0);
-  const [proportionSelected, selectProportion] = useState(0);
   const [modalVisible, setModalVisible] = useState(false);
-
+  const [divisionSelected, selectDivision] = useState(1);
+  const [proportionSelected, selectProportion] = useState(2);
   const height = Math.round(ProportionsList[proportionSelected].ratio * width);
+  const [coloursSelected, selectColours] = useState([
+    colours.primaryBlue,
+    colours.white,
+    colours.salmon,
+  ]);
+
+  const nextIndex = (currentIndex: number, list: { length: number }): number =>
+    currentIndex + 1 === list.length ? 0 : currentIndex + 1;
+
+  const renderFooter = () => (
+    <Footer>
+      <FooterButton
+        title="Division"
+        value={DivisionList[divisionSelected]}
+        onPress={() =>
+          selectDivision(nextIndex(divisionSelected, DivisionList))
+        }
+      />
+      <FooterButton
+        title="Proportion"
+        value={ProportionsList[proportionSelected].name}
+        onPress={() =>
+          selectProportion(nextIndex(proportionSelected, ProportionsList))
+        }
+      />
+      <FooterButton
+        title="Colours"
+        value={String(coloursSelected.length)}
+        onPress={() => setModalVisible(true)}
+      />
+    </Footer>
+  );
 
   const renderFlag = () => (
     <Svg
@@ -26,7 +63,7 @@ export default (): JSX.Element => {
       style={styles.flag}>
       {renderDivisions(
         DivisionList[divisionSelected],
-        [colours.black, colours.salmon, colours.beige],
+        coloursSelected,
         height,
         width,
       )}
@@ -37,39 +74,20 @@ export default (): JSX.Element => {
     console.log(serialiseSVG(renderFlag()));
   };
 
-  const nextIndex = (currentIndex: number, list: { length: number }): number =>
-    currentIndex + 1 === list.length ? 0 : currentIndex + 1;
-
   return (
     <View style={styles.container}>
       <Header title={'Flagitect'} onShare={exportSVG} />
       <View style={styles.editor}>{renderFlag()}</View>
-      <Footer>
-        <FooterButton
-          title="Division"
-          value={DivisionList[divisionSelected]}
-          onPress={() =>
-            selectDivision(nextIndex(divisionSelected, DivisionList))
-          }
-        />
-        <FooterButton
-          title="Proportion"
-          value={ProportionsList[proportionSelected].name}
-          onPress={() =>
-            selectProportion(nextIndex(proportionSelected, ProportionsList))
-          }
-        />
-        <FooterButton
-          title="Colours"
-          value="x"
-          onPress={() => setModalVisible(true)}
-        />
-      </Footer>
+      {renderFooter()}
       <Modal
         visible={modalVisible}
         dismiss={() => setModalVisible(false)}
-        title="Edit Colours"
-      />
+        title="Edit Colours">
+        <ColourSelector
+          coloursSelected={coloursSelected}
+          selectColours={selectColours}
+        />
+      </Modal>
     </View>
   );
 };

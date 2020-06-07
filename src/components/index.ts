@@ -6,3 +6,4 @@ export { default as Row } from './Row';
 export { default as Spinner } from './Spinner';
 export { default as Text } from './Text';
 export { default as Modal } from './Modal';
+export { default as ColourSelector } from './ColourSelector';

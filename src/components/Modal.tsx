@@ -43,10 +43,10 @@ type OwnProps = {
 
 const styles = StyleSheet.create({
   modalEmpty: {
-    flex: 1,
+    flex: 3,
   },
   modalBody: {
-    flex: 3,
+    flex: 5,
     backgroundColor: colours.white,
   },
   modalHeading: {
