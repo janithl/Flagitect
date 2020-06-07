@@ -1,16 +1,20 @@
 import React from 'react';
-import { Button, SafeAreaView, StyleSheet, View } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text } from '@components';
 import colours from '@res/colours';
+import { Share } from '@res/icons';
 
 export default ({ title, onShare }: OwnProps): JSX.Element => (
   <View style={styles.header}>
-    <SafeAreaView>
-      <Button onPress={onShare} title="Share" />
+    <SafeAreaView style={styles.headerContent}>
+      <View />
       <Text H2 colour={colours.white}>
         {title}
       </Text>
+      <TouchableOpacity onPress={onShare}>
+        <Share fill={colours.white} />
+      </TouchableOpacity>
     </SafeAreaView>
   </View>
 );
@@ -26,5 +30,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 100,
     backgroundColor: colours.salmon,
+  },
+  headerContent: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    width: '90%',
   },
 });
