@@ -2,14 +2,24 @@ import React from 'react';
 import { G, Path, Rect } from 'react-native-svg';
 
 export enum Division {
-  Horizontal = 'Horizontally',
-  Vertical = 'Vertically',
+  Horizontal = 'Horizontal',
+  Vertical = 'Vertical',
   Quartered = 'Quarterly',
   Diagonal = 'Diagonally',
-  DiagonalToLeft = 'Diagonally To Left',
+  DiagonalToLeft = 'Diag. To Left',
   Checked = 'Checky',
   Solid = 'Solid',
 }
+
+export const DivisionList = [
+  Division.Horizontal,
+  Division.Vertical,
+  Division.Quartered,
+  Division.Diagonal,
+  Division.DiagonalToLeft,
+  Division.Checked,
+  Division.Solid,
+];
 
 const renderHorizontalDivisions = (
   divColours: string[],

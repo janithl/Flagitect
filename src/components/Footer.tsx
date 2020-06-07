@@ -4,10 +4,14 @@ import { StyleSheet, View, TouchableOpacity } from 'react-native';
 import { Text, Row } from '@components';
 import colours from '@res/colours';
 
-export const FooterButton = ({ title, value, onPress }: FooterButtonProps) => (
+export const FooterButton = ({
+  title,
+  value,
+  onPress,
+}: FooterButtonProps): JSX.Element => (
   <TouchableOpacity style={styles.footerButton} onPress={onPress}>
     <Text colour={colours.white}>{title}</Text>
-    <Text colour={colours.white} H3>
+    <Text colour={colours.white} H4>
       {value}
     </Text>
   </TouchableOpacity>
@@ -36,7 +40,8 @@ const styles = StyleSheet.create({
     backgroundColor: colours.primaryBlue,
   },
   footerButton: {
-    padding: 20,
+    paddingHorizontal: 5,
+    paddingVertical: 20,
     alignItems: 'center',
   },
 });
