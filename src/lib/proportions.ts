@@ -1,9 +1,9 @@
-type Propotion = {
+type Proportion = {
   name: string;
   ratio: number;
 };
 
-export const PropotionsList: Propotion[] = [
+export const ProportionsList: Proportion[] = [
   {
     name: '1 : 1',
     ratio: 1,

@@ -1,5 +1,11 @@
 import React from 'react';
-import { SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native';
+import {
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { Text } from '@components';
 import colours from '@res/colours';
@@ -28,7 +34,7 @@ const styles = StyleSheet.create({
   header: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    height: 100,
+    height: Platform.OS === 'android' ? 70 : 100,
     backgroundColor: colours.salmon,
   },
   headerContent: {

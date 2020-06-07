@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text, Row } from '@components';
 import colours from '@res/colours';
@@ -36,7 +36,7 @@ type OwnProps = {
 const styles = StyleSheet.create({
   footer: {
     alignSelf: 'stretch',
-    height: 100,
+    height: Platform.OS === 'android' ? 70 : 100,
     backgroundColor: colours.primaryBlue,
   },
   footerButton: {

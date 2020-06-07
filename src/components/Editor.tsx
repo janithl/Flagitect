@@ -6,16 +6,16 @@ import { Footer, FooterButton, Header } from '@components';
 import colours from '@res/colours';
 import { serialiseSVG } from '@lib/utils';
 import { DivisionList, renderDivisions } from '@lib/divisions';
-import { PropotionsList } from '@lib/propotions';
+import { ProportionsList } from 'lib/proportions';
 
 const margin = 15;
 const width = Math.round(Dimensions.get('window').width - margin * 2);
 
 export default (): JSX.Element => {
   const [divisionSelected, selectDivision] = useState(0);
-  const [propotionSelected, selectPropotion] = useState(0);
+  const [proportionSelected, selectProportion] = useState(0);
 
-  const height = Math.round(PropotionsList[propotionSelected].ratio * width);
+  const height = Math.round(ProportionsList[proportionSelected].ratio * width);
 
   const renderFlag = () => (
     <Svg
@@ -53,9 +53,9 @@ export default (): JSX.Element => {
         />
         <FooterButton
           title="Proportion"
-          value={PropotionsList[propotionSelected].name}
+          value={ProportionsList[proportionSelected].name}
           onPress={() =>
-            selectPropotion(nextIndex(propotionSelected, PropotionsList))
+            selectProportion(nextIndex(proportionSelected, ProportionsList))
           }
         />
         <FooterButton title="Colours" value="x" />
