@@ -8,6 +8,7 @@ export enum Division {
   Diagonal = 'Diagonally',
   DiagonalToLeft = 'Diag. To Left',
   Checked = 'Checky',
+  PerSaltire = 'Per Saltire',
   Solid = 'Solid',
 }
 
@@ -18,6 +19,7 @@ export const DivisionList = [
   Division.Diagonal,
   Division.DiagonalToLeft,
   Division.Checked,
+  Division.PerSaltire,
   Division.Solid,
 ];
 
@@ -119,6 +121,28 @@ const renderDiagonalDivisions = (
   );
 };
 
+const renderPerSaltire = (
+  divColours: string[],
+  height: number,
+  width: number,
+): JSX.Element => {
+  const midpoint = [Math.round(width / 2), Math.round(height / 2)].join(' ');
+  return (
+    <G>
+      <Path d={`M0 0 H${width} L${midpoint} L0 0`} fill={divColours[0]} />
+      <Path d={`M0 0 L${midpoint} L0 ${height} V0`} fill={divColours[1]} />
+      <Path
+        d={`M0 ${height} H${width} L${midpoint} L0 ${height}`}
+        fill={divColours.length > 2 ? divColours[2] : divColours[0]}
+      />
+      <Path
+        d={`M${width} 0 L${midpoint} L${width} ${height} V0`}
+        fill={divColours.length > 3 ? divColours[3] : divColours[1]}
+      />
+    </G>
+  );
+};
+
 const renderSolid = (divColours: string[], height: number, width: number) => (
   <Rect x="0" y={0} height={height} width={width} fill={divColours[0]} />
 );
@@ -150,6 +174,8 @@ export const renderDivisions = (
       return renderDiagonalDivisions(divColours, height, width);
     case Division.Diagonal:
       return renderDiagonalDivisions(divColours, height, width, false);
+    case Division.PerSaltire:
+      return renderPerSaltire(divColours, height, width);
     case Division.Solid:
     default:
       return renderSolid(divColours, height, width);

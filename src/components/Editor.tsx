@@ -9,7 +9,7 @@ import {
   Header,
   Modal,
 } from '@components';
-import colours from '@res/colours';
+import colours, { initialColours } from '@res/colours';
 import { serialiseSVG } from '@lib/utils';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { ProportionsList } from 'lib/proportions';
@@ -22,11 +22,7 @@ export default (): JSX.Element => {
   const [divisionSelected, selectDivision] = useState(1);
   const [proportionSelected, selectProportion] = useState(2);
   const height = Math.round(ProportionsList[proportionSelected].ratio * width);
-  const [coloursSelected, selectColours] = useState([
-    colours.primaryBlue,
-    colours.white,
-    colours.salmon,
-  ]);
+  const [coloursSelected, selectColours] = useState(initialColours);
 
   const nextIndex = (currentIndex: number, list: { length: number }): number =>
     currentIndex + 1 === list.length ? 0 : currentIndex + 1;

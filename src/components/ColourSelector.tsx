@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text } from '@components';
-import colours from '@res/colours';
+import colours, { materialPalette } from '@res/colours';
 import { Add, Clear } from '@res/icons';
 
 const minimumColours = 2;
@@ -62,7 +62,7 @@ export default ({ coloursSelected, selectColours }: OwnProps): JSX.Element => {
       </View>
       {renderSectionHeading('Palette')}
       <View style={styles.selector}>
-        {Object.values(colours).map((colour, i) => (
+        {materialPalette.map((colour, i) => (
           <ColourSwatch
             key={i}
             colour={colour}
