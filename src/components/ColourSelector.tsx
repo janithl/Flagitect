@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text } from '@components';
-import colours, { materialPalette } from '@res/colours';
+import colours, { gnomePalette } from '@res/colours';
 import { Add, Clear } from '@res/icons';
 
 const minimumColours = 2;
@@ -12,15 +12,17 @@ const ColourSwatch = ({
   add = false,
   onPress,
 }: SwatchProps): JSX.Element => (
-  <TouchableOpacity
-    style={[styles.swatch, { backgroundColor: colour }]}
-    onPress={onPress}>
-    {add ? (
-      <Add fill={colours.white} size={32} />
-    ) : (
-      <Clear fill={colours.white} size={32} />
-    )}
-  </TouchableOpacity>
+  <View style={styles.swatchContainer}>
+    <View style={[styles.swatch, { backgroundColor: colour }]} />
+    <TouchableOpacity
+      style={[
+        styles.swatchButton,
+        { backgroundColor: add ? colours.secondaryBlue : colours.salmon },
+      ]}
+      onPress={onPress}>
+      {add ? <Add fill={colours.white} /> : <Clear fill={colours.white} />}
+    </TouchableOpacity>
+  </View>
 );
 
 type SwatchProps = {
@@ -62,7 +64,7 @@ export default ({ coloursSelected, selectColours }: OwnProps): JSX.Element => {
       </View>
       {renderSectionHeading('Palette')}
       <View style={styles.selector}>
-        {materialPalette.map((colour, i) => (
+        {gnomePalette.map((colour, i) => (
           <ColourSwatch
             key={i}
             colour={colour}
@@ -89,11 +91,21 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
     padding: 8,
-    borderRadius: 24,
+    borderRadius: 12,
     borderWidth: 1,
-    margin: 7,
-    alignItems: 'center',
-    alignContent: 'center',
+  },
+  swatchButton: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    height: 30,
+    width: 30,
+    borderRadius: 14,
+    borderWidth: 3,
+    borderColor: colours.white,
+  },
+  swatchContainer: {
+    padding: 7,
   },
   selector: {
     flexDirection: 'row',
