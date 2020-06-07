@@ -1,37 +1,29 @@
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
-import { G, Svg, Rect } from 'react-native-svg';
+import { Svg } from 'react-native-svg';
 
-import { Footer, Header } from '@components';
+import { Footer, FooterButton, Header } from '@components';
 import colours from '@res/colours';
 import { serialiseSVG } from '@lib/utils';
+import { Division, renderDivisions } from '@lib/divisions';
 
 const margin = 20;
 const width = Math.round(Dimensions.get('window').width - margin * 2);
 const propotions = 2 / 3;
 const height = Math.round(propotions * width);
 
-const renderHorizontalDivisions = (divColours: string[]) => {
-  const divHeight = height / divColours.length;
-  return (
-    <G>
-      {divColours.map((colour: string, i: number) => (
-        <Rect
-          x="0"
-          y={i * divHeight}
-          height={divHeight}
-          width={width}
-          fill={colour}
-          key={i}
-        />
-      ))}
-    </G>
-  );
-};
-
 const renderFlag = () => (
-  <Svg height={propotions * width} width={width} style={styles.flag}>
-    {renderHorizontalDivisions([colours.black, colours.salmon, colours.beige])}
+  <Svg
+    xmlns="http://www.w3.org/2000/svg"
+    height={propotions * width}
+    width={width}
+    style={styles.flag}>
+    {renderDivisions(
+      Division.Diagonal,
+      [colours.black, colours.salmon, colours.beige],
+      height,
+      width,
+    )}
   </Svg>
 );
 
@@ -43,7 +35,11 @@ export default (): JSX.Element => (
   <View style={styles.container}>
     <Header title={'Flagitect'} onShare={exportSVG} />
     <View style={styles.editor}>{renderFlag()}</View>
-    <Footer />
+    <Footer>
+      <FooterButton title="Division" value="Solid" />
+      <FooterButton title="Proportion" value="2 : 3" />
+      <FooterButton title="Colours" value="x" />
+    </Footer>
   </View>
 );
 
