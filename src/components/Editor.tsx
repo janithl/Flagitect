@@ -10,7 +10,7 @@ import {
   Modal,
 } from '@components';
 import colours, { initialColours } from '@res/colours';
-import { serialiseSVG } from '@lib/utils';
+import { serialiseSVG, saveFile } from '@lib/utils';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { ProportionsList } from 'lib/proportions';
 
@@ -67,7 +67,8 @@ export default (): JSX.Element => {
   );
 
   const exportSVG = () => {
-    console.log(serialiseSVG(renderFlag()));
+    const filename = `${new Date().getTime()}.svg`;
+    saveFile(filename, serialiseSVG(renderFlag()));
   };
 
   return (
