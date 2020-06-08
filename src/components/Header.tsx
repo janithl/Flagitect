@@ -9,17 +9,17 @@ import {
 
 import { Text } from '@components';
 import colours from '@res/colours';
-import { Share } from '@res/icons';
+import { Download } from '@res/icons';
 
-export default ({ title, onShare }: OwnProps): JSX.Element => (
+export default ({ title, onSave }: OwnProps): JSX.Element => (
   <View style={styles.header}>
     <SafeAreaView style={styles.headerContent}>
       <View />
       <Text H2 colour={colours.white}>
         {title}
       </Text>
-      <TouchableOpacity onPress={onShare}>
-        <Share fill={colours.white} />
+      <TouchableOpacity onPress={onSave}>
+        <Download fill={colours.white} size={32} />
       </TouchableOpacity>
     </SafeAreaView>
   </View>
@@ -27,7 +27,7 @@ export default ({ title, onShare }: OwnProps): JSX.Element => (
 
 type OwnProps = {
   title: string;
-  onShare: () => void;
+  onSave: () => void;
 };
 
 const styles = StyleSheet.create({

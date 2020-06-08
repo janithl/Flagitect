@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
-import { Alert, PermissionsAndroid } from 'react-native';
+import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import RNFetchBlob from 'rn-fetch-blob';
-const { fs } = RNFetchBlob;
+const { android, fs, ios } = RNFetchBlob;
 
 const childToWeb = (child: JSX.Element) => {
   const { type, props } = child;
@@ -23,6 +23,12 @@ export const saveFile = async (
   filename: string,
   contents: string,
 ): Promise<void> => {
+  if (Platform.OS === 'ios') {
+    const path = [fs.dirs.CacheDir, filename].join('/');
+    fs.writeFile(path, contents, 'utf8').then(() => ios.previewDocument(path));
+    return;
+  }
+
   const path = [fs.dirs.DownloadDir, filename].join('/');
   try {
     const granted = await PermissionsAndroid.request(
@@ -35,7 +41,7 @@ export const saveFile = async (
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
       fs.writeFile(path, contents, 'utf8').then(() =>
-        Alert.alert('File Written Successfully', `File written to ${path}`),
+        android.actionViewIntent(path, 'image/svg+xml'),
       );
     } else {
       Alert.alert('Error Writing File', 'Permission Denied');

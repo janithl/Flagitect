@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { Text } from '@components';
+import { SectionHeading } from '@components';
 import colours, { gnomePalette } from '@res/colours';
 import { Add, Clear } from '@res/icons';
 
@@ -44,15 +44,9 @@ export default ({ coloursSelected, selectColours }: OwnProps): JSX.Element => {
     selectColours([...coloursSelected, colour]);
   };
 
-  const renderSectionHeading = (title: string) => (
-    <View style={styles.sectionHeading}>
-      <Text colour={colours.white}>{title}</Text>
-    </View>
-  );
-
   return (
     <ScrollView>
-      {renderSectionHeading('Selected Colours')}
+      <SectionHeading title="Selected Colours" />
       <View style={styles.selector}>
         {coloursSelected.map((colour, i) => (
           <ColourSwatch
@@ -62,7 +56,7 @@ export default ({ coloursSelected, selectColours }: OwnProps): JSX.Element => {
           />
         ))}
       </View>
-      {renderSectionHeading('Palette')}
+      <SectionHeading title="Palette" />
       <View style={styles.selector}>
         {gnomePalette.map((colour, i) => (
           <ColourSwatch
@@ -83,10 +77,6 @@ type OwnProps = {
 };
 
 const styles = StyleSheet.create({
-  sectionHeading: {
-    backgroundColor: colours.primaryBlue,
-    padding: 10,
-  },
   swatch: {
     height: 48,
     width: 48,

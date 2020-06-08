@@ -25,7 +25,7 @@ export default ({
           </Text>
         </View>
         <TouchableOpacity style={styles.modalHeadingContent} onPress={dismiss}>
-          <Clear fill={colours.white} />
+          <Clear fill={colours.white} size={28} />
         </TouchableOpacity>
       </View>
 

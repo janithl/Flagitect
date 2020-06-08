@@ -7,3 +7,5 @@ export { default as Spinner } from './Spinner';
 export { default as Text } from './Text';
 export { default as Modal } from './Modal';
 export { default as ColourSelector } from './ColourSelector';
+export { default as FileSaver } from './FileSaver';
+export { default as SectionHeading } from './SectionHeading';

@@ -7,8 +7,8 @@ export enum Division {
   Quartered = 'Quarterly',
   Diagonal = 'Diagonally',
   DiagonalToLeft = 'Diag. To Left',
-  Checked = 'Checky',
   PerSaltire = 'Per Saltire',
+  Checked = 'Checky',
   Solid = 'Solid',
 }
 
@@ -18,8 +18,8 @@ export const DivisionList = [
   Division.Quartered,
   Division.Diagonal,
   Division.DiagonalToLeft,
-  Division.Checked,
   Division.PerSaltire,
+  Division.Checked,
   Division.Solid,
 ];
 

@@ -6,6 +6,7 @@ import {
   ColourSelector,
   Footer,
   FooterButton,
+  FileSaver,
   Header,
   Modal,
 } from '@components';
@@ -17,8 +18,14 @@ import { ProportionsList } from 'lib/proportions';
 const margin = 15;
 const width = Math.round(Dimensions.get('window').width - margin * 2);
 
+enum ModalActions {
+  SaveFlag = 'Save Flag',
+  EditColours = 'Edit Colours',
+  None = '',
+}
+
 export default (): JSX.Element => {
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState(ModalActions.None);
   const [divisionSelected, selectDivision] = useState(1);
   const [proportionSelected, selectProportion] = useState(2);
   const height = Math.round(ProportionsList[proportionSelected].ratio * width);
@@ -26,6 +33,10 @@ export default (): JSX.Element => {
 
   const nextIndex = (currentIndex: number, list: { length: number }): number =>
     currentIndex + 1 === list.length ? 0 : currentIndex + 1;
+
+  const saveFlagFile = (filename: string) => {
+    saveFile(`${filename}.svg`, serialiseSVG(renderFlag()));
+  };
 
   const renderFooter = () => (
     <Footer>
@@ -46,10 +57,27 @@ export default (): JSX.Element => {
       <FooterButton
         title="Colours"
         value={String(coloursSelected.length)}
-        onPress={() => setModalVisible(true)}
+        onPress={() => setModalTitle(ModalActions.EditColours)}
       />
     </Footer>
   );
+
+  const renderModalBody = () => {
+    switch (modalTitle) {
+      case ModalActions.EditColours:
+        return (
+          <ColourSelector
+            coloursSelected={coloursSelected}
+            selectColours={selectColours}
+          />
+        );
+      case ModalActions.SaveFlag:
+        return <FileSaver onSave={saveFlagFile} />;
+      case ModalActions.None:
+      default:
+        return <View />;
+    }
+  };
 
   const renderFlag = () => (
     <Svg
@@ -66,24 +94,19 @@ export default (): JSX.Element => {
     </Svg>
   );
 
-  const exportSVG = () => {
-    const filename = `${new Date().getTime()}.svg`;
-    saveFile(filename, serialiseSVG(renderFlag()));
-  };
-
   return (
     <View style={styles.container}>
-      <Header title={'Flagitect'} onShare={exportSVG} />
+      <Header
+        title={'Flagitect'}
+        onSave={() => setModalTitle(ModalActions.SaveFlag)}
+      />
       <View style={styles.editor}>{renderFlag()}</View>
       {renderFooter()}
       <Modal
-        visible={modalVisible}
-        dismiss={() => setModalVisible(false)}
-        title="Edit Colours">
-        <ColourSelector
-          coloursSelected={coloursSelected}
-          selectColours={selectColours}
-        />
+        visible={modalTitle !== ModalActions.None}
+        dismiss={() => setModalTitle(ModalActions.None)}
+        title={modalTitle}>
+        {renderModalBody()}
       </Modal>
     </View>
   );
