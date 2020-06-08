@@ -4,6 +4,7 @@ import { Svg } from 'react-native-svg';
 
 import {
   ColourSelector,
+  FileSaver,
   Footer,
   FooterButton,
   Header,
@@ -12,6 +13,7 @@ import {
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
+import { serialiseSVG } from '@lib/utils';
 import colours, { initialColours } from '@res/colours';
 
 const margin = 15;
@@ -58,6 +60,18 @@ export default (): JSX.Element => {
     </Footer>
   );
 
+  const onSave = (type: FileTypes) => {
+    const filename = String(new Date().getTime());
+    if (type === FileTypes.PNG) {
+      flag.current &&
+        flag.current.toDataURL((base64: string) =>
+          saveFile(filename, type, base64),
+        );
+    } else {
+      saveFile(filename, type, serialiseSVG(renderFlag()));
+    }
+  };
+
   const renderModalBody = () => {
     switch (modalTitle) {
       case ModalActions.EditColours:
@@ -67,13 +81,8 @@ export default (): JSX.Element => {
             selectColours={selectColours}
           />
         );
-      // case ModalActions.SaveFlag:
-      //   return (
-      //     <FileSaver
-      //       contentSVG={serialiseSVG(renderFlag())}
-      //       contentPNG={flag.current?.toDataURL}
-      //     />
-      //   );
+      case ModalActions.SaveFlag:
+        return <FileSaver onSave={onSave} />;
       case ModalActions.None:
       default:
         return <View />;
@@ -100,12 +109,7 @@ export default (): JSX.Element => {
     <View style={styles.container}>
       <Header
         title={'Flagitect'}
-        onSave={() =>
-          flag.current &&
-          flag.current.toDataURL((base64: string) =>
-            saveFile(String(new Date().getTime()), FileTypes.PNG, base64),
-          )
-        }
+        onSave={() => setModalTitle(ModalActions.SaveFlag)}
       />
       <View style={styles.editor}>{renderFlag()}</View>
       {renderFooter()}

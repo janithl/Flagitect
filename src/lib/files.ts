@@ -14,8 +14,8 @@ const mimeType = {
 };
 
 const extension = {
-  [FileTypes.PNG]: 'png',
-  [FileTypes.SVG]: 'svg',
+  [FileTypes.PNG]: '.png',
+  [FileTypes.SVG]: '.svg',
 };
 
 export const saveFile = async (
@@ -23,15 +23,17 @@ export const saveFile = async (
   filetype: FileTypes,
   contents: string,
 ): Promise<void> => {
+  const encoding = filetype === FileTypes.PNG ? 'base64' : 'utf8';
+
   if (Platform.OS === 'ios') {
-    const path = `${fs.dirs.CacheDir}/${filename}.${extension[filetype]}`;
-    fs.writeFile(path, contents, 'base64').then(() =>
+    const path = `${fs.dirs.CacheDir}/${filename}${extension[filetype]}`;
+    fs.writeFile(path, contents, encoding).then(() =>
       ios.previewDocument(path),
     );
     return;
   }
 
-  const path = `${fs.dirs.DownloadDir}/${filename}.${extension[filetype]}`;
+  const path = `${fs.dirs.DownloadDir}/${filename}${extension[filetype]}`;
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
@@ -42,7 +44,7 @@ export const saveFile = async (
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      fs.writeFile(path, contents, 'base64').then(() =>
+      fs.writeFile(path, contents, encoding).then(() =>
         android.actionViewIntent(path, mimeType[filetype]),
       );
     } else {

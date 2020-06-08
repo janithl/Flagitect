@@ -1,69 +1,49 @@
-import React, { useState } from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-import { Row, SectionHeading, Text } from '@components';
-import { saveFile, FileTypes } from '@lib/files';
+import { Text } from '@components';
+import { FileTypes } from '@lib/files';
+
 import colours from '@res/colours';
 
-const fileTypes = [FileTypes.PNG, FileTypes.SVG];
-
-export default ({ content }: OwnProps): JSX.Element => {
-  const [filename, setFilename] = useState('');
-
-  const onClickSave = (filetype: FileTypes) =>
-    saveFile(filename.toLowerCase().trim(), filetype, content);
-
-  const validate = filename.trim().length > 0;
-
-  return (
-    <ScrollView>
-      <SectionHeading title="Save File" />
-      <TextInput
+export default ({ onSave }: OwnProps): JSX.Element => (
+  <View>
+    {/* <SectionHeading title="Save File" />
+       <TextInput
         placeholder="Filename"
         value={filename}
         onChangeText={setFilename}
         style={styles.input}
-      />
-      <Row>
-        {fileTypes.map((fileType: FileTypes) => (
-          <TouchableOpacity
-            key={fileType}
-            onPress={() => onClickSave(fileType)}
-            disabled={!validate}
-            style={[
-              styles.button,
-              validate ? styles.buttonEnabled : styles.buttonDisabled,
-            ]}>
-            <Text colour={colours.white} H4>{`Save ${fileType}`}</Text>
-          </TouchableOpacity>
-        ))}
-      </Row>
-    </ScrollView>
-  );
-};
+      /></View> */}
+    <TouchableOpacity
+      onPress={() => onSave(FileTypes.PNG)}
+      style={styles.button}>
+      <Text colour={colours.white} H4>
+        Save PNG
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => onSave(FileTypes.SVG)}
+      style={styles.button}>
+      <Text colour={colours.white} H4>
+        Save SVG
+      </Text>
+    </TouchableOpacity>
+  </View>
+);
 
 type OwnProps = {
-  content: string;
+  onSave: (type: FileTypes) => void;
 };
 
 const styles = StyleSheet.create({
   button: {
-    width: '90%',
-    paddingVertical: 8,
-    borderRadius: 12,
-    margin: 10,
     alignItems: 'center',
-  },
-  buttonEnabled: {
     backgroundColor: colours.primaryBlue,
-  },
-  buttonDisabled: {
-    backgroundColor: colours.grey,
+    borderRadius: 12,
+    paddingVertical: 8,
+    marginHorizontal: 20,
+    marginTop: 20,
   },
   input: {
     padding: 8,
