@@ -7,6 +7,7 @@ export default {
 
   white: '#FFFFFF',
   black: '#000000',
+  grey: '#C5C5C5',
 };
 
 export const initialColours = ['#1A5FB4', '#FFFFFF', '#A51D2D'];

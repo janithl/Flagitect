@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
@@ -6,14 +6,13 @@ import {
   ColourSelector,
   Footer,
   FooterButton,
-  FileSaver,
   Header,
   Modal,
 } from '@components';
-import colours, { initialColours } from '@res/colours';
-import { serialiseSVG, saveFile } from '@lib/utils';
 import { DivisionList, renderDivisions } from '@lib/divisions';
-import { ProportionsList } from 'lib/proportions';
+import { saveFile, FileTypes } from '@lib/files';
+import { ProportionsList } from '@lib/proportions';
+import colours, { initialColours } from '@res/colours';
 
 const margin = 15;
 const width = Math.round(Dimensions.get('window').width - margin * 2);
@@ -30,13 +29,10 @@ export default (): JSX.Element => {
   const [proportionSelected, selectProportion] = useState(2);
   const height = Math.round(ProportionsList[proportionSelected].ratio * width);
   const [coloursSelected, selectColours] = useState(initialColours);
+  const flag = useRef(null);
 
   const nextIndex = (currentIndex: number, list: { length: number }): number =>
     currentIndex + 1 === list.length ? 0 : currentIndex + 1;
-
-  const saveFlagFile = (filename: string) => {
-    saveFile(`${filename}.svg`, serialiseSVG(renderFlag()));
-  };
 
   const renderFooter = () => (
     <Footer>
@@ -71,8 +67,13 @@ export default (): JSX.Element => {
             selectColours={selectColours}
           />
         );
-      case ModalActions.SaveFlag:
-        return <FileSaver onSave={saveFlagFile} />;
+      // case ModalActions.SaveFlag:
+      //   return (
+      //     <FileSaver
+      //       contentSVG={serialiseSVG(renderFlag())}
+      //       contentPNG={flag.current?.toDataURL}
+      //     />
+      //   );
       case ModalActions.None:
       default:
         return <View />;
@@ -84,6 +85,7 @@ export default (): JSX.Element => {
       xmlns="http://www.w3.org/2000/svg"
       height={height}
       width={width}
+      ref={flag}
       style={styles.flag}>
       {renderDivisions(
         DivisionList[divisionSelected],
@@ -98,7 +100,12 @@ export default (): JSX.Element => {
     <View style={styles.container}>
       <Header
         title={'Flagitect'}
-        onSave={() => setModalTitle(ModalActions.SaveFlag)}
+        onSave={() =>
+          flag.current &&
+          flag.current.toDataURL((base64: string) =>
+            saveFile(String(new Date().getTime()), FileTypes.PNG, base64),
+          )
+        }
       />
       <View style={styles.editor}>{renderFlag()}</View>
       {renderFooter()}

@@ -6,11 +6,19 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { SectionHeading, Text } from '@components';
-import colours from 'res/colours';
+import { Row, SectionHeading, Text } from '@components';
+import { saveFile, FileTypes } from '@lib/files';
+import colours from '@res/colours';
 
-export default ({ onSave }: OwnProps): JSX.Element => {
+const fileTypes = [FileTypes.PNG, FileTypes.SVG];
+
+export default ({ content }: OwnProps): JSX.Element => {
   const [filename, setFilename] = useState('');
+
+  const onClickSave = (filetype: FileTypes) =>
+    saveFile(filename.toLowerCase().trim(), filetype, content);
+
+  const validate = filename.trim().length > 0;
 
   return (
     <ScrollView>
@@ -21,32 +29,50 @@ export default ({ onSave }: OwnProps): JSX.Element => {
         onChangeText={setFilename}
         style={styles.input}
       />
-      <TouchableOpacity onPress={() => onSave(filename)} style={styles.button}>
-        <Text colour={colours.white} H4>
-          Save SVG
-        </Text>
-      </TouchableOpacity>
+      <Row>
+        {fileTypes.map((fileType: FileTypes) => (
+          <TouchableOpacity
+            key={fileType}
+            onPress={() => onClickSave(fileType)}
+            disabled={!validate}
+            style={[
+              styles.button,
+              validate ? styles.buttonEnabled : styles.buttonDisabled,
+            ]}>
+            <Text colour={colours.white} H4>{`Save ${fileType}`}</Text>
+          </TouchableOpacity>
+        ))}
+      </Row>
     </ScrollView>
   );
 };
 
 type OwnProps = {
-  onSave: (filename: string) => void;
+  content: string;
 };
 
 const styles = StyleSheet.create({
   button: {
-    padding: 8,
+    width: '90%',
+    paddingVertical: 8,
     borderRadius: 12,
-    backgroundColor: colours.primaryBlue,
     margin: 10,
     alignItems: 'center',
+  },
+  buttonEnabled: {
+    backgroundColor: colours.primaryBlue,
+  },
+  buttonDisabled: {
+    backgroundColor: colours.grey,
   },
   input: {
     padding: 8,
     margin: 10,
-    fontFamily: 'FiraSans-ExtraBold',
+    fontFamily: 'FiraSans-Regular',
     fontSize: 32,
+    lineHeight: 36,
     color: colours.primaryBlue,
+    borderBottomColor: colours.primaryBlue,
+    borderBottomWidth: 2,
   },
 });

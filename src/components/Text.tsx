@@ -1,7 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
-import colours from 'res/colours';
-import { Styles } from 'react-native-svg';
+import colours from '@res/colours';
 
 export default ({
   H1 = false,
