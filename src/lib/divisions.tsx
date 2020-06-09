@@ -1,5 +1,5 @@
 import React from 'react';
-import { G, Path, Rect } from 'react-native-svg';
+import { G, Polygon, Rect } from 'react-native-svg';
 
 export enum Division {
   Horizontal = 'Horizontal',
@@ -22,6 +22,8 @@ export const DivisionList = [
   Division.Checked,
   Division.Solid,
 ];
+
+const coord = (x: number, y: number) => [x, y].join(',');
 
 const renderHorizontalDivisions = (
   divColours: string[],
@@ -107,16 +109,16 @@ const renderDiagonalDivisions = (
   toLeft = true,
 ): JSX.Element => {
   const firstPath = toLeft
-    ? `M0 ${height} H${width} V0 L0 ${height}`
-    : `M0 0 V${height} H${width} L0 0`;
+    ? [coord(0, height), coord(width, height), coord(width, 0)]
+    : [coord(0, 0), coord(0, height), coord(width, height)];
   const secondPath = toLeft
-    ? `M0 0 H${width} L0 ${height} V0`
-    : `M0 0 H${width} V${height} L0 0`;
+    ? [coord(0, height), coord(0, 0), coord(width, 0)]
+    : [coord(0, 0), coord(width, 0), coord(width, height)];
 
   return (
     <G>
-      <Path d={firstPath} fill={divColours[0]} />
-      <Path d={secondPath} fill={divColours[1]} />
+      <Polygon points={firstPath.join(' ')} fill={divColours[0]} />
+      <Polygon points={secondPath.join(' ')} fill={divColours[1]} />
     </G>
   );
 };
@@ -126,17 +128,23 @@ const renderPerSaltire = (
   height: number,
   width: number,
 ): JSX.Element => {
-  const midpoint = [Math.round(width / 2), Math.round(height / 2)].join(' ');
+  const midpoint = coord(Math.round(width / 2), Math.round(height / 2));
   return (
     <G>
-      <Path d={`M0 0 H${width} L${midpoint} L0 0`} fill={divColours[0]} />
-      <Path d={`M0 0 L${midpoint} L0 ${height} V0`} fill={divColours[1]} />
-      <Path
-        d={`M0 ${height} H${width} L${midpoint} L0 ${height}`}
+      <Polygon
+        points={[coord(0, height), midpoint, coord(0, 0)].join(' ')}
+        fill={divColours[0]}
+      />
+      <Polygon
+        points={[coord(0, 0), midpoint, coord(width, 0)].join(' ')}
+        fill={divColours[1]}
+      />
+      <Polygon
+        points={[coord(width, 0), midpoint, coord(width, height)].join(' ')}
         fill={divColours.length > 2 ? divColours[2] : divColours[0]}
       />
-      <Path
-        d={`M${width} 0 L${midpoint} L${width} ${height} V0`}
+      <Polygon
+        points={[coord(width, height), midpoint, coord(0, height)].join(' ')}
         fill={divColours.length > 3 ? divColours[3] : divColours[1]}
       />
     </G>

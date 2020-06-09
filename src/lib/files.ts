@@ -6,16 +6,19 @@ const { android, fs, ios } = RNFetchBlob;
 export enum FileTypes {
   SVG = 'SVG',
   PNG = 'PNG',
+  HTML = 'HTML',
 }
 
 const mimeType = {
   [FileTypes.PNG]: 'image/png',
   [FileTypes.SVG]: 'image/svg+xml',
+  [FileTypes.HTML]: 'text/html',
 };
 
 const extension = {
   [FileTypes.PNG]: '.png',
   [FileTypes.SVG]: '.svg',
+  [FileTypes.HTML]: '.html',
 };
 
 export const saveFile = async (

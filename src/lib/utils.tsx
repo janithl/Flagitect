@@ -15,3 +15,13 @@ const toWeb = (children: JSX.Element[] | JSX.Element) =>
 export const serialiseSVG = (element: JSX.Element): string => {
   return ReactDOMServer.renderToStaticMarkup(toWeb(element));
 };
+
+export const addHTML = (content: string): string => `<!doctype html>
+<html lang="en">
+  <head>
+    <title>Flagitect</title>
+  </head>
+  <body>
+    ${content}
+  </body>
+</html>`;

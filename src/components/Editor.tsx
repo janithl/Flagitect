@@ -13,7 +13,7 @@ import {
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
-import { serialiseSVG } from '@lib/utils';
+import { serialiseSVG, addHTML } from '@lib/utils';
 import colours, { initialColours } from '@res/colours';
 
 enum ModalActions {
@@ -89,13 +89,18 @@ export default (): JSX.Element => {
 
   const onSave = (type: FileTypes) => {
     const filename = String(new Date().getTime());
-    if (type === FileTypes.PNG) {
-      flag.current &&
-        flag.current.toDataURL((base64: string) =>
-          saveFile(filename, type, base64),
-        );
-    } else {
-      saveFile(filename, type, serialiseSVG(renderFlag()));
+    switch (type) {
+      case FileTypes.PNG:
+        flag.current &&
+          flag.current.toDataURL((base64: string) =>
+            saveFile(filename, type, base64),
+          );
+        break;
+      case FileTypes.SVG:
+        saveFile(filename, type, serialiseSVG(renderFlag()));
+        break;
+      case FileTypes.HTML:
+        saveFile(filename, type, addHTML(serialiseSVG(renderFlag())));
     }
   };
 
@@ -122,7 +127,7 @@ export default (): JSX.Element => {
       height={size.height}
       width={size.width}
       ref={flag}
-      style={styles.flag}>
+      fill={colours.white}>
       {renderDivisions(
         DivisionList[divisionSelected],
         coloursSelected,
@@ -168,8 +173,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  flag: {
-    backgroundColor: colours.offWhite,
   },
 });

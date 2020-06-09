@@ -29,6 +29,13 @@ export default ({ onSave }: OwnProps): JSX.Element => (
         Save SVG
       </Text>
     </TouchableOpacity>
+    <TouchableOpacity
+      onPress={() => onSave(FileTypes.HTML)}
+      style={styles.button}>
+      <Text colour={colours.white} H4>
+        Save Webpage
+      </Text>
+    </TouchableOpacity>
   </View>
 );
 
