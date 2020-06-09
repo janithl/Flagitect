@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
@@ -16,22 +16,49 @@ import { ProportionsList } from '@lib/proportions';
 import { serialiseSVG } from '@lib/utils';
 import colours, { initialColours } from '@res/colours';
 
-const margin = 15;
-const width = Math.round(Dimensions.get('window').width - margin * 2);
-
 enum ModalActions {
   SaveFlag = 'Save Flag',
   EditColours = 'Edit Colours',
   None = '',
 }
 
+const isPortrait = () =>
+  Dimensions.get('window').height > Dimensions.get('window').width;
+const margin = { vertical: 100, horizontal: 15 };
+const initialSize = () => ({
+  height: Math.round(Dimensions.get('window').height - margin.vertical * 2),
+  width: Math.round(Dimensions.get('window').width - margin.horizontal * 2),
+});
+
 export default (): JSX.Element => {
   const [modalTitle, setModalTitle] = useState(ModalActions.None);
   const [divisionSelected, selectDivision] = useState(1);
   const [proportionSelected, selectProportion] = useState(2);
-  const height = Math.round(ProportionsList[proportionSelected].ratio * width);
   const [coloursSelected, selectColours] = useState(initialColours);
+  const [size, setSize] = useState(initialSize());
   const flag = useRef(null);
+
+  const calculateSize = () => {
+    if (isPortrait()) {
+      setSize({
+        height: Math.round(
+          initialSize().width * ProportionsList[proportionSelected].ratio,
+        ),
+        width: initialSize().width,
+      });
+    } else {
+      setSize({
+        height: initialSize().height,
+        width: Math.round(
+          initialSize().height / ProportionsList[proportionSelected].ratio,
+        ),
+      });
+    }
+  };
+
+  /** call calculate size on orientation and proportion changes */
+  Dimensions.addEventListener('change', calculateSize);
+  useEffect(calculateSize, [proportionSelected]);
 
   const nextIndex = (currentIndex: number, list: { length: number }): number =>
     currentIndex + 1 === list.length ? 0 : currentIndex + 1;
@@ -92,15 +119,15 @@ export default (): JSX.Element => {
   const renderFlag = () => (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
-      height={height}
-      width={width}
+      height={size.height}
+      width={size.width}
       ref={flag}
       style={styles.flag}>
       {renderDivisions(
         DivisionList[divisionSelected],
         coloursSelected,
-        height,
-        width,
+        size.height,
+        size.width,
       )}
     </Svg>
   );
