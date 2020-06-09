@@ -10,11 +10,12 @@ import {
   Header,
   Modal,
 } from '@components';
+import { Actions, ReducerAction } from '@components/AppState';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
 import { serialiseSVG, addHTML } from '@lib/utils';
-import colours, { initialColours } from '@res/colours';
+import colours from '@res/colours';
 
 enum ModalActions {
   SaveFlag = 'Save Flag',
@@ -30,11 +31,13 @@ const initialSize = () => ({
   width: Math.round(Dimensions.get('window').width - margin.horizontal * 2),
 });
 
-export default (): JSX.Element => {
+export default ({
+  dispatch,
+  division,
+  proportion,
+  selectedColours,
+}: OwnProps): JSX.Element => {
   const [modalTitle, setModalTitle] = useState(ModalActions.None);
-  const [divisionSelected, selectDivision] = useState(1);
-  const [proportionSelected, selectProportion] = useState(2);
-  const [coloursSelected, selectColours] = useState(initialColours);
   const [size, setSize] = useState(initialSize());
   const flag = useRef(null);
 
@@ -42,7 +45,7 @@ export default (): JSX.Element => {
     if (isPortrait()) {
       setSize({
         height: Math.round(
-          initialSize().width * ProportionsList[proportionSelected].ratio,
+          initialSize().width * ProportionsList[proportion].ratio,
         ),
         width: initialSize().width,
       });
@@ -50,7 +53,7 @@ export default (): JSX.Element => {
       setSize({
         height: initialSize().height,
         width: Math.round(
-          initialSize().height / ProportionsList[proportionSelected].ratio,
+          initialSize().height / ProportionsList[proportion].ratio,
         ),
       });
     }
@@ -58,30 +61,23 @@ export default (): JSX.Element => {
 
   /** call calculate size on orientation and proportion changes */
   Dimensions.addEventListener('change', calculateSize);
-  useEffect(calculateSize, [proportionSelected]);
-
-  const nextIndex = (currentIndex: number, list: { length: number }): number =>
-    currentIndex + 1 === list.length ? 0 : currentIndex + 1;
+  useEffect(calculateSize, [proportion]);
 
   const renderFooter = () => (
     <Footer>
       <FooterButton
         title="Division"
-        value={DivisionList[divisionSelected]}
-        onPress={() =>
-          selectDivision(nextIndex(divisionSelected, DivisionList))
-        }
+        value={DivisionList[division]}
+        onPress={() => dispatch({ type: Actions.INCREMENT_DIVISION })}
       />
       <FooterButton
         title="Proportion"
-        value={ProportionsList[proportionSelected].name}
-        onPress={() =>
-          selectProportion(nextIndex(proportionSelected, ProportionsList))
-        }
+        value={ProportionsList[proportion].name}
+        onPress={() => dispatch({ type: Actions.INCREMENT_PROPORTION })}
       />
       <FooterButton
         title="Colours"
-        value={String(coloursSelected.length)}
+        value={String(selectedColours.length)}
         onPress={() => setModalTitle(ModalActions.EditColours)}
       />
     </Footer>
@@ -109,8 +105,8 @@ export default (): JSX.Element => {
       case ModalActions.EditColours:
         return (
           <ColourSelector
-            coloursSelected={coloursSelected}
-            selectColours={selectColours}
+            selectedColours={selectedColours}
+            dispatch={dispatch}
           />
         );
       case ModalActions.SaveFlag:
@@ -129,8 +125,8 @@ export default (): JSX.Element => {
       ref={flag}
       fill={colours.white}>
       {renderDivisions(
-        DivisionList[divisionSelected],
-        coloursSelected,
+        DivisionList[division],
+        selectedColours,
         size.height,
         size.width,
       )}
@@ -153,6 +149,13 @@ export default (): JSX.Element => {
       </Modal>
     </View>
   );
+};
+
+type OwnProps = {
+  division: number;
+  proportion: number;
+  selectedColours: string[];
+  dispatch: (action: ReducerAction) => void;
 };
 
 const styles = StyleSheet.create({

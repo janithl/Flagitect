@@ -2,10 +2,9 @@ import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { SectionHeading } from '@components';
+import { Actions, ReducerAction } from '@components/AppState';
 import colours, { gnomePalette } from '@res/colours';
 import { Add, Clear } from '@res/icons';
-
-const minimumColours = 2;
 
 const ColourSwatch = ({
   colour,
@@ -31,49 +30,37 @@ type SwatchProps = {
   onPress?: () => void;
 };
 
-export default ({ coloursSelected, selectColours }: OwnProps): JSX.Element => {
-  const removeColour = (i: number) => {
-    if (coloursSelected.length > minimumColours) {
-      const newColours = [...coloursSelected];
-      newColours.splice(i, 1);
-      selectColours(newColours);
-    }
-  };
-
-  const addColour = (colour: string) => {
-    selectColours([...coloursSelected, colour]);
-  };
-
-  return (
-    <ScrollView>
-      <SectionHeading title="Selected Colours" />
-      <View style={styles.selector}>
-        {coloursSelected.map((colour, i) => (
-          <ColourSwatch
-            key={i}
-            colour={colour}
-            onPress={() => removeColour(i)}
-          />
-        ))}
-      </View>
-      <SectionHeading title="Palette" />
-      <View style={styles.selector}>
-        {gnomePalette.map((colour, i) => (
-          <ColourSwatch
-            key={i}
-            colour={colour}
-            add={true}
-            onPress={() => addColour(colour)}
-          />
-        ))}
-      </View>
-    </ScrollView>
-  );
-};
+export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => (
+  <ScrollView>
+    <SectionHeading title="Selected Colours" />
+    <View style={styles.selector}>
+      {selectedColours.map((colour, i) => (
+        <ColourSwatch
+          key={i}
+          colour={colour}
+          onPress={() => dispatch({ type: Actions.REMOVE_COLOUR, payload: i })}
+        />
+      ))}
+    </View>
+    <SectionHeading title="Palette" />
+    <View style={styles.selector}>
+      {gnomePalette.map((colour, i) => (
+        <ColourSwatch
+          key={i}
+          colour={colour}
+          add={true}
+          onPress={() =>
+            dispatch({ type: Actions.ADD_COLOUR, payload: colour })
+          }
+        />
+      ))}
+    </View>
+  </ScrollView>
+);
 
 type OwnProps = {
-  coloursSelected: string[];
-  selectColours: (colours: string[]) => void;
+  selectedColours: string[];
+  dispatch: (action: ReducerAction) => void;
 };
 
 const styles = StyleSheet.create({

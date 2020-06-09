@@ -13,6 +13,7 @@ export enum Division {
 }
 
 export const DivisionList = [
+  Division.Solid,
   Division.Horizontal,
   Division.Vertical,
   Division.Quartered,
@@ -20,7 +21,6 @@ export const DivisionList = [
   Division.DiagonalToLeft,
   Division.PerSaltire,
   Division.Checked,
-  Division.Solid,
 ];
 
 const coord = (x: number, y: number) => [x, y].join(',');

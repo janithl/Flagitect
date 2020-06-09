@@ -1,5 +1,9 @@
 import React from 'react';
 
-import Editor from '@components/Editor';
+import { AppState, Editor } from '@components';
 
-export default (): JSX.Element => <Editor />;
+export default (): JSX.Element => (
+  <AppState>
+    <Editor />
+  </AppState>
+);

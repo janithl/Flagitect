@@ -1,3 +1,4 @@
+export { default as AppState } from './AppState';
 export { default as ColourSelector } from './ColourSelector';
 export { default as Editor } from './Editor';
 export { default as FileSaver } from './FileSaver';
