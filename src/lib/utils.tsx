@@ -13,7 +13,7 @@ const toWeb = (children: JSX.Element[] | JSX.Element) =>
   React.Children.map(children, childToWeb);
 
 export const serialiseSVG = (element: JSX.Element): string => {
-  return ReactDOMServer.renderToStaticMarkup(toWeb(element));
+  return ReactDOMServer.renderToStaticMarkup(<>{toWeb(element)}</>);
 };
 
 export const addHTML = (content: string): string => `<!doctype html>

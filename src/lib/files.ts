@@ -27,16 +27,15 @@ export const saveFile = async (
   contents: string,
 ): Promise<void> => {
   const encoding = filetype === FileTypes.PNG ? 'base64' : 'utf8';
+  const path = `${fs.dirs.CacheDir}/${filename}${extension[filetype]}`;
 
   if (Platform.OS === 'ios') {
-    const path = `${fs.dirs.CacheDir}/${filename}${extension[filetype]}`;
     fs.writeFile(path, contents, encoding).then(() =>
       ios.previewDocument(path),
     );
     return;
   }
 
-  const path = `${fs.dirs.DownloadDir}/${filename}${extension[filetype]}`;
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
