@@ -11,7 +11,7 @@ const ColourSwatch = ({
   add = false,
   onPress,
 }: SwatchProps): JSX.Element => (
-  <View style={styles.swatchContainer}>
+  <View style={styles.swatchContainer} accessibilityHint="colourSwatch">
     <View style={[styles.swatch, { backgroundColor: colour }]} />
     <TouchableOpacity
       style={[
