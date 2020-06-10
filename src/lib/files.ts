@@ -7,6 +7,7 @@ export enum FileTypes {
   SVG = 'SVG',
   PNG = 'PNG',
   HTML = 'HTML',
+  NONE = '',
 }
 
 const mimeType = {

@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { SectionHeading } from '@components';
-import { Actions, ReducerAction } from '@components/AppState';
+import { Actions, ReducerAction } from '@lib/state';
 import colours, { gnomePalette } from '@res/colours';
 import { Add, Clear } from '@res/icons';
 

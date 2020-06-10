@@ -8,10 +8,11 @@ import {
 } from 'react-native';
 
 import { Text } from '@components';
+import { Actions, ModalActions, ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 import { Download } from '@res/icons';
 
-export default ({ title, onSave }: OwnProps): JSX.Element => (
+const Header = ({ title, onSave }: OwnProps): JSX.Element => (
   <View style={styles.header}>
     <SafeAreaView style={styles.headerContent}>
       <View />
@@ -25,9 +26,27 @@ export default ({ title, onSave }: OwnProps): JSX.Element => (
   </View>
 );
 
+export default Header;
+
 type OwnProps = {
   title: string;
   onSave: () => void;
+};
+
+export const EditorHeader = ({ dispatch }: EditorHeaderProps): JSX.Element => (
+  <Header
+    title={'Flagitect'}
+    onSave={() =>
+      dispatch({
+        type: Actions.SET_MODAL_ACTION,
+        payload: ModalActions.SaveFlag,
+      })
+    }
+  />
+);
+
+type EditorHeaderProps = {
+  dispatch: (action: ReducerAction) => void;
 };
 
 const styles = StyleSheet.create({

@@ -1,27 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
-import {
-  ColourSelector,
-  FileSaver,
-  Footer,
-  FooterButton,
-  Header,
-  Modal,
-} from '@components';
-import { Actions, ReducerAction } from '@components/AppState';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
+import { ReducerAction, Actions } from '@lib/state';
 import { serialiseSVG, addHTML } from '@lib/utils';
 import colours from '@res/colours';
-
-enum ModalActions {
-  SaveFlag = 'Save Flag',
-  EditColours = 'Edit Colours',
-  None = '',
-}
 
 const isPortrait = () =>
   Dimensions.get('window').height > Dimensions.get('window').width;
@@ -34,10 +20,10 @@ const initialSize = () => ({
 export default ({
   dispatch,
   division,
+  fileType,
   proportion,
   selectedColours,
 }: OwnProps): JSX.Element => {
-  const [modalTitle, setModalTitle] = useState(ModalActions.None);
   const [size, setSize] = useState(initialSize());
   const flag = useRef(null);
 
@@ -63,60 +49,6 @@ export default ({
   Dimensions.addEventListener('change', calculateSize);
   useEffect(calculateSize, [proportion]);
 
-  const renderFooter = () => (
-    <Footer>
-      <FooterButton
-        title="Division"
-        value={DivisionList[division]}
-        onPress={() => dispatch({ type: Actions.INCREMENT_DIVISION })}
-      />
-      <FooterButton
-        title="Proportion"
-        value={ProportionsList[proportion].name}
-        onPress={() => dispatch({ type: Actions.INCREMENT_PROPORTION })}
-      />
-      <FooterButton
-        title="Colours"
-        value={String(selectedColours.length)}
-        onPress={() => setModalTitle(ModalActions.EditColours)}
-      />
-    </Footer>
-  );
-
-  const onSave = (type: FileTypes) => {
-    const filename = String(new Date().getTime());
-    switch (type) {
-      case FileTypes.PNG:
-        flag.current &&
-          flag.current.toDataURL((base64: string) =>
-            saveFile(filename, type, base64),
-          );
-        break;
-      case FileTypes.SVG:
-        saveFile(filename, type, serialiseSVG(renderFlag()));
-        break;
-      case FileTypes.HTML:
-        saveFile(filename, type, addHTML(serialiseSVG(renderFlag())));
-    }
-  };
-
-  const renderModalBody = () => {
-    switch (modalTitle) {
-      case ModalActions.EditColours:
-        return (
-          <ColourSelector
-            selectedColours={selectedColours}
-            dispatch={dispatch}
-          />
-        );
-      case ModalActions.SaveFlag:
-        return <FileSaver onSave={onSave} />;
-      case ModalActions.None:
-      default:
-        return <View />;
-    }
-  };
-
   const renderFlag = () => (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -133,26 +65,38 @@ export default ({
     </Svg>
   );
 
-  return (
-    <View style={styles.container}>
-      <Header
-        title={'Flagitect'}
-        onSave={() => setModalTitle(ModalActions.SaveFlag)}
-      />
-      <View style={styles.editor}>{renderFlag()}</View>
-      {renderFooter()}
-      <Modal
-        visible={modalTitle !== ModalActions.None}
-        dismiss={() => setModalTitle(ModalActions.None)}
-        title={modalTitle}>
-        {renderModalBody()}
-      </Modal>
-    </View>
-  );
+  const getSVG = useCallback(() => serialiseSVG(renderFlag()), [
+    division,
+    selectedColours,
+    size,
+  ]);
+
+  useEffect(() => {
+    if (fileType === FileTypes.NONE) return;
+
+    const filename = String(new Date().getTime());
+    switch (fileType) {
+      case FileTypes.PNG:
+        flag.current &&
+          flag.current.toDataURL((base64: string) =>
+            saveFile(filename, fileType, base64),
+          );
+        break;
+      case FileTypes.SVG:
+        saveFile(filename, fileType, getSVG());
+        break;
+      case FileTypes.HTML:
+        saveFile(filename, fileType, addHTML(getSVG()));
+    }
+    dispatch({ type: Actions.SAVE_DONE });
+  }, [dispatch, getSVG, fileType]);
+
+  return <View style={styles.editor}>{renderFlag()}</View>;
 };
 
 type OwnProps = {
   division: number;
+  fileType: FileTypes;
   proportion: number;
   selectedColours: string[];
   dispatch: (action: ReducerAction) => void;
