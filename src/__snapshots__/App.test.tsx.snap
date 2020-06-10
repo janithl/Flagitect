@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders initial app state 1`] = `
+Array [
+  <RNSVGSvgView
+    bbHeight={480}
+    bbWidth={720}
+    fill="#FFFFFF"
+    focusable={false}
+    height={480}
+    style={
+      Array [
+        Object {
+          "backgroundColor": "transparent",
+          "borderWidth": 0,
+        },
+        Object {
+          "flex": 0,
+          "height": 480,
+          "width": 720,
+        },
+      ]
+    }
+    width={720}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <RNSVGGroup
+      fill={4294967295}
+      propList={
+        Array [
+          "fill",
+        ]
+      }
+    >
+      <RNSVGGroup>
+        <RNSVGRect
+          fill={4279918516}
+          height={480}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          width={240}
+          x={0}
+          y="0"
+        />
+        <RNSVGRect
+          fill={4294967295}
+          height={480}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          width={240}
+          x={240}
+          y="0"
+        />
+        <RNSVGRect
+          fill={4289010989}
+          height={480}
+          propList={
+            Array [
+              "fill",
+            ]
+          }
+          width={240}
+          x={480}
+          y="0"
+        />
+      </RNSVGGroup>
+    </RNSVGGroup>
+  </RNSVGSvgView>,
+]
+`;

@@ -91,7 +91,11 @@ export default ({
     dispatch({ type: Actions.SAVE_DONE });
   }, [dispatch, getSVG, fileType]);
 
-  return <View style={styles.editor}>{renderFlag()}</View>;
+  return (
+    <View testID="editor" style={styles.editor}>
+      {renderFlag()}
+    </View>
+  );
 };
 
 type OwnProps = {
