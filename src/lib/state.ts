@@ -33,18 +33,19 @@ export type ReducerAction = {
   payload?: string | number | ModalActions | StateType;
 };
 
+export const initialState = {
+  division: 2,
+  proportion: 2,
+  selectedColours: initialColours,
+  modalAction: ModalActions.None,
+  fileType: '',
+};
+
 /** validates that the object passed is a state object */
 const validateState = (object: ReducerAction['payload']): boolean => {
   if (!object || typeof object !== 'object') return false;
 
-  const stateKeys = [
-    'division',
-    'proportion',
-    'selectedColours',
-    'modalActions',
-  ];
-
-  stateKeys.forEach((key) => {
+  Object.keys(initialState).forEach((key) => {
     if (!Object.keys(object).includes(key)) {
       return false;
     }
@@ -57,14 +58,6 @@ const nextIndex = (currentIndex: number, list: { length: number }): number =>
   currentIndex + 1 === list.length ? 0 : currentIndex + 1;
 
 const minimumColours = 2;
-
-export const initialState = {
-  division: 2,
-  proportion: 2,
-  selectedColours: initialColours,
-  modalAction: ModalActions.None,
-  fileType: '',
-};
 
 export const reducer = (state: StateType, action: ReducerAction): StateType => {
   if (__DEV__) {
