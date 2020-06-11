@@ -9,7 +9,8 @@ import {
 
 import { Text } from '@components';
 import Actions from '@lib/actions';
-import { ModalActions, ReducerAction } from '@lib/state';
+import { ModalActions } from '@lib/reducers';
+import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 import { Download, Menu } from '@res/icons';
 

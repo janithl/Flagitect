@@ -1,11 +1,34 @@
 import Actions from '@lib/actions';
-import { ModalActions, ReducerAction, StateType } from '@lib/state';
 
-export const UIReducer = (
-  state: StateType,
-  action: ReducerAction,
-): StateType => {
-  switch (action.type) {
+export enum ModalActions {
+  SaveFlag = 'Save Flag',
+  EditColours = 'Edit Colours',
+  EditCharges = 'Edit Charges',
+  None = '',
+}
+
+export type UIReducerAction = {
+  type: Actions;
+  payload?: string | ModalActions;
+};
+
+export type UIStateType = {
+  modalAction: ModalActions;
+  fileType: string;
+  menuOpen: boolean;
+};
+
+const initialState: UIStateType = {
+  modalAction: ModalActions.None,
+  fileType: '',
+  menuOpen: false,
+};
+
+export default (
+  state = initialState,
+  action?: UIReducerAction,
+): UIStateType => {
+  switch (action?.type) {
     case Actions.SET_MODAL_ACTION:
       return {
         ...state,

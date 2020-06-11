@@ -20,10 +20,8 @@ const initialSize = () => ({
 
 export default ({
   dispatch,
-  division,
-  fileType,
-  proportion,
-  selectedColours,
+  flag: { division, proportion, selectedColours },
+  ui: { fileType },
 }: OwnProps): JSX.Element => {
   const [size, setSize] = useState(initialSize());
   const flag = useRef(null);
@@ -100,10 +98,14 @@ export default ({
 };
 
 type OwnProps = {
-  division: number;
-  fileType: FileTypes;
-  proportion: number;
-  selectedColours: string[];
+  flag: {
+    division: number;
+    proportion: number;
+    selectedColours: string[];
+  };
+  ui: {
+    fileType: FileTypes;
+  };
   dispatch: (action: ReducerAction) => void;
 };
 
