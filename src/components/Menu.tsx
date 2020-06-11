@@ -1,22 +1,24 @@
 import React, { useEffect, useRef } from 'react';
 import {
   Animated,
-  Dimensions,
   Image,
   Modal,
   SafeAreaView,
+  StyleProp,
   StyleSheet,
   TouchableOpacity,
+  useWindowDimensions,
   View,
-  StyleProp,
 } from 'react-native';
 
 import Actions from '@lib/actions';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 
-const width = Math.floor(Dimensions.get('screen').width / 1.2);
-const SlideInMenu = ({ style = {}, children }: SlideInMenuProps) => {
+const menuPercentage = 90 / 100;
+
+const SlideInMenu = ({ style, children }: SlideInMenuProps) => {
+  const width = Math.floor(useWindowDimensions().width * menuPercentage);
   const translateX = useRef(new Animated.Value(-width)).current;
   useEffect(() => {
     Animated.timing(translateX, {
@@ -27,45 +29,58 @@ const SlideInMenu = ({ style = {}, children }: SlideInMenuProps) => {
   });
 
   return (
-    <Animated.View style={{ ...style, transform: [{ translateX }] }}>
+    <Animated.View style={[style, { transform: [{ translateX }] }]}>
       {children}
     </Animated.View>
   );
 };
 
 type SlideInMenuProps = {
-  style?: StyleProp;
+  style?: StyleProp<View>;
   children?: JSX.Element | JSX.Element[];
 };
 
-export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => (
-  <Modal
-    transparent={true}
-    visible={menuOpen}
-    onRequestClose={() =>
-      dispatch({
-        type: Actions.TOGGLE_MENU,
-      })
-    }>
-    <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.background}
-        onPress={() =>
-          dispatch({
-            type: Actions.TOGGLE_MENU,
-          })
-        }>
-        <SlideInMenu style={styles.modalBody}>
-          <SafeAreaView>
-            <View style={styles.logoContainer}>
-              <Image style={styles.logo} source={require('res/app_icon.png')} />
-            </View>
-          </SafeAreaView>
-        </SlideInMenu>
-      </TouchableOpacity>
-    </View>
-  </Modal>
-);
+export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
+  const width = Math.floor(useWindowDimensions().width * menuPercentage);
+  return (
+    <Modal
+      transparent={true}
+      visible={menuOpen}
+      onRequestClose={() =>
+        dispatch({
+          type: Actions.TOGGLE_MENU,
+        })
+      }>
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.background}
+          onPress={() =>
+            dispatch({
+              type: Actions.TOGGLE_MENU,
+            })
+          }>
+          <SlideInMenu
+            style={[
+              styles.modalBody,
+              {
+                width,
+                transform: [{ translateX: -width }],
+              },
+            ]}>
+            <SafeAreaView>
+              <View style={styles.logoContainer}>
+                <Image
+                  style={styles.logo}
+                  source={require('res/app_icon.png')}
+                />
+              </View>
+            </SafeAreaView>
+          </SlideInMenu>
+        </TouchableOpacity>
+      </View>
+    </Modal>
+  );
+};
 
 type OwnProps = {
   ui: { menuOpen: boolean };
@@ -83,10 +98,8 @@ const styles = StyleSheet.create({
   },
   modalBody: {
     flex: 1,
-    width: width,
     backgroundColor: colours.white,
     alignItems: 'center',
-    transform: [{ translateX: -width }],
   },
   logo: {
     width: 200,

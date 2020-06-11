@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Dimensions, StyleSheet, View } from 'react-native';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
 import Actions from '@lib/actions';
@@ -10,43 +10,44 @@ import { ReducerAction } from '@lib/state';
 import { serialiseSVG, addHTML } from '@lib/utils';
 import colours from '@res/colours';
 
-const isPortrait = () =>
-  Dimensions.get('window').height > Dimensions.get('window').width;
-const margin = { vertical: 100, horizontal: 15 };
-const initialSize = () => ({
-  height: Math.round(Dimensions.get('window').height - margin.vertical * 2),
-  width: Math.round(Dimensions.get('window').width - margin.horizontal * 2),
-});
+const margins = {
+  vertical: Platform.OS === 'android' ? 75 : 100,
+  horizontal: 10,
+};
+
+/** calculate the flag size */
+const calculateSize = (
+  screenHeight: number,
+  screenWidth: number,
+  ratio: number,
+) => {
+  const size = {
+    height: screenHeight - margins.vertical * 2,
+    width: screenWidth - margins.horizontal * 2,
+  };
+
+  if (screenHeight > screenWidth) {
+    /** Portrait mode */
+    size.height = Math.round(size.width * ratio);
+  } else {
+    /** Landscape mode */
+    size.width = Math.round(size.height / ratio);
+  }
+
+  return size;
+};
 
 export default ({
   dispatch,
   flag: { division, proportion, selectedColours },
   ui: { fileType },
 }: OwnProps): JSX.Element => {
-  const [size, setSize] = useState(initialSize());
   const flag = useRef(null);
-
-  const calculateSize = () => {
-    if (isPortrait()) {
-      setSize({
-        height: Math.round(
-          initialSize().width * ProportionsList[proportion].ratio,
-        ),
-        width: initialSize().width,
-      });
-    } else {
-      setSize({
-        height: initialSize().height,
-        width: Math.round(
-          initialSize().height / ProportionsList[proportion].ratio,
-        ),
-      });
-    }
-  };
-
-  /** call calculate size on orientation and proportion changes */
-  Dimensions.addEventListener('change', calculateSize);
-  useEffect(calculateSize, [proportion]);
+  const size = calculateSize(
+    useWindowDimensions().height,
+    useWindowDimensions().width,
+    ProportionsList[proportion].ratio,
+  );
 
   const renderFlag = () => (
     <Svg
