@@ -6,7 +6,9 @@ import colours from '@res/colours';
 
 export default ({ title }: OwnProps): JSX.Element => (
   <View style={styles.sectionHeading}>
-    <Text colour={colours.white}>{title}</Text>
+    <Text colour={colours.white} H5>
+      {title}
+    </Text>
   </View>
 );
 

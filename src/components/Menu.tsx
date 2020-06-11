@@ -4,16 +4,20 @@ import {
   Image,
   Modal,
   SafeAreaView,
+  ScrollView,
   StyleProp,
   StyleSheet,
   TouchableOpacity,
   useWindowDimensions,
   View,
 } from 'react-native';
+import { getVersion } from 'react-native-device-info';
 
+import { SectionHeading, Text } from '@components';
 import Actions from '@lib/actions';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
+import { Clear } from '@res/icons';
 
 const menuPercentage = 90 / 100;
 
@@ -42,41 +46,74 @@ type SlideInMenuProps = {
 
 export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
   const width = Math.floor(useWindowDimensions().width * menuPercentage);
+  const toggleMenu = () =>
+    dispatch({
+      type: Actions.TOGGLE_MENU,
+    });
+
   return (
-    <Modal
-      transparent={true}
-      visible={menuOpen}
-      onRequestClose={() =>
-        dispatch({
-          type: Actions.TOGGLE_MENU,
-        })
-      }>
+    <Modal transparent={true} visible={menuOpen} onRequestClose={toggleMenu}>
       <View style={styles.container}>
-        <TouchableOpacity
-          style={styles.background}
-          onPress={() =>
-            dispatch({
-              type: Actions.TOGGLE_MENU,
-            })
-          }>
-          <SlideInMenu
-            style={[
-              styles.modalBody,
-              {
-                width,
-                transform: [{ translateX: -width }],
-              },
-            ]}>
-            <SafeAreaView>
-              <View style={styles.logoContainer}>
-                <Image
-                  style={styles.logo}
-                  source={require('res/app_icon.png')}
-                />
+        <SlideInMenu
+          style={[
+            styles.modalBody,
+            {
+              width,
+              transform: [{ translateX: -width }],
+            },
+          ]}>
+          <SafeAreaView>
+            <ScrollView>
+              <View style={styles.modalContent}>
+                <TouchableOpacity onPress={toggleMenu}>
+                  <Clear fill={colours.black} size={32} />
+                </TouchableOpacity>
+
+                <View style={styles.logoContainer}>
+                  <Image
+                    style={styles.logo}
+                    source={require('res/app_icon.png')}
+                  />
+                </View>
+                <View style={styles.title}>
+                  <Text H1>{`Flagitect ${getVersion()}`}</Text>
+                </View>
               </View>
-            </SafeAreaView>
-          </SlideInMenu>
-        </TouchableOpacity>
+              <SectionHeading title={'License'} />
+              <View style={styles.modalContent}>
+                <Text>{`Copyright (c) ${new Date().getFullYear()} Flagitect Developers`}</Text>
+                <Text />
+                <Text>
+                  Permission is hereby granted, free of charge, to any person
+                  obtaining a copy of this software and associated documentation
+                  files (the "Software"), to deal in the Software without
+                  restriction, including without limitation the rights to use,
+                  copy, modify, merge, publish, distribute, sublicense, and/or
+                  sell copies of the Software, and to permit persons to whom the
+                  Software is furnished to do so, subject to the following
+                  conditions:
+                </Text>
+                <Text />
+                <Text>
+                  The above copyright notice and this permission notice shall be
+                  included in all copies or substantial portions of the
+                  Software.
+                </Text>
+                <Text />
+                <Text>
+                  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+                  KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+                  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+                  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+                  COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+                  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+                  OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+                  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+                </Text>
+              </View>
+            </ScrollView>
+          </SafeAreaView>
+        </SlideInMenu>
       </View>
     </Modal>
   );
@@ -93,19 +130,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: 'rgba(0,0,0,0.4)',
   },
-  background: {
-    flex: 1,
-  },
   modalBody: {
     flex: 1,
     backgroundColor: colours.white,
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  modalContent: {
+    padding: 20,
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 240,
+    height: 240,
   },
   logoContainer: {
-    margin: 20,
+    flex: 1,
+    alignItems: 'center',
+  },
+  title: {
+    alignItems: 'center',
+    marginTop: 20,
   },
 });
