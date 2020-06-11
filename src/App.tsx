@@ -6,6 +6,7 @@ import {
   EditorHeader,
   EditorModal,
   Footer,
+  Menu,
 } from '@components';
 
 export default (): JSX.Element => (
@@ -14,5 +15,6 @@ export default (): JSX.Element => (
     <Editor />
     <Footer />
     <EditorModal />
+    <Menu />
   </AppState>
 );

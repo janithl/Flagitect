@@ -4,7 +4,8 @@ import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Text, Row } from '@components';
 import { DivisionList } from '@lib/divisions';
 import { ProportionsList } from '@lib/proportions';
-import { Actions, ModalActions, ReducerAction } from '@lib/state';
+import Actions from '@lib/actions';
+import { ModalActions, ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 
 export const FooterButton = ({

@@ -2,10 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { Svg } from 'react-native-svg';
 
+import Actions from '@lib/actions';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
-import { ReducerAction, Actions } from '@lib/state';
+import { ReducerAction } from '@lib/state';
 import { serialiseSVG, addHTML } from '@lib/utils';
 import colours from '@res/colours';
 

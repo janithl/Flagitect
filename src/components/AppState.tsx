@@ -1,6 +1,7 @@
 import React, { Children, cloneElement, useEffect, useReducer } from 'react';
 
-import { Actions, initialState, reducer } from '@lib/state';
+import Actions from '@lib/actions';
+import { initialState, reducer } from '@lib/state';
 import { getState, storeState } from '@lib/storage';
 
 export default ({ children }: OwnProps): JSX.Element => {

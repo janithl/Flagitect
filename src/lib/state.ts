@@ -1,18 +1,8 @@
+import Actions from '@lib/actions';
 import { DivisionList } from '@lib/divisions';
 import { ProportionsList } from '@lib/proportions';
+import { UIReducer } from '@lib/reducers';
 import { initialColours } from '@res/colours';
-
-export enum Actions {
-  INCREMENT_DIVISION = 'INCREMENT_DIVISION',
-  INCREMENT_PROPORTION = 'INCREMENT_PROPORTION',
-  ADD_COLOUR = 'ADD_COLOUR',
-  REMOVE_COLOUR = 'REMOVE_COLOUR',
-  REHYDRATE_STATE = 'REHYDRATE_STATE',
-  SET_MODAL_ACTION = 'SET_MODAL_ACTION',
-  DISMISS_MODAL = 'DISMISS_MODAL',
-  SAVE_FLAG = 'SAVE_FLAG',
-  SAVE_DONE = 'SAVE_DONE',
-}
 
 export type StateType = {
   division: number;
@@ -20,6 +10,7 @@ export type StateType = {
   selectedColours: string[];
   modalAction: ModalActions;
   fileType: string;
+  menuOpen: boolean;
 };
 
 export enum ModalActions {
@@ -39,6 +30,7 @@ export const initialState = {
   selectedColours: initialColours,
   modalAction: ModalActions.None,
   fileType: '',
+  menuOpen: false,
 };
 
 /** validates that the object passed is a state object */
@@ -95,36 +87,12 @@ export const reducer = (state: StateType, action: ReducerAction): StateType => {
         ),
       };
 
-    case Actions.SET_MODAL_ACTION:
-      return {
-        ...state,
-        modalAction: action.payload as ModalActions,
-      };
-
-    case Actions.DISMISS_MODAL:
-      return {
-        ...state,
-        modalAction: ModalActions.None,
-      };
-
-    case Actions.SAVE_FLAG:
-      return {
-        ...state,
-        fileType: action.payload as string,
-      };
-
-    case Actions.SAVE_DONE:
-      return {
-        ...state,
-        fileType: '',
-      };
-
     case Actions.REHYDRATE_STATE:
       return validateState(action.payload)
         ? (action.payload as StateType)
         : state;
 
     default:
-      return state;
+      return UIReducer(state, action);
   }
 };

@@ -5,6 +5,7 @@ export { default as EditorModal } from './EditorModal';
 export { default as FileSaver } from './FileSaver';
 export { default as Footer, FooterButton } from './Footer';
 export { default as Header, EditorHeader } from './Header';
+export { default as Menu } from './Menu';
 export { default as Modal } from './Modal';
 export { default as NumberSpinner } from './NumberSpinner';
 export { default as Row } from './Row';

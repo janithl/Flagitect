@@ -2,7 +2,8 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { ColourSelector, FileSaver, Modal } from '@components';
-import { Actions, ModalActions, ReducerAction } from '@lib/state';
+import Actions from '@lib/actions';
+import { ModalActions, ReducerAction } from '@lib/state';
 
 export default ({
   dispatch,
