@@ -7,6 +7,7 @@ export default ({
   H2 = false,
   H3 = false,
   H4 = false,
+  H5 = false,
   colour,
   children = [],
 }: OwnProps): JSX.Element => {
@@ -23,6 +24,9 @@ export default ({
   if (H4) {
     style = styles.heading4;
   }
+  if (H5) {
+    style = styles.heading5;
+  }
 
   const textStyle = colour ? [style, { color: colour }] : style;
   return <Text style={textStyle}>{children}</Text>;
@@ -33,6 +37,7 @@ type OwnProps = {
   H2?: boolean;
   H3?: boolean;
   H4?: boolean;
+  H5?: boolean;
   colour?: string;
   children?: JSX.Element[] | JSX.Element | string;
 };
@@ -56,6 +61,11 @@ const styles = StyleSheet.create({
   heading4: {
     fontFamily: 'FiraSans-ExtraBold',
     fontSize: 20,
+    color: colours.black,
+  },
+  heading5: {
+    fontFamily: 'FiraSans-ExtraBold',
+    fontSize: 16,
     color: colours.black,
   },
   paragraph: {

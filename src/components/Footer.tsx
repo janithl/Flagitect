@@ -11,19 +11,23 @@ import colours from '@res/colours';
 export const FooterButton = ({
   title,
   value,
+  short = true,
   onPress,
 }: FooterButtonProps): JSX.Element => (
   <TouchableOpacity style={styles.footerButton} onPress={onPress}>
     <Text colour={colours.white}>{title}</Text>
-    <Text colour={colours.white} H4>
-      {value}
-    </Text>
+    <View style={styles.footerValue}>
+      <Text colour={colours.white} H3={short} H5={!short}>
+        {value}
+      </Text>
+    </View>
   </TouchableOpacity>
 );
 
 type FooterButtonProps = {
   title: string;
   value: string;
+  short: boolean;
   onPress?: () => void;
 };
 
@@ -38,6 +42,7 @@ export default ({
       <FooterButton
         title="Division"
         value={DivisionList[division]}
+        short={false}
         onPress={() => dispatch({ type: Actions.INCREMENT_DIVISION })}
       />
       <FooterButton
@@ -55,6 +60,11 @@ export default ({
           })
         }
       />
+      <FooterButton
+        title="Charges"
+        value="5"
+        onPress={() => dispatch({ type: Actions.INCREMENT_PROPORTION })}
+      />
     </Row>
   </View>
 );
@@ -69,12 +79,15 @@ type OwnProps = {
 const styles = StyleSheet.create({
   footer: {
     alignSelf: 'stretch',
-    height: Platform.OS === 'android' ? 70 : 100,
+    height: Platform.OS === 'android' ? 50 : 80,
     backgroundColor: colours.primaryBlue,
   },
   footerButton: {
-    paddingHorizontal: 5,
-    paddingVertical: 20,
+    padding: 10,
     alignItems: 'center',
+  },
+  footerValue: {
+    height: 30,
+    justifyContent: 'center',
   },
 });
