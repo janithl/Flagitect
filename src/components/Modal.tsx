@@ -13,6 +13,7 @@ export default ({
 }: OwnProps): JSX.Element => (
   <Modal
     animationType="slide"
+    hardwareAccelerated={true}
     transparent={true}
     visible={visible}
     onRequestClose={dismiss}>

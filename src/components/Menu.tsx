@@ -51,7 +51,11 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
     });
 
   return (
-    <Modal transparent={true} visible={menuOpen} onRequestClose={toggleMenu}>
+    <Modal
+      transparent={true}
+      hardwareAccelerated={true}
+      visible={menuOpen}
+      onRequestClose={toggleMenu}>
       <View style={styles.container}>
         <SlideInMenu
           style={[
