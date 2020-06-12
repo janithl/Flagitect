@@ -1,4 +1,4 @@
-![flagitect-logo](src/res/app_icon.png)
+<img src="src/res/app_icon.png" width="280" height="280">
 
 # Flagitect
 
