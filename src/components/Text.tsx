@@ -9,6 +9,7 @@ export default ({
   H4 = false,
   H5 = false,
   colour,
+  textAlign,
   children = [],
 }: OwnProps): JSX.Element => {
   let style = styles.paragraph;
@@ -28,8 +29,14 @@ export default ({
     style = styles.heading5;
   }
 
-  const textStyle = colour ? [style, { color: colour }] : style;
-  return <Text style={textStyle}>{children}</Text>;
+  const textStyle: { [key: string]: string } = {};
+  if (colour) {
+    textStyle.color = colour;
+  }
+  if (textAlign) {
+    textStyle.textAlign = textAlign;
+  }
+  return <Text style={[style, textStyle]}>{children}</Text>;
 };
 
 type OwnProps = {
@@ -39,6 +46,7 @@ type OwnProps = {
   H4?: boolean;
   H5?: boolean;
   colour?: string;
+  textAlign?: string;
   children?: JSX.Element[] | JSX.Element | string;
 };
 

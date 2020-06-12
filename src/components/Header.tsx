@@ -63,8 +63,8 @@ const styles = StyleSheet.create({
   header: {
     alignSelf: 'stretch',
     alignItems: 'center',
-    height: Platform.OS === 'android' ? 70 : 100,
     backgroundColor: colours.salmon,
+    height: Platform.OS === 'android' ? 55 : 100,
   },
   headerContent: {
     flex: 1,
