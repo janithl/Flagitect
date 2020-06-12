@@ -17,3 +17,9 @@ jest.mock('rn-fetch-blob', () => ({
     },
   },
 }));
+
+jest.mock('react-native-device-info', () => {
+  return {
+    getVersion: jest.fn(),
+  };
+});

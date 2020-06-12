@@ -10,6 +10,5 @@ test('Renders ColourSelector', () => {
   };
   const { getByText } = render(<ColourSelector {...props} />);
 
-  expect(getByText('Selected Colours')).toBeTruthy();
-  expect(getByText('Palette')).toBeTruthy();
+  expect(getByText('Add Colours')).toBeTruthy();
 });

@@ -152,7 +152,7 @@ const renderPerSaltire = (
 };
 
 const renderSolid = (divColours: string[], height: number, width: number) => (
-  <Rect x="0" y={0} height={height} width={width} fill={divColours[0]} />
+  <Rect x="0" y="0" height={height} width={width} fill={divColours[0]} />
 );
 
 export const renderDivisions = (

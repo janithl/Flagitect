@@ -1,5 +1,7 @@
 export { default as AppState } from './AppState';
+export { default as Button } from './Button';
 export { default as ColourSelector } from './ColourSelector';
+export { default as ColourSwatch } from './ColourSwatch';
 export { default as Editor } from './Editor';
 export { default as EditorModal } from './EditorModal';
 export { default as FileSaver } from './FileSaver';

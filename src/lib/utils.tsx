@@ -25,3 +25,16 @@ export const addHTML = (content: string): string => `<!doctype html>
     ${content}
   </body>
 </html>`;
+
+export const chunkArray = (array: string[], chunkSize: number): string[][] => {
+  const result: string[][] = [];
+  let chunk: string[] = [];
+  array.forEach((value: string, index: number) => {
+    chunk.push(value);
+    if (index % chunkSize === chunkSize - 1) {
+      result.push(chunk);
+      chunk = [];
+    }
+  });
+  return result;
+};

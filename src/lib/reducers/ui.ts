@@ -2,8 +2,10 @@ import Actions from '@lib/actions';
 
 export enum ModalActions {
   SaveFlag = 'Save Flag',
-  EditColours = 'Edit Colours',
+  EditColours = 'Edit Division Colours',
   EditCharges = 'Edit Charges',
+  SelectColourBorder = 'Select Border Colour',
+  SelectColourDivision = 'Add Division Colour',
   None = '',
 }
 

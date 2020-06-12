@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { Text } from '@components';
+import { Button, Text } from '@components';
 import { FileTypes } from '@lib/files';
 
 import colours from '@res/colours';
@@ -15,27 +15,21 @@ export default ({ onSave }: OwnProps): JSX.Element => (
         onChangeText={setFilename}
         style={styles.input}
       /></View> */}
-    <TouchableOpacity
-      onPress={() => onSave(FileTypes.PNG)}
-      style={styles.button}>
+    <Button onPress={() => onSave(FileTypes.PNG)}>
       <Text colour={colours.white} H4>
         Save PNG
       </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      onPress={() => onSave(FileTypes.SVG)}
-      style={styles.button}>
+    </Button>
+    <Button onPress={() => onSave(FileTypes.SVG)}>
       <Text colour={colours.white} H4>
         Save SVG
       </Text>
-    </TouchableOpacity>
-    <TouchableOpacity
-      onPress={() => onSave(FileTypes.HTML)}
-      style={styles.button}>
+    </Button>
+    <Button onPress={() => onSave(FileTypes.HTML)}>
       <Text colour={colours.white} H4>
         Save Webpage
       </Text>
-    </TouchableOpacity>
+    </Button>
   </View>
 );
 
@@ -44,14 +38,6 @@ type OwnProps = {
 };
 
 const styles = StyleSheet.create({
-  button: {
-    alignItems: 'center',
-    backgroundColor: colours.primaryBlue,
-    borderRadius: 12,
-    paddingVertical: 8,
-    marginHorizontal: 20,
-    marginTop: 20,
-  },
   input: {
     padding: 8,
     margin: 10,

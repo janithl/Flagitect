@@ -1,18 +1,28 @@
 import Actions from '@lib/actions';
 import { DivisionList } from '@lib/divisions';
 import { ProportionsList } from '@lib/proportions';
-import { initialColours } from '@res/colours';
+import colours, { initialColours } from '@res/colours';
+
+type BorderType = {
+  heightPercentage: number;
+  colour: string;
+};
 
 export type FlagStateType = {
   division: number;
   proportion: number;
   selectedColours: string[];
+  border: BorderType;
 };
 
 const initialState: FlagStateType = {
   division: 2,
   proportion: 2,
   selectedColours: initialColours,
+  border: {
+    heightPercentage: 0,
+    colour: colours.beige,
+  },
 };
 
 const nextIndex = (currentIndex: number, list: { length: number }): number =>
@@ -58,6 +68,24 @@ export default (
         selectedColours: state.selectedColours.filter(
           (_, index) => index !== Number(action.payload),
         ),
+      };
+
+    case Actions.SET_BORDER_COLOUR:
+      return {
+        ...state,
+        border: {
+          ...state.border,
+          colour: String(action.payload),
+        },
+      };
+
+    case Actions.SET_BORDER_HP:
+      return {
+        ...state,
+        border: {
+          ...state.border,
+          heightPercentage: Number(action.payload),
+        },
       };
 
     default:

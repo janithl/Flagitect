@@ -1,14 +1,13 @@
 import React, { useCallback, useEffect, useRef } from 'react';
 import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
-import { Svg } from 'react-native-svg';
+import { G, Rect, Svg } from 'react-native-svg';
 
 import Actions from '@lib/actions';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
-import { ProportionsList } from '@lib/proportions';
+import { BorderHeightPercentages, ProportionsList } from '@lib/proportions';
 import { ReducerAction } from '@lib/state';
 import { serialiseSVG, addHTML } from '@lib/utils';
-import colours from '@res/colours';
 
 const margins = {
   vertical: Platform.OS === 'android' ? 75 : 100,
@@ -39,7 +38,7 @@ const calculateSize = (
 
 export default ({
   dispatch,
-  flag: { division, proportion, selectedColours },
+  flag: { border, division, proportion, selectedColours },
   ui: { fileType },
 }: OwnProps): JSX.Element => {
   const flag = useRef(null);
@@ -48,20 +47,25 @@ export default ({
     useWindowDimensions().width,
     ProportionsList[proportion].ratio,
   );
+  const borderWidth = Math.floor(
+    size.height * (BorderHeightPercentages[border.heightPercentage] / 100),
+  );
 
   const renderFlag = () => (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
       height={size.height}
       width={size.width}
-      ref={flag}
-      fill={colours.white}>
-      {renderDivisions(
-        DivisionList[division],
-        selectedColours,
-        size.height,
-        size.width,
-      )}
+      ref={flag}>
+      <Rect height={size.height} width={size.width} fill={border.colour} />
+      <G translate={borderWidth}>
+        {renderDivisions(
+          DivisionList[division],
+          selectedColours,
+          size.height - borderWidth * 2,
+          size.width - borderWidth * 2,
+        )}
+      </G>
     </Svg>
   );
 
@@ -100,6 +104,10 @@ export default ({
 
 type OwnProps = {
   flag: {
+    border: {
+      colour: string;
+      heightPercentage: number;
+    };
     division: number;
     proportion: number;
     selectedColours: string[];

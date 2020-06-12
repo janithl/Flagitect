@@ -29,3 +29,5 @@ export const ProportionsList: Proportion[] = [
     ratio: 5 / 8,
   },
 ];
+
+export const BorderHeightPercentages = [0, 5, 10, 15, 20, 25];
