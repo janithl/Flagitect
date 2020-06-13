@@ -13,7 +13,9 @@ const toWeb = (children: JSX.Element[] | JSX.Element) =>
   React.Children.map(children, childToWeb);
 
 export const serialiseSVG = (element: JSX.Element): string => {
-  return ReactDOMServer.renderToStaticMarkup(<>{toWeb(element)}</>);
+  const svg = ReactDOMServer.renderToStaticMarkup(<>{toWeb(element)}</>);
+  if (__DEV__) console.log(svg);
+  return svg;
 };
 
 export const addHTML = (content: string): string => `<!doctype html>
@@ -38,3 +40,5 @@ export const chunkArray = (array: string[], chunkSize: number): string[][] => {
   });
   return result;
 };
+
+export const coord = (x: number, y: number) => [x, y].join(',');

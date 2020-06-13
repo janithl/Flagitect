@@ -1,6 +1,8 @@
 import React from 'react';
 import { G, Polygon, Rect } from 'react-native-svg';
 
+import { coord } from '@lib/utils';
+
 export enum Division {
   Horizontal = 'Horizontal',
   Vertical = 'Vertical',
@@ -22,8 +24,6 @@ export const DivisionList = [
   Division.PerSaltire,
   Division.Checked,
 ];
-
-const coord = (x: number, y: number) => [x, y].join(',');
 
 const renderHorizontalDivisions = (
   divColours: string[],

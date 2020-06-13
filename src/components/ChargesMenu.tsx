@@ -13,7 +13,7 @@ export default ({ border, dispatch }: OwnProps): JSX.Element => (
     <SectionHeading title="Border" />
     <View>
       <Spinner
-        label="Border Height"
+        label="Border Height (%)"
         value={border.heightPercentage}
         list={BorderHeightPercentages}
         setValue={(payload: number) =>
