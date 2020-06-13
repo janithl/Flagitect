@@ -6,8 +6,10 @@ import Actions from '@lib/actions';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { BorderHeightPercentages, ProportionsList } from '@lib/proportions';
+import { ChargeType } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { serialiseSVG, addHTML } from '@lib/utils';
+import renderCharges from '@res/charges';
 
 const margins = {
   vertical: Platform.OS === 'android' ? 75 : 100,
@@ -40,6 +42,7 @@ export default ({
   dispatch,
   flag: { border, division, proportion, selectedColours },
   ui: { fileType },
+  charges,
 }: OwnProps): JSX.Element => {
   const flag = useRef(null);
   const size = calculateSize(
@@ -62,6 +65,11 @@ export default ({
         {renderDivisions(
           DivisionList[division],
           selectedColours,
+          size.height - borderWidth * 2,
+          size.width - borderWidth * 2,
+        )}
+        {renderCharges(
+          Object.values(charges),
           size.height - borderWidth * 2,
           size.width - borderWidth * 2,
         )}
@@ -114,6 +122,9 @@ type OwnProps = {
   };
   ui: {
     fileType: FileTypes;
+  };
+  charges: {
+    [key: string]: ChargeType;
   };
   dispatch: (action: ReducerAction) => void;
 };

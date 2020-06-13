@@ -1,25 +1,17 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
-import {
-  ChargesMenu,
-  ColourSelector,
-  FileSaver,
-  Modal,
-  SectionHeading,
-  Spinner,
-  Text,
-} from '@components';
+import { ChargesMenu, ColourSelector, FileSaver, Modal } from '@components';
 import Actions from '@lib/actions';
-import { ModalActions } from '@lib/reducers';
+import { ChargeType, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
-import { BorderHeightPercentages } from '@lib/proportions';
 import Palette from './Palette';
 
 export default ({
   dispatch,
   flag: { selectedColours, border },
   ui: { modalAction },
+  charges,
 }: OwnProps): JSX.Element => {
   const renderModalBody = () => {
     switch (modalAction) {
@@ -45,7 +37,9 @@ export default ({
           />
         );
       case ModalActions.EditCharges:
-        return <ChargesMenu border={border} dispatch={dispatch} />;
+        return (
+          <ChargesMenu border={border} charges={charges} dispatch={dispatch} />
+        );
       case ModalActions.None:
       default:
         return <View />;
@@ -72,6 +66,9 @@ type OwnProps = {
   };
   ui: {
     modalAction: ModalActions;
+  };
+  charges: {
+    [key: string]: ChargeType;
   };
   dispatch: (action: ReducerAction) => void;
 };

@@ -14,6 +14,10 @@ enum Actions {
   SAVE_DONE = 'SAVE_DONE',
   TOGGLE_MENU = 'TOGGLE_MENU',
 
+  /** Charges */
+  UPDATE_CHARGE = 'UPDATE_CHARGE',
+  REMOVE_CHARGE = 'REMOVE_CHARGE',
+
   /** Etc */
   REHYDRATE_STATE = 'REHYDRATE_STATE',
 }

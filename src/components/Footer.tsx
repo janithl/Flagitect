@@ -5,7 +5,7 @@ import { Text, Row } from '@components';
 import { DivisionList } from '@lib/divisions';
 import { ProportionsList } from '@lib/proportions';
 import Actions from '@lib/actions';
-import { ModalActions } from '@lib/reducers';
+import { ModalActions, ChargeType } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 
@@ -34,6 +34,7 @@ type FooterButtonProps = {
 
 export default ({
   flag: { division, proportion, selectedColours },
+  charges,
   dispatch,
 }: OwnProps): JSX.Element => {
   const openModal = (payload: ModalActions) =>
@@ -63,7 +64,7 @@ export default ({
         />
         <FooterButton
           title="Charges"
-          value="0"
+          value={String(Object.keys(charges).length)}
           onPress={() => openModal(ModalActions.EditCharges)}
         />
       </Row>
@@ -76,6 +77,9 @@ type OwnProps = {
     division: number;
     proportion: number;
     selectedColours: string[];
+  };
+  charges: {
+    [key: string]: ChargeType;
   };
   dispatch: (action: ReducerAction) => void;
 };

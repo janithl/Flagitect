@@ -2,8 +2,15 @@ import React from 'react';
 import { Circle } from 'react-native-svg';
 
 export default (
-  x: number,
-  y: number,
-  radius: number,
+  height: number,
+  width: number,
   colour: string,
-): JSX.Element => <Circle cx={x} cy={y} r={radius} fill={colour} />;
+  percentage = 50,
+): JSX.Element => (
+  <Circle
+    cx={width / 2}
+    cy={height / 2}
+    r={(height * percentage) / 200}
+    fill={colour}
+  />
+);

@@ -41,4 +41,12 @@ export const chunkArray = (array: string[], chunkSize: number): string[][] => {
   return result;
 };
 
-export const coord = (x: number, y: number) => [x, y].join(',');
+export const coord = (x: number, y: number): string => [x, y].join(',');
+
+export const makeID = (): string =>
+  [
+    new Date().getTime().toString(32),
+    Math.floor(new Date().getTime() * Math.random()).toString(32),
+  ]
+    .join('-')
+    .toUpperCase();
