@@ -7,19 +7,36 @@ import { ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { gnomePalette } from '@res/colours';
 
-export default ({ selectAction, dispatch }: OwnProps): JSX.Element => {
+export default ({
+  selectAction,
+  selectedCharge,
+  dispatch,
+}: OwnProps): JSX.Element => {
   const onSelect = (payload: string) => {
-    if (selectAction === ModalActions.SelectColourBorder) {
-      dispatch({
-        type: Actions.SET_BORDER_COLOUR,
-        payload,
-      });
-      openModal(dispatch, ModalActions.EditCharge);
-    } else if (selectAction === ModalActions.SelectColourDivision) {
-      dispatch({
-        type: Actions.ADD_COLOUR,
-        payload,
-      });
+    switch (selectAction) {
+      case ModalActions.SelectColourBorder:
+        dispatch({
+          type: Actions.SET_BORDER_COLOUR,
+          payload,
+        });
+        openModal(dispatch, ModalActions.ChargesList);
+        break;
+      case ModalActions.SelectColourCharge:
+        dispatch({
+          type: Actions.UPDATE_CHARGE,
+          payload: {
+            id: selectedCharge,
+            colour: payload,
+          },
+        });
+        openModal(dispatch, ModalActions.EditCharge);
+        break;
+      case ModalActions.SelectColourDivision:
+        dispatch({
+          type: Actions.ADD_COLOUR,
+          payload,
+        });
+        break;
     }
   };
 
@@ -39,6 +56,7 @@ export default ({ selectAction, dispatch }: OwnProps): JSX.Element => {
 
 type OwnProps = {
   selectAction: ModalActions;
+  selectedCharge: string;
   dispatch: (action: ReducerAction) => void;
 };
 

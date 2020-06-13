@@ -1,9 +1,15 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { Alert, ScrollView } from 'react-native';
 
-import { Button, Spinner, SpinnerTypes, Text } from '@components';
+import {
+  Button,
+  SectionHeading,
+  Spinner,
+  SpinnerTypes,
+  Text,
+} from '@components';
 import Actions from '@lib/actions';
-import { ChargeType } from '@lib/reducers';
+import { ChargeType, openModal, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 
@@ -18,33 +24,65 @@ export default ({
       payload: { id: selectedCharge, [key]: value },
     });
 
-  const removeCharge = () =>
+  const removeChargePrompt = () =>
+    Alert.alert(
+      `Remove ${charges[selectedCharge]?.type}?`,
+      'Are you sure you want to remove this charge?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        { text: 'OK', onPress: removeCharge },
+      ],
+      { cancelable: false },
+    );
+
+  const removeCharge = () => {
     dispatch({
       type: Actions.REMOVE_CHARGE,
       payload: selectedCharge,
     });
+    dispatch({
+      type: Actions.SELECT_CHARGE,
+      payload: '',
+    });
+  };
 
   return (
     <ScrollView>
-      <Spinner
-        label="Size (%)"
-        value={charges[selectedCharge]?.percentage ?? 10}
-        type={SpinnerTypes.Number}
-        min={10}
-        max={90}
-        step={10}
-        setValue={(value: number) => updateValue('percentage', value)}
-      />
-      <Spinner
-        label="Thickness (%)"
-        value={charges[selectedCharge]?.thickness ?? 10}
-        type={SpinnerTypes.Number}
-        min={5}
-        max={50}
-        step={5}
-        setValue={(value: number) => updateValue('thickness', value)}
-      />
-      <Button onPress={removeCharge}>
+      <SectionHeading title={`${charges[selectedCharge]?.type} Properties`} />
+      {charges[selectedCharge]?.percentage ? (
+        <Spinner
+          label="Size (%)"
+          value={charges[selectedCharge]?.percentage ?? 10}
+          type={SpinnerTypes.Number}
+          min={10}
+          max={90}
+          step={10}
+          setValue={(value: number) => updateValue('percentage', value)}
+        />
+      ) : null}
+      {charges[selectedCharge]?.thickness ? (
+        <Spinner
+          label="Thickness (%)"
+          value={charges[selectedCharge]?.thickness ?? 10}
+          type={SpinnerTypes.Number}
+          min={5}
+          max={50}
+          step={5}
+          setValue={(value: number) => updateValue('thickness', value)}
+        />
+      ) : null}
+      <Button
+        onPress={() => openModal(dispatch, ModalActions.SelectColourCharge)}>
+        <Text colour={colours.white} H4>
+          Select Colour
+        </Text>
+      </Button>
+      <SectionHeading title="Remove Charge" />
+      <Button onPress={removeChargePrompt}>
         <Text colour={colours.white} H4>
           Remove Charge
         </Text>

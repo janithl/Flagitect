@@ -11,7 +11,7 @@ import {
 import Actions from '@lib/actions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
-import { ChargesList } from '@res/charges/index';
+import { ChargesList, CrossTypes } from '@res/charges/index';
 import colours from '@res/colours';
 
 export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
@@ -60,6 +60,8 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
             payload: {
               type: charge,
               colour: colours.white,
+              percentage: 30,
+              thickness: charge === CrossTypes.Greek ? 20 : undefined,
             },
           })
         }>

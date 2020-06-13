@@ -6,6 +6,7 @@ export enum ModalActions {
   ChargesList = 'Charges',
   EditCharge = 'Edit Charge',
   SelectColourBorder = 'Select Border Colour',
+  SelectColourCharge = 'Select Charge Colour',
   SelectColourDivision = 'Add Division Colour',
   None = '',
 }

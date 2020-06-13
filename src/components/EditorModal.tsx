@@ -29,8 +29,15 @@ export default ({
           />
         );
       case ModalActions.SelectColourBorder:
+      case ModalActions.SelectColourCharge:
       case ModalActions.SelectColourDivision:
-        return <Palette selectAction={modalAction} dispatch={dispatch} />;
+        return (
+          <Palette
+            selectAction={modalAction}
+            selectedCharge={selectedCharge}
+            dispatch={dispatch}
+          />
+        );
       case ModalActions.SaveFlag:
         return (
           <FileSaver
