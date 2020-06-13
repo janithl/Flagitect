@@ -3,7 +3,7 @@ import { FlatList, StyleSheet, View } from 'react-native';
 
 import { ColourSwatch } from '@components';
 import Actions from '@lib/actions';
-import { ModalActions } from '@lib/reducers';
+import { ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { gnomePalette } from '@res/colours';
 
@@ -14,10 +14,7 @@ export default ({ selectAction, dispatch }: OwnProps): JSX.Element => {
         type: Actions.SET_BORDER_COLOUR,
         payload,
       });
-      dispatch({
-        type: Actions.SET_MODAL_ACTION,
-        payload: ModalActions.EditCharge,
-      });
+      openModal(dispatch, ModalActions.EditCharge);
     } else if (selectAction === ModalActions.SelectColourDivision) {
       dispatch({
         type: Actions.ADD_COLOUR,

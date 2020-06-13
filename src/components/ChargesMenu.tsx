@@ -9,7 +9,7 @@ import {
   Text,
 } from '@components';
 import Actions from '@lib/actions';
-import { ChargeType, ModalActions } from '@lib/reducers';
+import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { ChargesList } from '@res/charges/index';
 import colours from '@res/colours';
@@ -30,33 +30,28 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
         }
       />
       <Button
-        onPress={() =>
-          dispatch({
-            type: Actions.SET_MODAL_ACTION,
-            payload: ModalActions.SelectColourBorder,
-          })
-        }>
+        onPress={() => openModal(dispatch, ModalActions.SelectColourBorder)}>
         <Text colour={colours.white} H4>
-          Set Colour
+          Select Colour
         </Text>
       </Button>
     </View>
+
     <SectionHeading title="Charges" />
     {Object.values(charges).map((charge: ChargeType) => (
       <Button
         onPress={() =>
           dispatch({
-            type: Actions.REMOVE_CHARGE,
+            type: Actions.SELECT_CHARGE,
             payload: charge.id,
           })
         }>
-        <Text colour={colours.white} H4>
-          {`Remove ${charge.type} ${charge.id}`}
-        </Text>
+        <Text colour={colours.white} H4>{`Edit ${charge.type}`}</Text>
+        <Text colour={colours.white}>{charge.id}</Text>
       </Button>
     ))}
-    <SectionHeading title="Add Charges" />
 
+    <SectionHeading title="Add Charges" />
     {ChargesList.map((charge) => (
       <Button
         onPress={() =>
@@ -81,8 +76,6 @@ type OwnProps = {
     colour: string;
     heightPercentage: number;
   };
-  charges: {
-    [key: string]: ChargeType;
-  };
+  charges: { [key: string]: ChargeType };
   dispatch: (action: ReducerAction) => void;
 };

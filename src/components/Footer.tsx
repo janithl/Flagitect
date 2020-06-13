@@ -5,7 +5,7 @@ import { Text, Row } from '@components';
 import { DivisionList } from '@lib/divisions';
 import { ProportionsList } from '@lib/proportions';
 import Actions from '@lib/actions';
-import { ModalActions, ChargeType } from '@lib/reducers';
+import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 
@@ -37,12 +37,6 @@ export default ({
   charges,
   dispatch,
 }: OwnProps): JSX.Element => {
-  const openModal = (payload: ModalActions) =>
-    dispatch({
-      type: Actions.SET_MODAL_ACTION,
-      payload,
-    });
-
   return (
     <View style={styles.footer}>
       <Row>
@@ -60,12 +54,12 @@ export default ({
         <FooterButton
           title="Colours"
           value={String(selectedColours.length)}
-          onPress={() => openModal(ModalActions.EditColours)}
+          onPress={() => openModal(dispatch, ModalActions.EditColours)}
         />
         <FooterButton
           title="Charges"
           value={String(Object.keys(charges).length)}
-          onPress={() => openModal(ModalActions.ChargesList)}
+          onPress={() => openModal(dispatch, ModalActions.ChargesList)}
         />
       </Row>
     </View>

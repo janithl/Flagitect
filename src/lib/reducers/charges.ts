@@ -1,21 +1,13 @@
 import Actions from '@lib/actions';
 import { makeID } from '@lib/utils';
-import { Charges, CrossTypes, PileTypes } from '@res/charges';
-
-type ChargeOptions = {
-  thickness: number;
-  percentage: number;
-  crossType: CrossTypes;
-  pileType: PileTypes;
-};
+import { Charges } from '@res/charges';
 
 export type ChargeType = {
   id: string;
   type: Charges;
-  height: number;
-  width: number;
   colour: string;
-  options?: Partial<ChargeOptions>;
+  thickness?: number;
+  percentage?: number;
 };
 
 export type ChargesStateType = {

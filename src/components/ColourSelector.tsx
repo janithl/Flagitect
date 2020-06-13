@@ -3,7 +3,7 @@ import { FlatList, StyleSheet } from 'react-native';
 
 import { Button, ColourSwatch, Text } from '@components';
 import Actions from '@lib/actions';
-import { ModalActions } from '@lib/reducers';
+import { ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 
@@ -12,10 +12,7 @@ export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => {
     dispatch({ type: Actions.REMOVE_COLOUR, payload });
 
   const addColours = () =>
-    dispatch({
-      type: Actions.SET_MODAL_ACTION,
-      payload: ModalActions.SelectColourDivision,
-    });
+    openModal(dispatch, ModalActions.SelectColourDivision);
 
   return (
     <FlatList

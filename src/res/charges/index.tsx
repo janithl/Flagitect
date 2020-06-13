@@ -26,8 +26,8 @@ export default (
                 height,
                 width,
                 charge.colour,
-                charge.options?.thickness,
-                charge.options?.percentage,
+                charge?.thickness,
+                charge?.percentage,
                 charge.type,
               )}
             </G>
@@ -35,12 +35,7 @@ export default (
         case DiscTypes.Disc:
           return (
             <G id={charge.id}>
-              {renderDisc(
-                height,
-                width,
-                charge.colour,
-                charge?.options?.percentage,
-              )}
+              {renderDisc(height, width, charge.colour, charge?.percentage)}
             </G>
           );
         case PileTypes.Pile:
@@ -53,7 +48,7 @@ export default (
                 width,
                 charge.colour,
                 charge.type,
-                charge.options?.percentage,
+                charge?.percentage,
               )}
             </G>
           );

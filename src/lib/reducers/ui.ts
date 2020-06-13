@@ -19,12 +19,14 @@ export type UIStateType = {
   modalAction: ModalActions;
   fileType: string;
   menuOpen: boolean;
+  selectedCharge: string;
 };
 
 const initialState: UIStateType = {
   modalAction: ModalActions.None,
   fileType: '',
   menuOpen: false,
+  selectedCharge: '',
 };
 
 export default (
@@ -62,7 +64,26 @@ export default (
         menuOpen: !state.menuOpen,
       };
 
+    case Actions.SELECT_CHARGE:
+      return {
+        ...state,
+        selectedCharge: action.payload as string,
+        modalAction:
+          action.payload?.length === 0
+            ? ModalActions.ChargesList
+            : ModalActions.EditCharge,
+      };
+
     default:
       return state;
   }
 };
+
+export const openModal = (
+  dispatch: (action: UIReducerAction) => void,
+  modal: ModalActions,
+): void =>
+  dispatch({
+    type: Actions.SET_MODAL_ACTION,
+    payload: modal,
+  });
