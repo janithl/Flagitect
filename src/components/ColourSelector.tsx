@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 
 import { Button, ColourSwatch, Text } from '@components';
 import Actions from '@lib/actions';
@@ -25,6 +25,7 @@ export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => {
       )}
       keyExtractor={(item) => item}
       numColumns={5}
+      columnWrapperStyle={styles.columnStyle}
       ListFooterComponent={
         <Button onPress={addColours}>
           <Text colour={colours.white} H4>
@@ -40,3 +41,11 @@ type OwnProps = {
   selectedColours: string[];
   dispatch: (action: ReducerAction) => void;
 };
+
+const styles = StyleSheet.create({
+  columnStyle: {
+    flex: 1,
+    justifyContent: 'space-evenly',
+    marginTop: 10,
+  },
+});

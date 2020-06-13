@@ -1,75 +1,67 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
-import { Row, Text } from '@components';
+import { Button, Row, Text } from '@components';
 import { Left, Right } from '@res/icons';
 import colours from '@res/colours';
 
 export default ({
   colour = colours.primaryBlue,
-  value,
-  label,
+  label = '',
   list,
+  value,
   setValue,
 }: OwnProps): JSX.Element => {
-  const nextValue = (minValue: number, maxValue: number, value: number) => {
-    if (value < minValue) return maxValue;
-    if (value > maxValue) return minValue;
-    return value;
+  const nextValue = (pickedValue: number) => {
+    if (pickedValue < 0) return list.length - 1;
+    if (pickedValue > list.length - 1) return 0;
+    return pickedValue;
   };
 
   return (
-    <Row>
-      <View style={styles.control}>
-        <Text H4 colour={colour}>
-          Border Width
-        </Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => setValue(nextValue(0, list.length - 1, value - 1))}>
-        <View style={[styles.control, styles.controlButton]}>
-          <Left fill={colours.white} />
+    <View style={styles.container}>
+      <Row>
+        <View style={styles.item}>
+          <Button onPress={() => setValue(nextValue(value - 1))} padded={false}>
+            <Left fill={colours.white} size={32} />
+          </Button>
         </View>
-      </TouchableOpacity>
-      <View style={styles.control}>
-        <Text H4 colour={colour}>
-          {String(list[value])}
-        </Text>
-      </View>
-      <TouchableOpacity
-        onPress={() => setValue(nextValue(0, list.length - 1, value + 1))}>
-        <View style={[styles.control, styles.controlButton]}>
-          <Right fill={colours.white} />
+        <View style={styles.item}>
+          <Text colour={colour}>{label}</Text>
+          <View style={styles.value}>
+            <Text colour={colour} H3>
+              {String(list[value])}
+            </Text>
+          </View>
         </View>
-      </TouchableOpacity>
-    </Row>
+        <View style={styles.item}>
+          <Button onPress={() => setValue(nextValue(value + 1))} padded={false}>
+            <Right fill={colours.white} size={32} />
+          </Button>
+        </View>
+      </Row>
+    </View>
   );
 };
 
 type OwnProps = {
-  value: number;
-  label: string;
-  colour: string;
+  colour?: string;
+  label?: string;
   list: string[] | number[];
+  value: number;
   setValue: (value: number) => void;
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    flexDirection: 'row',
-    // alignItems: 'center',
-    // justifyContent: 'space-evenly',
+    height: 60,
   },
-  control: {
+  item: {
+    padding: 10,
     alignItems: 'center',
-    width: 120,
-    height: 36,
-    padding: 6,
-    borderRadius: 18,
   },
-  controlButton: {
-    width: 36,
-    backgroundColor: colours.primaryBlue,
+  value: {
+    height: 30,
+    justifyContent: 'center',
   },
 });

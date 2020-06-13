@@ -2,6 +2,7 @@ import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 
 import {
+  ChargesMenu,
   ColourSelector,
   FileSaver,
   Modal,
@@ -44,29 +45,7 @@ export default ({
           />
         );
       case ModalActions.EditCharges:
-        return (
-          <View>
-            <SectionHeading title="Border" />
-            <View>
-              <Spinner
-                value={border.heightPercentage}
-                list={BorderHeightPercentages}
-                setValue={(payload: number) =>
-                  dispatch({ type: Actions.SET_BORDER_HP, payload })
-                }
-              />
-              <TouchableOpacity
-                onPress={() =>
-                  dispatch({
-                    type: Actions.SET_MODAL_ACTION,
-                    payload: ModalActions.SelectColourBorder,
-                  })
-                }>
-                <Text H4>Set Colour</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        );
+        return <ChargesMenu border={border} dispatch={dispatch} />;
       case ModalActions.None:
       default:
         return <View />;

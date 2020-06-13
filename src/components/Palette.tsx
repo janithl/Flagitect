@@ -14,7 +14,10 @@ export default ({ selectAction, dispatch }: OwnProps): JSX.Element => {
         type: Actions.SET_BORDER_COLOUR,
         payload,
       });
-      dispatch({ type: Actions.DISMISS_MODAL });
+      dispatch({
+        type: Actions.SET_MODAL_ACTION,
+        payload: ModalActions.EditCharges,
+      });
     } else if (selectAction === ModalActions.SelectColourDivision) {
       dispatch({
         type: Actions.ADD_COLOUR,
