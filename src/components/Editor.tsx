@@ -5,7 +5,7 @@ import { G, Rect, Svg } from 'react-native-svg';
 import Actions from '@lib/actions';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
-import { BorderHeightPercentages, ProportionsList } from '@lib/proportions';
+import { ProportionsList } from '@lib/proportions';
 import { ChargeType } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { serialiseSVG, addHTML } from '@lib/utils';
@@ -50,9 +50,7 @@ export default ({
     useWindowDimensions().width,
     ProportionsList[proportion].ratio,
   );
-  const borderWidth = Math.floor(
-    size.height * (BorderHeightPercentages[border.heightPercentage] / 100),
-  );
+  const borderWidth = Math.floor((size.height * border.heightPercentage) / 100);
 
   const renderFlag = () => (
     <Svg

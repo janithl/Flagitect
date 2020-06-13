@@ -2,41 +2,59 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { Button, Row, Text } from '@components';
-import { Left, Right } from '@res/icons';
+import { Add, Left, Remove, Right } from '@res/icons';
 import colours from '@res/colours';
 
-export default ({
-  colour = colours.primaryBlue,
-  label = '',
-  list,
-  value,
-  setValue,
-}: OwnProps): JSX.Element => {
+export enum SpinnerTypes {
+  Number = 'Number',
+  List = 'List',
+}
+
+export default ({ type, value, setValue, ...props }: OwnProps): JSX.Element => {
   const nextValue = (pickedValue: number) => {
-    if (pickedValue < 0) return list.length - 1;
-    if (pickedValue > list.length - 1) return 0;
-    return pickedValue;
+    if (type === SpinnerTypes.Number) {
+      if (pickedValue < props?.min) return props?.min;
+      if (pickedValue > props?.max) return props?.max;
+      return pickedValue;
+    } else {
+      if (pickedValue < 0) return props?.list?.length - 1;
+      if (pickedValue > props?.list?.length - 1) return 0;
+      return pickedValue;
+    }
   };
 
+  const step = props?.step || 1;
   return (
     <View style={styles.container}>
       <Row>
         <View style={styles.item}>
-          <Button onPress={() => setValue(nextValue(value - 1))} padded={false}>
-            <Left fill={colours.white} size={32} />
+          <Button
+            onPress={() => setValue(nextValue(value - step))}
+            padded={false}>
+            {type === SpinnerTypes.Number ? (
+              <Remove fill={colours.white} size={32} />
+            ) : (
+              <Left fill={colours.white} size={32} />
+            )}
           </Button>
         </View>
         <View style={styles.item}>
-          <Text colour={colour}>{label}</Text>
+          <Text colour={props.colour}>{props.label}</Text>
           <View style={styles.value}>
-            <Text colour={colour} H3>
-              {String(list[value])}
+            <Text colour={props.colour} H3>
+              {props?.list ? String(props?.list[value]) : String(value)}
             </Text>
           </View>
         </View>
         <View style={styles.item}>
-          <Button onPress={() => setValue(nextValue(value + 1))} padded={false}>
-            <Right fill={colours.white} size={32} />
+          <Button
+            onPress={() => setValue(nextValue(value + step))}
+            padded={false}>
+            {type === SpinnerTypes.Number ? (
+              <Add fill={colours.white} size={32} />
+            ) : (
+              <Right fill={colours.white} size={32} />
+            )}
           </Button>
         </View>
       </Row>
@@ -44,13 +62,25 @@ export default ({
   );
 };
 
-type OwnProps = {
-  colour?: string;
-  label?: string;
-  list: string[] | number[];
-  value: number;
-  setValue: (value: number) => void;
-};
+type OwnProps =
+  | {
+      type: SpinnerTypes.List;
+      list: string[] | number[];
+      value: number;
+      setValue: (value: number) => void;
+      colour?: string;
+      label?: string;
+    }
+  | {
+      type: SpinnerTypes.Number;
+      value: number;
+      setValue: (value: number) => void;
+      step?: number;
+      min?: number;
+      max?: number;
+      colour?: string;
+      label?: string;
+    };
 
 const styles = StyleSheet.create({
   container: {

@@ -1,9 +1,14 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { Button, SectionHeading, Spinner, Text } from '@components';
+import {
+  Button,
+  SectionHeading,
+  Spinner,
+  SpinnerTypes,
+  Text,
+} from '@components';
 import Actions from '@lib/actions';
-import { BorderHeightPercentages } from '@lib/proportions';
 import { ChargeType, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { ChargesList } from '@res/charges/index';
@@ -16,7 +21,10 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
       <Spinner
         label="Border Height (%)"
         value={border.heightPercentage}
-        list={BorderHeightPercentages}
+        type={SpinnerTypes.Number}
+        min={0}
+        max={25}
+        step={5}
         setValue={(payload: number) =>
           dispatch({ type: Actions.SET_BORDER_HP, payload })
         }
