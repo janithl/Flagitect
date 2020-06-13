@@ -5,8 +5,8 @@ import { coord } from '@lib/utils';
 
 export enum PileTypes {
   Pile = 'Pile',
-  UprightPile = 'Upright Pile',
-  InvertedPile = 'Inverted Pile',
+  Upright = 'Upright Pile',
+  Inverted = 'Inverted Pile',
 }
 
 export default (
@@ -25,12 +25,12 @@ export default (
       points.push(coord(0, height));
       points.push(coord(width * percentage, Math.floor(height / 2)));
       break;
-    case PileTypes.UprightPile:
+    case PileTypes.Upright:
       points.push(coord(0, height));
       points.push(coord(width, height));
       points.push(coord(Math.floor(width / 2), height - height * percentage));
       break;
-    case PileTypes.InvertedPile:
+    case PileTypes.Inverted:
       points.push(coord(0, 0));
       points.push(coord(width, 0));
       points.push(coord(Math.floor(width / 2), height * percentage));

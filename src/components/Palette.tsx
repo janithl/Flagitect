@@ -16,7 +16,7 @@ export default ({ selectAction, dispatch }: OwnProps): JSX.Element => {
       });
       dispatch({
         type: Actions.SET_MODAL_ACTION,
-        payload: ModalActions.EditCharges,
+        payload: ModalActions.EditCharge,
       });
     } else if (selectAction === ModalActions.SelectColourDivision) {
       dispatch({

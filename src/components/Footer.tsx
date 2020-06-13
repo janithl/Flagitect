@@ -65,7 +65,7 @@ export default ({
         <FooterButton
           title="Charges"
           value={String(Object.keys(charges).length)}
-          onPress={() => openModal(ModalActions.EditCharges)}
+          onPress={() => openModal(ModalActions.ChargesList)}
         />
       </Row>
     </View>

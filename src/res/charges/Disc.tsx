@@ -1,6 +1,10 @@
 import React from 'react';
 import { Circle } from 'react-native-svg';
 
+export enum DiscTypes {
+  Disc = 'Disc',
+}
+
 export default (
   height: number,
   width: number,

@@ -3,7 +3,8 @@ import Actions from '@lib/actions';
 export enum ModalActions {
   SaveFlag = 'Save Flag',
   EditColours = 'Edit Division Colours',
-  EditCharges = 'Edit Charges',
+  ChargesList = 'Charges',
+  EditCharge = 'Edit Charge',
   SelectColourBorder = 'Select Border Colour',
   SelectColourDivision = 'Add Division Colour',
   None = '',

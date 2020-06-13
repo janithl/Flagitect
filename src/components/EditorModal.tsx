@@ -36,7 +36,7 @@ export default ({
             }
           />
         );
-      case ModalActions.EditCharges:
+      case ModalActions.ChargesList:
         return (
           <ChargesMenu border={border} charges={charges} dispatch={dispatch} />
         );

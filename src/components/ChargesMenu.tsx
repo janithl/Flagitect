@@ -1,16 +1,16 @@
 import React from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import { Button, SectionHeading, Spinner, Text } from '@components';
 import Actions from '@lib/actions';
 import { BorderHeightPercentages } from '@lib/proportions';
 import { ChargeType, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
-import { Charges } from '@res/charges';
+import { ChargesList } from '@res/charges/index';
 import colours from '@res/colours';
 
 export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
-  <View>
+  <ScrollView>
     <SectionHeading title="Border" />
     <View>
       <Spinner
@@ -49,7 +49,7 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
     ))}
     <SectionHeading title="Add Charges" />
 
-    {[Charges.Disc, Charges.Cross, Charges.Pile].map((charge) => (
+    {ChargesList.map((charge) => (
       <Button
         onPress={() =>
           dispatch({
@@ -65,7 +65,7 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
         </Text>
       </Button>
     ))}
-  </View>
+  </ScrollView>
 );
 
 type OwnProps = {
