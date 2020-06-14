@@ -16,15 +16,17 @@ import { Charges, ChargesList, CrossTypes } from '@res/charges/index';
 import colours from '@res/colours';
 import { Edit, Paint } from '@res/icons';
 
+const crosses = [CrossTypes.Cross, CrossTypes.Greek, CrossTypes.Nordic];
+
 const addCharge = (charge: Charges) => ({
   type: charge,
   colour: colours.white,
-  percentage: 30,
-  thickness: [CrossTypes.Cross, CrossTypes.Greek, CrossTypes.Nordic].includes(
-    charge as CrossTypes,
+  percentage: !(
+    crosses.includes(charge as CrossTypes) && charge === CrossTypes.Greek
   )
-    ? 10
-    : undefined,
+    ? undefined
+    : 10,
+  thickness: crosses.includes(charge as CrossTypes) ? 10 : undefined,
 });
 
 export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
