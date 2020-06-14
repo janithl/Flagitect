@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import {
+  ChargesAdd,
   ChargesMenu,
   ChargesEditor,
   ColourSelector,
@@ -61,6 +62,8 @@ export default ({
             dispatch={dispatch}
           />
         );
+      case ModalActions.AddCharge:
+        return <ChargesAdd dispatch={dispatch} />;
       case ModalActions.None:
       default:
         return <View />;

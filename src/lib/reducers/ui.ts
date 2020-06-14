@@ -4,10 +4,11 @@ export enum ModalActions {
   SaveFlag = 'Save Flag',
   EditColours = 'Edit Division Colours',
   ChargesList = 'Charges',
+  AddCharge = 'Add Charge',
   EditCharge = 'Edit Charge',
   SelectColourBorder = 'Select Border Colour',
   SelectColourCharge = 'Select Charge Colour',
-  SelectColourDivision = 'Add Division Colour',
+  SelectColourDivision = 'Select Division Colour',
   None = '',
 }
 

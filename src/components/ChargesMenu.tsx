@@ -1,33 +1,12 @@
 import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import {
-  Button,
-  ListItem,
-  SectionHeading,
-  Spinner,
-  SpinnerTypes,
-  Text,
-} from '@components';
+import { ListItem, SectionHeading, Spinner, SpinnerTypes } from '@components';
 import Actions from '@lib/actions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
-import { Charges, ChargesList, CrossTypes } from '@res/charges/index';
 import colours from '@res/colours';
-import { Edit, Paint } from '@res/icons';
-
-const crosses = [CrossTypes.Cross, CrossTypes.Greek, CrossTypes.Nordic];
-
-const addCharge = (charge: Charges) => ({
-  type: charge,
-  colour: colours.white,
-  percentage: !(
-    crosses.includes(charge as CrossTypes) && charge === CrossTypes.Greek
-  )
-    ? undefined
-    : 10,
-  thickness: crosses.includes(charge as CrossTypes) ? 10 : undefined,
-});
+import { Add, Edit, Paint } from '@res/icons';
 
 export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
   <ScrollView>
@@ -52,8 +31,14 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
     </View>
 
     <SectionHeading title="Charges" />
+    <ListItem
+      title="Add Charge"
+      icon={<Add fill={colours.primaryBlue} size={32} />}
+      onPress={() => openModal(dispatch, ModalActions.AddCharge)}
+    />
     {Object.values(charges).map((charge: ChargeType) => (
       <ListItem
+        key={charge.id}
         title={charge.type}
         icon={<Edit fill={colours.primaryBlue} size={32} />}
         onPress={() =>
@@ -63,21 +48,6 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
           })
         }
       />
-    ))}
-
-    <SectionHeading title="Add Charges" />
-    {ChargesList.map((charge) => (
-      <Button
-        onPress={() =>
-          dispatch({
-            type: Actions.UPDATE_CHARGE,
-            payload: addCharge(charge),
-          })
-        }>
-        <Text colour={colours.white} H4>
-          {`Add ${charge}`}
-        </Text>
-      </Button>
     ))}
   </ScrollView>
 );
