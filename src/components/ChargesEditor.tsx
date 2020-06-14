@@ -89,7 +89,7 @@ export default ({
         onPress={() => openModal(dispatch, ModalActions.SelectColourCharge)}
       />
       <ListItem
-        title={`Remove ${charges[selectedCharge]?.type}`}
+        title="Remove"
         icon={<Delete fill={colours.salmon} size={32} />}
         colour={colours.salmon}
         onPress={removeChargePrompt}

@@ -6,10 +6,11 @@ import Actions from '@lib/actions';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
-import { ChargeType } from '@lib/reducers';
+import { ChargeType, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { serialiseSVG, addHTML } from '@lib/utils';
 import renderCharges from '@res/charges';
+import colours from 'res/colours';
 
 const margins = {
   vertical: Platform.OS === 'android' ? 75 : 100,
@@ -41,7 +42,7 @@ const calculateSize = (
 export default ({
   dispatch,
   flag: { border, division, proportion, selectedColours },
-  ui: { fileType },
+  ui: { fileType, modalAction },
   charges,
 }: OwnProps): JSX.Element => {
   const flag = useRef(null);
@@ -102,7 +103,12 @@ export default ({
   }, [dispatch, getSVG, fileType]);
 
   return (
-    <View testID="editor" style={styles.editor}>
+    <View
+      testID="editor"
+      style={[
+        styles.editor,
+        modalAction === ModalActions.None ? null : styles.editorSmall,
+      ]}>
       {renderFlag()}
     </View>
   );
@@ -120,6 +126,7 @@ type OwnProps = {
   };
   ui: {
     fileType: FileTypes;
+    modalAction: ModalActions;
   };
   charges: {
     [key: string]: ChargeType;
@@ -128,22 +135,14 @@ type OwnProps = {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  label: {
-    margin: 10,
-    alignItems: 'center',
-  },
-  slider: {
-    width: 150,
-    height: 50,
-  },
   editor: {
     flex: 1,
     alignItems: 'center',
+    backgroundColor: colours.grey,
     justifyContent: 'center',
+    paddingTop: 5,
+  },
+  editorSmall: {
+    justifyContent: 'flex-start',
   },
 });

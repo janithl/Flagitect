@@ -13,29 +13,6 @@ import {
 } from '@res/charges/index';
 import colours from '@res/colours';
 
-const getChargeOptions = (charge: Charges) => {
-  const options: Partial<ChargeType> = {
-    type: charge,
-    colour: colours.white,
-    percentage: 30,
-  };
-  if ([CrossTypes.Cross, CrossTypes.Nordic].includes(charge as CrossTypes)) {
-    delete options.percentage;
-  }
-  if (
-    [CrossTypes.Cross, CrossTypes.Greek, CrossTypes.Nordic].includes(
-      charge as CrossTypes,
-    )
-  ) {
-    options.thickness = 10;
-  }
-  if ([SimpleTypes.Canton, SimpleTypes.Panel].includes(charge as SimpleTypes)) {
-    options.percentage = 50;
-  }
-
-  return options;
-};
-
 const ChargeItem = ({ title, onPress }: ChargeItemProps) => (
   <TouchableOpacity onPress={onPress} style={styles.chargeItem}>
     <Text colour={colours.white} textAlign="center" H4>
@@ -90,3 +67,24 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
 });
+
+const getChargeOptions = (charge: Charges) => {
+  const options: Partial<ChargeType> = {
+    type: charge,
+    colour: colours.white,
+    percentage: 50,
+  };
+
+  switch (charge) {
+    case CrossTypes.Cross:
+    case CrossTypes.Nordic:
+      delete options.percentage;
+      options.thickness = 10;
+      break;
+    case CrossTypes.Greek:
+      options.thickness = 15;
+      break;
+  }
+
+  return options;
+};

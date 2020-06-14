@@ -21,7 +21,7 @@ const initialState: FlagStateType = {
   selectedColours: initialColours,
   border: {
     heightPercentage: 0,
-    colour: colours.beige,
+    colour: colours.white,
   },
 };
 
