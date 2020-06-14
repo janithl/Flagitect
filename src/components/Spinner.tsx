@@ -85,6 +85,8 @@ type OwnProps =
 const styles = StyleSheet.create({
   container: {
     height: 60,
+    borderBottomColor: colours.grey,
+    borderBottomWidth: 1,
   },
   item: {
     padding: 10,

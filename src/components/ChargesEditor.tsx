@@ -6,6 +6,7 @@ import Actions from '@lib/actions';
 import { ChargeType, openModal, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
+import { Delete, Paint } from '@res/icons';
 
 const properties = [
   {
@@ -84,12 +85,15 @@ export default ({
       <SectionHeading title="Options" />
       <ListItem
         title="Set Colour"
+        icon={<Paint fill={charges[selectedCharge]?.colour} size={32} />}
         onPress={() => openModal(dispatch, ModalActions.SelectColourCharge)}
       />
       <ListItem
         title={`Remove ${charges[selectedCharge]?.type}`}
+        icon={<Delete fill={colours.salmon} size={32} />}
         colour={colours.salmon}
         onPress={removeChargePrompt}
+        arrow={false}
       />
     </ScrollView>
   );

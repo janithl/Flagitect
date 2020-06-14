@@ -9,6 +9,7 @@ export default ({
   title,
   subtitle,
   colour = colours.primaryBlue,
+  arrow = true,
   onPress,
   icon,
 }: OwnProps): JSX.Element => (
@@ -21,7 +22,7 @@ export default ({
       {subtitle && <Text colour={colour}>{subtitle}</Text>}
     </View>
     <View style={styles.icon}>
-      <Right fill={colour} size={48} />
+      {arrow && <Right fill={colour} size={48} />}
     </View>
   </TouchableOpacity>
 );
@@ -32,6 +33,7 @@ type OwnProps = {
   subtitle?: string;
   colour?: string;
   icon?: JSX.Element;
+  arrow?: boolean;
 };
 
 const styles = StyleSheet.create({

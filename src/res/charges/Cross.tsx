@@ -15,7 +15,7 @@ export default (
   percentage = 50,
   crossType?: CrossTypes,
 ): JSX.Element => {
-  thickness *= height / 100;
+  thickness *= Math.floor(height / 100);
   percentage /= 100;
 
   const y = Math.floor((height - thickness) / 2);

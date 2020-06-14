@@ -1,10 +1,11 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { Button, Text } from '@components';
+import { ListItem } from '@components';
 import { FileTypes } from '@lib/files';
 
 import colours from '@res/colours';
+import { Download } from '@res/icons';
 
 export default ({ onSave }: OwnProps): JSX.Element => (
   <View>
@@ -15,21 +16,24 @@ export default ({ onSave }: OwnProps): JSX.Element => (
         onChangeText={setFilename}
         style={styles.input}
       /></View> */}
-    <Button onPress={() => onSave(FileTypes.PNG)}>
-      <Text colour={colours.white} H4>
-        Save PNG
-      </Text>
-    </Button>
-    <Button onPress={() => onSave(FileTypes.SVG)}>
-      <Text colour={colours.white} H4>
-        Save SVG
-      </Text>
-    </Button>
-    <Button onPress={() => onSave(FileTypes.HTML)}>
-      <Text colour={colours.white} H4>
-        Save Webpage
-      </Text>
-    </Button>
+    <ListItem
+      arrow={false}
+      title="Save PNG"
+      onPress={() => onSave(FileTypes.PNG)}
+      icon={<Download fill={colours.primaryBlue} size={32} />}
+    />
+    <ListItem
+      arrow={false}
+      title="Save SVG"
+      onPress={() => onSave(FileTypes.SVG)}
+      icon={<Download fill={colours.primaryBlue} size={32} />}
+    />
+    <ListItem
+      arrow={false}
+      title="Save Webpage"
+      onPress={() => onSave(FileTypes.HTML)}
+      icon={<Download fill={colours.primaryBlue} size={32} />}
+    />
   </View>
 );
 
