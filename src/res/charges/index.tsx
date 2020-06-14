@@ -3,11 +3,18 @@ import { G } from 'react-native-svg';
 
 import { ChargeType } from '@lib/reducers';
 
-import renderDisc, { DiscTypes } from './Disc';
+import renderPanel from './Panel';
+import renderDisc from './Disc';
 import renderCross, { CrossTypes } from './Cross';
 import renderPile, { PileTypes } from './Pile';
 
-export type Charges = DiscTypes | CrossTypes | PileTypes;
+export enum SimpleTypes {
+  Canton = 'Canton',
+  Disc = 'Disc',
+  Panel = 'Panel',
+}
+
+export type Charges = SimpleTypes | CrossTypes | PileTypes;
 
 export default (
   charges: ChargeType[],
@@ -21,7 +28,7 @@ export default (
         case CrossTypes.Greek:
         case CrossTypes.Nordic:
           return (
-            <G id={charge.id}>
+            <G id={charge.id} key={charge.id}>
               {renderCross(
                 height,
                 width,
@@ -32,9 +39,22 @@ export default (
               )}
             </G>
           );
-        case DiscTypes.Disc:
+        case SimpleTypes.Canton:
+        case SimpleTypes.Panel:
           return (
-            <G id={charge.id}>
+            <G id={charge.id} key={charge.id}>
+              {renderPanel(
+                height,
+                width,
+                charge.colour,
+                charge?.percentage,
+                charge?.type === SimpleTypes.Canton,
+              )}
+            </G>
+          );
+        case SimpleTypes.Disc:
+          return (
+            <G id={charge.id} key={charge.id}>
               {renderDisc(height, width, charge.colour, charge?.percentage)}
             </G>
           );
@@ -42,7 +62,7 @@ export default (
         case PileTypes.Inverted:
         case PileTypes.Upright:
           return (
-            <G id={charge.id}>
+            <G id={charge.id} key={charge.id}>
               {renderPile(
                 height,
                 width,
@@ -58,7 +78,9 @@ export default (
 );
 
 export const ChargesList = [
-  DiscTypes.Disc,
+  SimpleTypes.Canton,
+  SimpleTypes.Disc,
+  SimpleTypes.Panel,
   PileTypes.Pile,
   PileTypes.Upright,
   PileTypes.Inverted,
@@ -67,11 +89,4 @@ export const ChargesList = [
   CrossTypes.Greek,
 ];
 
-export {
-  renderCross,
-  renderDisc,
-  renderPile,
-  CrossTypes,
-  DiscTypes,
-  PileTypes,
-};
+export { renderCross, renderDisc, renderPile, CrossTypes, PileTypes };

@@ -5,7 +5,12 @@ import { Text } from '@components';
 import Actions from '@lib/actions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
-import { Charges, ChargesList, CrossTypes } from '@res/charges/index';
+import {
+  Charges,
+  ChargesList,
+  CrossTypes,
+  SimpleTypes,
+} from '@res/charges/index';
 import colours from '@res/colours';
 
 const getChargeOptions = (charge: Charges) => {
@@ -23,6 +28,9 @@ const getChargeOptions = (charge: Charges) => {
     )
   ) {
     options.thickness = 10;
+  }
+  if ([SimpleTypes.Canton, SimpleTypes.Panel].includes(charge as SimpleTypes)) {
+    options.percentage = 50;
   }
 
   return options;
