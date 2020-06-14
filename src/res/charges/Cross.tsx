@@ -15,19 +15,19 @@ export default (
   percentage = 50,
   crossType?: CrossTypes,
 ): JSX.Element => {
-  thickness *= Math.floor(height / 100);
+  thickness *= Math.round(height / 100);
   percentage /= 100;
 
-  const y = Math.floor((height - thickness) / 2);
+  const y = Math.round((height - thickness) / 2);
   const x =
-    crossType === CrossTypes.Nordic ? y : Math.floor((width - thickness) / 2);
+    crossType === CrossTypes.Nordic ? y : Math.round((width - thickness) / 2);
   let startY = 0,
     startX = 0;
 
   if (crossType === CrossTypes.Greek) {
-    startY = Math.floor((height - height * percentage) / 2);
-    height = Math.floor(height - startY * 2);
-    startX = Math.floor((width - height) / 2);
+    startY = Math.round((height - Math.round(height * percentage)) / 2);
+    height = Math.round(height - startY * 2);
+    startX = Math.round((width - height) / 2);
     width = height;
   }
 

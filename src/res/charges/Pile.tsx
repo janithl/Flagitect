@@ -19,21 +19,23 @@ export default (
   percentage /= 100;
 
   const points: string[] = [];
+  const midX = Math.round(width / 2);
+  const midY = Math.round(height / 2);
   switch (pileType) {
     case PileTypes.Pile:
       points.push(coord(0, 0));
       points.push(coord(0, height));
-      points.push(coord(width * percentage, Math.floor(height / 2)));
+      points.push(coord(Math.round(width * percentage), midY));
       break;
     case PileTypes.Upright:
       points.push(coord(0, height));
       points.push(coord(width, height));
-      points.push(coord(Math.floor(width / 2), height - height * percentage));
+      points.push(coord(midX, height - Math.round(height * percentage)));
       break;
     case PileTypes.Inverted:
       points.push(coord(0, 0));
       points.push(coord(width, 0));
-      points.push(coord(Math.floor(width / 2), height * percentage));
+      points.push(coord(midX, Math.round(height * percentage)));
       break;
   }
   return <Polygon points={points.join(' ')} fill={colour} />;
