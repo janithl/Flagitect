@@ -31,8 +31,8 @@ const properties = [
     name: 'points',
     label: 'Points',
     options: {
-      min: 5,
-      step: 2,
+      min: 4,
+      step: 1,
     },
   },
   {
