@@ -12,16 +12,37 @@ const properties = [
   {
     name: 'percentage',
     label: 'Size (%)',
-    min: 10,
-    max: 100,
-    step: 10,
+    options: {
+      min: 10,
+      max: 100,
+      step: 10,
+    },
   },
   {
     name: 'thickness',
     label: 'Thickness (%)',
-    min: 5,
-    max: 50,
-    step: 5,
+    options: {
+      min: 5,
+      max: 50,
+      step: 5,
+    },
+  },
+  {
+    name: 'points',
+    label: 'Points',
+    options: {
+      min: 5,
+      step: 2,
+    },
+  },
+  {
+    name: 'rotation',
+    label: 'Rotation',
+    options: {
+      min: 15,
+      max: 360,
+      step: 15,
+    },
   },
 ];
 
@@ -71,12 +92,10 @@ export default ({
             <Spinner
               key={item.name}
               label={item.label}
-              value={charges[selectedCharge][item.name] ?? item.min}
               type={SpinnerTypes.Number}
-              min={item.min}
-              max={item.max}
-              step={item.step}
+              value={charges[selectedCharge][item.name] ?? item.options.min}
               setValue={(value: number) => updateValue(item.name, value)}
+              {...item.options}
             />
           ) : (
             <View key={item.name} />

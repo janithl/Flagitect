@@ -10,6 +10,7 @@ import {
   ChargesList,
   CrossTypes,
   SimpleTypes,
+  ComplexTypes,
 } from '@res/charges/index';
 import colours from '@res/colours';
 
@@ -83,6 +84,10 @@ const getChargeOptions = (charge: Charges) => {
       break;
     case CrossTypes.Greek:
       options.thickness = 15;
+      break;
+    case ComplexTypes.Star:
+      options.rotation = 270;
+      options.points = 5;
       break;
   }
 

@@ -7,6 +7,7 @@ import renderPanel from './Panel';
 import renderDisc from './Disc';
 import renderCross, { CrossTypes } from './Cross';
 import renderPile, { PileTypes } from './Pile';
+import renderStar from './Star';
 
 export enum SimpleTypes {
   Canton = 'Canton',
@@ -14,7 +15,11 @@ export enum SimpleTypes {
   Panel = 'Panel',
 }
 
-export type Charges = SimpleTypes | CrossTypes | PileTypes;
+export enum ComplexTypes {
+  Star = 'Star',
+}
+
+export type Charges = SimpleTypes | CrossTypes | PileTypes | ComplexTypes;
 
 export default (
   charges: ChargeType[],
@@ -72,6 +77,23 @@ export default (
               )}
             </G>
           );
+        case ComplexTypes.Star:
+          return (
+            <G
+              id={charge.id}
+              key={charge.id}
+              rotation={charge?.rotation}
+              originX={Math.round(width / 2)}
+              originY={Math.round(height / 2)}>
+              {renderStar(
+                height,
+                width,
+                charge.colour,
+                charge?.percentage,
+                charge?.points,
+              )}
+            </G>
+          );
       }
     })}
   </>
@@ -87,6 +109,7 @@ export const ChargesList = [
   CrossTypes.Cross,
   CrossTypes.Nordic,
   CrossTypes.Greek,
+  ComplexTypes.Star,
 ];
 
 export { renderCross, renderDisc, renderPile, CrossTypes, PileTypes };

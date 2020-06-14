@@ -10,7 +10,7 @@ import {
   Modal,
 } from '@components';
 import Actions from '@lib/actions';
-import { ChargeType, ModalActions } from '@lib/reducers';
+import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import Palette from './Palette';
 
@@ -70,10 +70,27 @@ export default ({
     }
   };
 
+  const dismissModal = () => {
+    switch (modalAction) {
+      case ModalActions.SelectColourBorder:
+      case ModalActions.EditCharge:
+        openModal(dispatch, ModalActions.ChargesList);
+        break;
+      case ModalActions.SelectColourCharge:
+        openModal(dispatch, ModalActions.EditCharge);
+        break;
+      case ModalActions.SelectColourDivision:
+        openModal(dispatch, ModalActions.EditColours);
+        break;
+      default:
+        openModal(dispatch, ModalActions.None);
+    }
+  };
+
   return (
     <Modal
       visible={modalAction !== ModalActions.None}
-      dismiss={() => dispatch({ type: Actions.DISMISS_MODAL })}
+      dismiss={dismissModal}
       title={modalAction}>
       {renderModalBody()}
     </Modal>

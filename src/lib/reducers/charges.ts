@@ -8,6 +8,8 @@ export type ChargeType = {
   colour: string;
   thickness?: number;
   percentage?: number;
+  rotation?: number;
+  points?: number;
 };
 
 export type ChargesStateType = {
