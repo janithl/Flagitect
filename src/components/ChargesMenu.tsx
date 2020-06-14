@@ -3,6 +3,7 @@ import { ScrollView, View } from 'react-native';
 
 import {
   Button,
+  ListItem,
   SectionHeading,
   Spinner,
   SpinnerTypes,
@@ -13,6 +14,7 @@ import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import { ChargesList, CrossTypes } from '@res/charges/index';
 import colours from '@res/colours';
+import { Edit } from '@res/icons';
 
 export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
   <ScrollView>
@@ -39,16 +41,16 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
 
     <SectionHeading title="Charges" />
     {Object.values(charges).map((charge: ChargeType) => (
-      <Button
+      <ListItem
+        title={charge.type}
+        icon={<Edit fill={colours.primaryBlue} />}
         onPress={() =>
           dispatch({
             type: Actions.SELECT_CHARGE,
             payload: charge.id,
           })
-        }>
-        <Text colour={colours.white} H4>{`Edit ${charge.type}`}</Text>
-        <Text colour={colours.white}>{charge.id}</Text>
-      </Button>
+        }
+      />
     ))}
 
     <SectionHeading title="Add Charges" />
@@ -61,7 +63,7 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => (
               type: charge,
               colour: colours.white,
               percentage: 30,
-              thickness: charge === CrossTypes.Greek ? 20 : undefined,
+              thickness: charge === CrossTypes.Greek ? 10 : undefined,
             },
           })
         }>

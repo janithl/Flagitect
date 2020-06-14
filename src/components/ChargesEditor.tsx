@@ -1,17 +1,28 @@
 import React from 'react';
-import { Alert, ScrollView } from 'react-native';
+import { Alert, ScrollView, View } from 'react-native';
 
-import {
-  Button,
-  SectionHeading,
-  Spinner,
-  SpinnerTypes,
-  Text,
-} from '@components';
+import { ListItem, SectionHeading, Spinner, SpinnerTypes } from '@components';
 import Actions from '@lib/actions';
 import { ChargeType, openModal, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
+
+const properties = [
+  {
+    name: 'percentage',
+    label: 'Size (%)',
+    min: 10,
+    max: 100,
+    step: 10,
+  },
+  {
+    name: 'thickness',
+    label: 'Thickness (%)',
+    min: 5,
+    max: 50,
+    step: 5,
+  },
+];
 
 export default ({
   selectedCharge,
@@ -53,40 +64,33 @@ export default ({
   return (
     <ScrollView>
       <SectionHeading title={`${charges[selectedCharge]?.type} Properties`} />
-      {charges[selectedCharge]?.percentage ? (
-        <Spinner
-          label="Size (%)"
-          value={charges[selectedCharge]?.percentage ?? 10}
-          type={SpinnerTypes.Number}
-          min={10}
-          max={90}
-          step={10}
-          setValue={(value: number) => updateValue('percentage', value)}
-        />
-      ) : null}
-      {charges[selectedCharge]?.thickness ? (
-        <Spinner
-          label="Thickness (%)"
-          value={charges[selectedCharge]?.thickness ?? 10}
-          type={SpinnerTypes.Number}
-          min={5}
-          max={50}
-          step={5}
-          setValue={(value: number) => updateValue('thickness', value)}
-        />
-      ) : null}
-      <Button
-        onPress={() => openModal(dispatch, ModalActions.SelectColourCharge)}>
-        <Text colour={colours.white} H4>
-          Select Colour
-        </Text>
-      </Button>
-      <SectionHeading title="Remove Charge" />
-      <Button onPress={removeChargePrompt}>
-        <Text colour={colours.white} H4>
-          Remove Charge
-        </Text>
-      </Button>
+      {charges[selectedCharge] &&
+        properties.map((item) =>
+          charges[selectedCharge][item.name] ? (
+            <Spinner
+              key={item.name}
+              label={item.label}
+              value={charges[selectedCharge][item.name] ?? item.min}
+              type={SpinnerTypes.Number}
+              min={item.min}
+              max={item.max}
+              step={item.step}
+              setValue={(value: number) => updateValue(item.name, value)}
+            />
+          ) : (
+            <View key={item.name} />
+          ),
+        )}
+      <SectionHeading title="Options" />
+      <ListItem
+        title="Set Colour"
+        onPress={() => openModal(dispatch, ModalActions.SelectColourCharge)}
+      />
+      <ListItem
+        title={`Remove ${charges[selectedCharge]?.type}`}
+        colour={colours.salmon}
+        onPress={removeChargePrompt}
+      />
     </ScrollView>
   );
 };
