@@ -9,6 +9,7 @@ export default (
   colour: string,
   percentage = 50,
   points = 5,
+  rotation = 0,
 ): JSX.Element => {
   const segment = (2 * Math.PI) / points;
   const r = Math.round((height * percentage) / 200);
@@ -25,5 +26,13 @@ export default (
     i += Math.floor(points / 2);
   }
 
-  return <Polygon points={pointCoords.join(' ')} fill={colour} />;
+  return (
+    <Polygon
+      fill={colour}
+      originX={Math.round(width / 2)}
+      originY={Math.round(height / 2)}
+      points={pointCoords.join(' ')}
+      rotation={rotation}
+    />
+  );
 };

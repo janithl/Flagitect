@@ -7,15 +7,19 @@ import renderPanel from './Panel';
 import renderDisc from './Disc';
 import renderCross, { CrossTypes } from './Cross';
 import renderPile, { PileTypes } from './Pile';
+import renderCrescent from './Crescent';
+import renderDiamond from './Diamond';
 import renderStar from './Star';
 
 export enum SimpleTypes {
   Canton = 'Canton',
+  Diamond = 'Diamond',
   Disc = 'Disc',
   Panel = 'Panel',
 }
 
 export enum ComplexTypes {
+  Crescent = 'Crescent',
   Star = 'Star',
 }
 
@@ -57,6 +61,12 @@ export default (
               )}
             </G>
           );
+        case SimpleTypes.Diamond:
+          return (
+            <G id={charge.id} key={charge.id}>
+              {renderDiamond(height, width, charge.colour, charge?.percentage)}
+            </G>
+          );
         case SimpleTypes.Disc:
           return (
             <G id={charge.id} key={charge.id}>
@@ -79,18 +89,26 @@ export default (
           );
         case ComplexTypes.Star:
           return (
-            <G
-              id={charge.id}
-              key={charge.id}
-              rotation={charge?.rotation}
-              originX={Math.round(width / 2)}
-              originY={Math.round(height / 2)}>
+            <G id={charge.id} key={charge.id}>
               {renderStar(
                 height,
                 width,
                 charge.colour,
                 charge?.percentage,
                 charge?.points,
+                charge?.rotation,
+              )}
+            </G>
+          );
+        case ComplexTypes.Crescent:
+          return (
+            <G id={charge.id} key={charge.id}>
+              {renderCrescent(
+                height,
+                width,
+                charge.colour,
+                charge.percentage,
+                charge.rotation,
               )}
             </G>
           );
@@ -101,7 +119,7 @@ export default (
 
 export const ChargesList = [
   SimpleTypes.Canton,
-  SimpleTypes.Disc,
+  SimpleTypes.Diamond,
   SimpleTypes.Panel,
   PileTypes.Pile,
   PileTypes.Upright,
@@ -109,7 +127,9 @@ export const ChargesList = [
   CrossTypes.Cross,
   CrossTypes.Nordic,
   CrossTypes.Greek,
+  SimpleTypes.Disc,
   ComplexTypes.Star,
+  ComplexTypes.Crescent,
 ];
 
 export { renderCross, renderDisc, renderPile, CrossTypes, PileTypes };

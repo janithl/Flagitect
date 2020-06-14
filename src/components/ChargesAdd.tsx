@@ -9,7 +9,6 @@ import {
   Charges,
   ChargesList,
   CrossTypes,
-  SimpleTypes,
   ComplexTypes,
 } from '@res/charges/index';
 import colours from '@res/colours';
@@ -56,7 +55,7 @@ const styles = StyleSheet.create({
   chargeItem: {
     width: 100,
     height: 100,
-    padding: 10,
+    padding: 5,
     borderRadius: 10,
     backgroundColor: colours.secondaryBlue,
     justifyContent: 'center',
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
   columnStyle: {
     flex: 1,
     justifyContent: 'space-evenly',
-    marginTop: 20,
+    marginVertical: 20,
   },
 });
 
@@ -88,6 +87,9 @@ const getChargeOptions = (charge: Charges) => {
     case ComplexTypes.Star:
       options.rotation = 270;
       options.points = 5;
+      break;
+    case ComplexTypes.Crescent:
+      options.rotation = 90;
       break;
   }
 

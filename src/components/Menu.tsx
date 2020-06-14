@@ -10,14 +10,15 @@ import {
   useWindowDimensions,
   View,
   ViewStyle,
+  Linking,
 } from 'react-native';
 import { getVersion } from 'react-native-device-info';
 
-import { SectionHeading, Text } from '@components';
+import { ListItem, SectionHeading, Text } from '@components';
 import Actions from '@lib/actions';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
-import { Clear } from '@res/icons';
+import { Clear, Link } from '@res/icons';
 import { license } from '@res/strings';
 
 const SlideInMenu = ({ style, children }: SlideInMenuProps) => {
@@ -82,6 +83,25 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
                   <Text H1>{`Flagitect ${getVersion()}`}</Text>
                 </View>
               </View>
+              <SectionHeading title="Links" />
+              <ListItem
+                title="Source Code"
+                subtitle="github.com/janithl/Flagitect"
+                colour={colours.black}
+                icon={<Link fill={colours.black} size={32} />}
+                onPress={() =>
+                  Linking.openURL('https://github.com/janithl/Flagitect')
+                }
+              />
+              <ListItem
+                title="Subreddit"
+                subtitle="reddit.com/r/Flagitect"
+                colour={colours.black}
+                icon={<Link fill={colours.black} size={32} />}
+                onPress={() =>
+                  Linking.openURL('https://www.reddit.com/r/Flagitect')
+                }
+              />
               <SectionHeading title="License" />
               <View style={styles.modalContent}>
                 <Text>{`Copyright (c) ${new Date().getFullYear()} Flagitect Developers`}</Text>

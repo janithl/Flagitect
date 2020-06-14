@@ -16,7 +16,7 @@ export default ({
   <TouchableOpacity style={styles.container} onPress={onPress}>
     <View style={styles.icon}>{icon}</View>
     <View style={styles.label}>
-      <Text colour={colour} H3>
+      <Text colour={colour} H4>
         {title}
       </Text>
       {subtitle && <Text colour={colour}>{subtitle}</Text>}
