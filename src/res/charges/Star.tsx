@@ -1,7 +1,7 @@
 import React from 'react';
 import { G, Polygon } from 'react-native-svg';
 
-import { coord } from '@lib/utils';
+import { coord, toDP } from '@lib/utils';
 
 export default (
   height: number,
@@ -18,9 +18,9 @@ export default (
     const y = Math.round(height / 2 + radius * Math.sin(point * segment));
     return coord(x, y);
   };
+  const rotateCoords = [rotation, toDP(width / 2, 1), toDP(height / 2, 1)];
 
   let i = 0;
-
   if (points % 2 === 0) {
     /** for even number of points */
     const polygon1: string[] = [];
@@ -34,10 +34,7 @@ export default (
     }
 
     return (
-      <G
-        originX={Math.round(width / 2)}
-        originY={Math.round(height / 2)}
-        rotation={rotation}>
+      <G transform={`rotate(${rotateCoords.join(' ')})`}>
         <Polygon fill={colour} points={polygon1.join(' ')} />
         <Polygon fill={colour} points={polygon2.join(' ')} />
       </G>
@@ -54,10 +51,8 @@ export default (
   return (
     <Polygon
       fill={colour}
-      originX={Math.round(width / 2)}
-      originY={Math.round(height / 2)}
+      transform={`rotate(${rotateCoords.join(' ')})`}
       points={pointCoords.join(' ')}
-      rotation={rotation}
     />
   );
 };

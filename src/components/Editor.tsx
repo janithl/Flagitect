@@ -6,9 +6,9 @@ import Actions from '@lib/actions';
 import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
-import { ChargeType, ModalActions } from '@lib/reducers';
+import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
-import { serialiseSVG, addHTML } from '@lib/utils';
+import { addHTML, addXML, serialiseSVG } from '@lib/utils';
 import renderCharges from '@res/charges';
 import colours from 'res/colours';
 
@@ -94,10 +94,13 @@ export default ({
           );
         break;
       case FileTypes.SVG:
-        saveFile(filename, fileType, getSVG());
+        saveFile(filename, fileType, addXML(getSVG()));
         break;
       case FileTypes.HTML:
         saveFile(filename, fileType, addHTML(getSVG()));
+    }
+    if (Platform.OS === 'ios') {
+      openModal(dispatch, ModalActions.None);
     }
     dispatch({ type: Actions.SAVE_DONE });
   }, [dispatch, getSVG, fileType]);

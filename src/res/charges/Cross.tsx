@@ -47,7 +47,7 @@ export default (
         height={thickness}
         width={size.width}
         fill={colour}
-      />{' '}
+      />
     </>
   );
 };

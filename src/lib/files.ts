@@ -29,11 +29,12 @@ export const saveFile = async (
 ): Promise<void> => {
   const encoding = filetype === FileTypes.PNG ? 'base64' : 'utf8';
   const path = `${fs.dirs.CacheDir}/${filename}${extension[filetype]}`;
+  if (__DEV__) console.log({ path, encoding, contents });
 
   if (Platform.OS === 'ios') {
-    fs.writeFile(path, contents, encoding).then(() =>
-      ios.previewDocument(path),
-    );
+    fs.writeFile(path, contents, encoding)
+      .then(() => ios.previewDocument(path))
+      .catch(console.error);
     return;
   }
 
@@ -47,9 +48,9 @@ export const saveFile = async (
       },
     );
     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      fs.writeFile(path, contents, encoding).then(() =>
-        android.actionViewIntent(path, mimeType[filetype]),
-      );
+      fs.writeFile(path, contents, encoding)
+        .then(() => android.actionViewIntent(path, mimeType[filetype]))
+        .catch(console.error);
     } else {
       Alert.alert('Error Writing File', 'Permission Denied');
     }
