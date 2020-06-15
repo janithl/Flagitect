@@ -79,9 +79,16 @@ const getChargeOptions = (charge: Charges) => {
   };
 
   switch (charge) {
+    case SimpleTypes.Canton:
+    case SimpleTypes.Panel:
+      delete options.repeatX;
+      delete options.repeatY;
+      break;
     case CrossTypes.Cross:
     case CrossTypes.Nordic:
       delete options.percentage;
+      delete options.repeatX;
+      delete options.repeatY;
       options.thickness = 10;
       break;
     case CrossTypes.Greek:
@@ -93,10 +100,6 @@ const getChargeOptions = (charge: Charges) => {
       break;
     case ComplexTypes.Crescent:
       options.rotation = 90;
-      break;
-    case SimpleTypes.Canton:
-      delete options.repeatX;
-      delete options.repeatY;
       break;
   }
 

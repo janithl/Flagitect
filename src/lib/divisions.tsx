@@ -1,7 +1,7 @@
 import React from 'react';
 import { G, Polygon, Rect } from 'react-native-svg';
 
-import { coord } from '@lib/utils';
+import { coord, toDP } from '@lib/utils';
 
 export enum Division {
   Horizontal = 'Horizontal',
@@ -76,28 +76,28 @@ const renderCheckedDivisions = (
   divsHorizontal = 9,
   divsVertical = 7,
 ): JSX.Element => {
-  const divHeight = Math.round(height / divsVertical);
-  const divWidth = Math.round(width / divsHorizontal);
+  const divHeight = toDP(height / divsVertical, 2);
+  const divWidth = toDP(width / divsHorizontal, 2);
+  const divs = {
+    vertical: Array(divsVertical).fill(0),
+    horizontal: Array(divsHorizontal).fill(0),
+  };
   return (
     <G>
-      {Array(divsVertical)
-        .fill(0)
-        .map((_, i: number) => (
-          <G key={i}>
-            {Array(divsHorizontal)
-              .fill(0)
-              .map((__, j: number) => (
-                <Rect
-                  x={j * divWidth}
-                  y={i * divHeight}
-                  height={divHeight}
-                  width={divWidth}
-                  fill={divColours[(i + j) % 2]}
-                  key={[i, j].join('-')}
-                />
-              ))}
-          </G>
-        ))}
+      {divs.vertical.map((_, i: number) => (
+        <G key={i}>
+          {divs.horizontal.map((__, j: number) => (
+            <Rect
+              key={[i, j].join('-')}
+              x={j * divWidth}
+              y={i * divHeight}
+              height={divHeight}
+              width={divWidth}
+              fill={divColours[(i + j) % 2]}
+            />
+          ))}
+        </G>
+      ))}
     </G>
   );
 };
