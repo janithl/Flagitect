@@ -1,7 +1,5 @@
 import React from 'react';
-import { Defs, Pattern, Rect } from 'react-native-svg';
-
-import { toDP } from '@lib/utils';
+import { Rect } from 'react-native-svg';
 
 export enum CrossTypes {
   Cross = 'Cross',
@@ -10,15 +8,12 @@ export enum CrossTypes {
 }
 
 export default (
-  id: string,
   height: number,
   width: number,
   colour: string,
   thickness = 15,
   percentage = 50,
   crossType?: CrossTypes,
-  repeatX = 1,
-  repeatY = 1,
 ): JSX.Element => {
   const size = { height, width };
   thickness *= Math.round(height / 100);
@@ -39,29 +34,20 @@ export default (
 
   return (
     <>
-      <Defs>
-        <Pattern
-          id={id}
-          viewBox={[0, 0, width, height].join(' ')}
-          height={`${toDP(100 / repeatY, 2)}%`}
-          width={`${toDP(100 / repeatX, 2)}%`}>
-          <Rect
-            x={x}
-            y={startY}
-            height={size.height}
-            width={thickness}
-            fill={colour}
-          />
-          <Rect
-            x={startX}
-            y={y}
-            height={thickness}
-            width={size.width}
-            fill={colour}
-          />
-        </Pattern>
-      </Defs>
-      <Rect height={height} width={width} x={0} y={0} fill={`url(#${id})`} />
+      <Rect
+        x={x}
+        y={startY}
+        height={size.height}
+        width={thickness}
+        fill={colour}
+      />
+      <Rect
+        x={startX}
+        y={y}
+        height={thickness}
+        width={size.width}
+        fill={colour}
+      />{' '}
     </>
   );
 };

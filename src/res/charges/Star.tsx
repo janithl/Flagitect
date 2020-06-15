@@ -1,18 +1,15 @@
 import React from 'react';
-import { Defs, G, Pattern, Polygon, Rect, Svg } from 'react-native-svg';
+import { G, Polygon } from 'react-native-svg';
 
-import { coord, toDP } from '@lib/utils';
+import { coord } from '@lib/utils';
 
 export default (
-  id: string,
   height: number,
   width: number,
   colour: string,
   percentage = 50,
   points = 5,
   rotation = 0,
-  repeatX = 1,
-  repeatY = 1,
 ): JSX.Element => {
   const segment = (2 * Math.PI) / points;
   const r = Math.round((height * percentage) / 200);
@@ -23,7 +20,6 @@ export default (
   };
 
   let i = 0;
-  let star: JSX.Element | null = null;
 
   if (points % 2 === 0) {
     /** for even number of points */
@@ -37,7 +33,7 @@ export default (
       i += 2;
     }
 
-    star = (
+    return (
       <G
         originX={Math.round(width / 2)}
         originY={Math.round(height / 2)}
@@ -46,37 +42,22 @@ export default (
         <Polygon fill={colour} points={polygon2.join(' ')} />
       </G>
     );
-  } else {
-    /** for odd number of points */
-    const pointCoords: string[] = [];
-    while (pointCoords.length < points) {
-      pointCoords.push(getPointCoordinates(i));
-      i += Math.floor(points / 2);
-    }
+  }
 
-    star = (
-      <Polygon
-        fill={colour}
-        originX={Math.round(width / 2)}
-        originY={Math.round(height / 2)}
-        points={pointCoords.join(' ')}
-        rotation={rotation}
-      />
-    );
+  /** for odd number of points */
+  const pointCoords: string[] = [];
+  while (pointCoords.length < points) {
+    pointCoords.push(getPointCoordinates(i));
+    i += Math.floor(points / 2);
   }
 
   return (
-    <>
-      <Defs>
-        <Pattern
-          id={id}
-          viewBox={[0, 0, width, height].join(' ')}
-          height={`${toDP(100 / repeatY, 2)}%`}
-          width={`${toDP(100 / repeatX, 2)}%`}>
-          {star}
-        </Pattern>
-      </Defs>
-      <Rect height={height} width={width} x={0} y={0} fill={`url(#${id})`} />
-    </>
+    <Polygon
+      fill={colour}
+      originX={Math.round(width / 2)}
+      originY={Math.round(height / 2)}
+      points={pointCoords.join(' ')}
+      rotation={rotation}
+    />
   );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
-import { G } from 'react-native-svg';
+import { Defs, G, Pattern, Rect } from 'react-native-svg';
 
 import { ChargeType } from '@lib/reducers';
+import { toDP } from '@lib/utils';
 
 import renderPanel from './Panel';
 import renderDisc from './Disc';
@@ -32,116 +33,107 @@ export default (
 ): JSX.Element => (
   <>
     {charges.map((charge: ChargeType) => {
-      switch (charge?.type) {
-        case CrossTypes.Cross:
-        case CrossTypes.Greek:
-        case CrossTypes.Nordic:
-          return (
-            <G id={charge.id} key={charge.id}>
-              {renderCross(
-                charge.id,
-                height,
-                width,
-                charge.colour,
-                charge.thickness,
-                charge.percentage,
-                charge.type,
-                charge.repeatX,
-                charge.repeatY,
-              )}
-            </G>
-          );
-        case SimpleTypes.Canton:
-        case SimpleTypes.Panel:
-          return (
-            <G id={charge.id} key={charge.id}>
-              {renderPanel(
-                height,
-                width,
-                charge.colour,
-                charge.percentage,
-                charge.type === SimpleTypes.Canton,
-              )}
-            </G>
-          );
-        case SimpleTypes.Diamond:
-          return (
-            <G id={charge.id} key={charge.id}>
-              {renderDiamond(
-                charge.id,
-                height,
-                width,
-                charge.colour,
-                charge.percentage,
-                charge.repeatX,
-                charge.repeatY,
-              )}
-            </G>
-          );
-        case SimpleTypes.Disc:
-          return (
-            <G id={charge.id} key={charge.id}>
-              {renderDisc(
-                charge.id,
-                height,
-                width,
-                charge.colour,
-                charge.percentage,
-                charge.repeatX,
-                charge.repeatY,
-              )}
-            </G>
-          );
-        case PileTypes.Pile:
-        case PileTypes.Inverted:
-        case PileTypes.Upright:
-          return (
-            <G id={charge.id} key={charge.id}>
-              {renderPile(
-                charge.id,
-                height,
-                width,
-                charge.colour,
-                charge.type,
-                charge.percentage,
-                charge.repeatX,
-                charge.repeatY,
-              )}
-            </G>
-          );
-        case ComplexTypes.Star:
-          return (
-            <G id={charge.id} key={charge.id}>
-              {renderStar(
-                charge.id,
-                height,
-                width,
-                charge.colour,
-                charge.percentage,
-                charge.points,
-                charge.rotation,
-                charge.repeatX,
-                charge.repeatY,
-              )}
-            </G>
-          );
-        case ComplexTypes.Crescent:
-          return (
-            <G id={charge.id} key={charge.id}>
-              {renderCrescent(
-                charge.id,
-                height,
-                width,
-                charge.colour,
-                charge.percentage,
-                charge.rotation,
-                charge.repeatX,
-                charge.repeatY,
-              )}
-            </G>
-          );
+      let chargeElement = renderCharge(charge, height, width);
+      if (Number(charge.repeatX) > 1 || Number(charge.repeatY) > 1) {
+        chargeElement = repeatCharge(
+          chargeElement,
+          charge.id,
+          height,
+          width,
+          charge.repeatX,
+          charge.repeatY,
+        );
       }
+      return (
+        <G id={`charge-${charge.id}`} key={charge.id}>
+          {chargeElement}
+        </G>
+      );
     })}
+  </>
+);
+
+export const renderCharge = (
+  charge: ChargeType,
+  height: number,
+  width: number,
+): JSX.Element => {
+  switch (charge?.type) {
+    case CrossTypes.Cross:
+    case CrossTypes.Greek:
+    case CrossTypes.Nordic:
+      return renderCross(
+        height,
+        width,
+        charge.colour,
+        charge.thickness,
+        charge.percentage,
+        charge.type,
+      );
+    case SimpleTypes.Canton:
+    case SimpleTypes.Panel:
+      return renderPanel(
+        height,
+        width,
+        charge.colour,
+        charge.percentage,
+        charge.type === SimpleTypes.Canton,
+      );
+    case SimpleTypes.Diamond:
+      return renderDiamond(height, width, charge.colour, charge.percentage);
+    case SimpleTypes.Disc:
+      return renderDisc(height, width, charge.colour, charge.percentage);
+    case PileTypes.Pile:
+    case PileTypes.Inverted:
+    case PileTypes.Upright:
+      return renderPile(
+        height,
+        width,
+        charge.colour,
+        charge.type,
+        charge.percentage,
+      );
+    case ComplexTypes.Star:
+      return renderStar(
+        height,
+        width,
+        charge.colour,
+        charge.percentage,
+        charge.points,
+        charge.rotation,
+      );
+    case ComplexTypes.Crescent:
+      return renderCrescent(
+        height,
+        width,
+        charge.colour,
+        charge.percentage,
+        charge.rotation,
+      );
+    default:
+      return <G />;
+  }
+};
+
+export const repeatCharge = (
+  charge: JSX.Element,
+  id: string,
+  height: number,
+  width: number,
+  repeatX = 1,
+  repeatY = 1,
+): JSX.Element => (
+  <>
+    <Defs>
+      <Pattern
+        id={id}
+        viewBox={[0, 0, width, height].join(' ')}
+        height={`${toDP(100 / repeatY, 2)}%`}
+        width={`${toDP(100 / repeatX, 2)}%`}>
+        {charge}
+      </Pattern>
+    </Defs>
+    <Rect height={height} width={width} x={0} y={0} fill={`url(#${id})`} />
   </>
 );
 
