@@ -39,12 +39,15 @@ export default (
           return (
             <G id={charge.id} key={charge.id}>
               {renderCross(
+                charge.id,
                 height,
                 width,
                 charge.colour,
-                charge?.thickness,
-                charge?.percentage,
+                charge.thickness,
+                charge.percentage,
                 charge.type,
+                charge.repeatX,
+                charge.repeatY,
               )}
             </G>
           );
@@ -56,15 +59,23 @@ export default (
                 height,
                 width,
                 charge.colour,
-                charge?.percentage,
-                charge?.type === SimpleTypes.Canton,
+                charge.percentage,
+                charge.type === SimpleTypes.Canton,
               )}
             </G>
           );
         case SimpleTypes.Diamond:
           return (
             <G id={charge.id} key={charge.id}>
-              {renderDiamond(height, width, charge.colour, charge?.percentage)}
+              {renderDiamond(
+                charge.id,
+                height,
+                width,
+                charge.colour,
+                charge.percentage,
+                charge.repeatX,
+                charge.repeatY,
+              )}
             </G>
           );
         case SimpleTypes.Disc:
@@ -102,12 +113,15 @@ export default (
           return (
             <G id={charge.id} key={charge.id}>
               {renderStar(
+                charge.id,
                 height,
                 width,
                 charge.colour,
-                charge?.percentage,
-                charge?.points,
-                charge?.rotation,
+                charge.percentage,
+                charge.points,
+                charge.rotation,
+                charge.repeatX,
+                charge.repeatY,
               )}
             </G>
           );
@@ -115,11 +129,14 @@ export default (
           return (
             <G id={charge.id} key={charge.id}>
               {renderCrescent(
+                charge.id,
                 height,
                 width,
                 charge.colour,
                 charge.percentage,
                 charge.rotation,
+                charge.repeatX,
+                charge.repeatY,
               )}
             </G>
           );

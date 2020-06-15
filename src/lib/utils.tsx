@@ -51,7 +51,7 @@ export const makeID = (): string =>
     .join('-')
     .toUpperCase();
 
-export const toDP = (x: number, decimalPlace: number): number => {
+export const toDP = (x: number, decimalPlace = 2): number => {
   x *= Math.pow(10, decimalPlace);
   return Math.round(x) / Math.pow(10, decimalPlace);
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Circle, Defs, Pattern, Rect } from 'react-native-svg';
+
 import { toDP } from '@lib/utils';
 
 export default (
