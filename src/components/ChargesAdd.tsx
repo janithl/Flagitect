@@ -6,10 +6,11 @@ import Actions from '@lib/actions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import {
+  BendTypes,
   Charges,
   ChargesList,
-  CrossTypes,
   ComplexTypes,
+  CrossTypes,
   SimpleTypes,
 } from '@res/charges/index';
 import colours from '@res/colours';
@@ -86,10 +87,20 @@ const getChargeOptions = (charge: Charges) => {
       break;
     case CrossTypes.Cross:
     case CrossTypes.Nordic:
+    case CrossTypes.Saltire:
       delete options.percentage;
       delete options.repeatX;
       delete options.repeatY;
       options.thickness = 10;
+      break;
+    case BendTypes.Bend:
+    case BendTypes.Enhanced:
+    case BendTypes.Reduced:
+      delete options.percentage;
+      delete options.repeatX;
+      delete options.repeatY;
+      options.thickness = 10;
+      options.flip = false;
       break;
     case CrossTypes.Greek:
       options.thickness = 15;

@@ -6,6 +6,7 @@ import { toDP } from '@lib/utils';
 
 import renderPanel from './Panel';
 import renderDisc from './Disc';
+import renderBend, { BendTypes } from './Bend';
 import renderCross, { CrossTypes } from './Cross';
 import renderPile, { PileTypes } from './Pile';
 import renderCrescent from './Crescent';
@@ -24,7 +25,12 @@ export enum ComplexTypes {
   Star = 'Star',
 }
 
-export type Charges = SimpleTypes | CrossTypes | PileTypes | ComplexTypes;
+export type Charges =
+  | SimpleTypes
+  | BendTypes
+  | CrossTypes
+  | PileTypes
+  | ComplexTypes;
 
 export default (
   charges: ChargeType[],
@@ -110,6 +116,37 @@ export const renderCharge = (
         charge.percentage,
         charge.rotation,
       );
+    case BendTypes.Bend:
+    case BendTypes.Enhanced:
+    case BendTypes.Reduced:
+      return renderBend(
+        height,
+        width,
+        charge.colour,
+        charge.type,
+        charge.thickness,
+        charge.flip,
+      );
+    case CrossTypes.Saltire:
+      return (
+        <>
+          {renderBend(
+            height,
+            width,
+            charge.colour,
+            BendTypes.Bend,
+            charge.thickness,
+          )}
+          {renderBend(
+            height,
+            width,
+            charge.colour,
+            BendTypes.Bend,
+            charge.thickness,
+            true,
+          )}
+        </>
+      );
     default:
       return <G />;
   }
@@ -141,15 +178,26 @@ export const ChargesList = [
   SimpleTypes.Canton,
   SimpleTypes.Diamond,
   SimpleTypes.Panel,
+  BendTypes.Bend,
+  BendTypes.Enhanced,
+  BendTypes.Reduced,
   PileTypes.Pile,
   PileTypes.Upright,
   PileTypes.Inverted,
   CrossTypes.Cross,
   CrossTypes.Nordic,
   CrossTypes.Greek,
+  CrossTypes.Saltire,
   SimpleTypes.Disc,
   ComplexTypes.Star,
   ComplexTypes.Crescent,
 ];
 
-export { renderCross, renderDisc, renderPile, CrossTypes, PileTypes };
+export {
+  renderCross,
+  renderDisc,
+  renderPile,
+  BendTypes,
+  CrossTypes,
+  PileTypes,
+};

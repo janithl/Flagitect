@@ -5,6 +5,7 @@ export enum CrossTypes {
   Cross = 'Cross',
   Greek = 'Greek Cross',
   Nordic = 'Nordic Cross',
+  Saltire = 'Saltire',
 }
 
 export default (

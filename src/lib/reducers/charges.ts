@@ -9,6 +9,7 @@ export type ChargeType = {
   thickness?: number;
   percentage?: number;
   rotation?: number;
+  flip?: boolean;
   points?: number;
   repeatX?: number;
   repeatY?: number;
