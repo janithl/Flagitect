@@ -10,6 +10,7 @@ import {
   ChargesList,
   CrossTypes,
   ComplexTypes,
+  SimpleTypes,
 } from '@res/charges/index';
 import colours from '@res/colours';
 
@@ -73,6 +74,8 @@ const getChargeOptions = (charge: Charges) => {
     type: charge,
     colour: colours.white,
     percentage: 50,
+    repeatX: 1,
+    repeatY: 1,
   };
 
   switch (charge) {
@@ -90,6 +93,10 @@ const getChargeOptions = (charge: Charges) => {
       break;
     case ComplexTypes.Crescent:
       options.rotation = 90;
+      break;
+    case SimpleTypes.Canton:
+      delete options.repeatX;
+      delete options.repeatY;
       break;
   }
 

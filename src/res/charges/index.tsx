@@ -70,7 +70,15 @@ export default (
         case SimpleTypes.Disc:
           return (
             <G id={charge.id} key={charge.id}>
-              {renderDisc(height, width, charge.colour, charge?.percentage)}
+              {renderDisc(
+                charge.id,
+                height,
+                width,
+                charge.colour,
+                charge.percentage,
+                charge.repeatX,
+                charge.repeatY,
+              )}
             </G>
           );
         case PileTypes.Pile:
@@ -79,11 +87,14 @@ export default (
           return (
             <G id={charge.id} key={charge.id}>
               {renderPile(
+                charge.id,
                 height,
                 width,
                 charge.colour,
                 charge.type,
-                charge?.percentage,
+                charge.percentage,
+                charge.repeatX,
+                charge.repeatY,
               )}
             </G>
           );

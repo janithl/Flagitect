@@ -1,5 +1,5 @@
 import React from 'react';
-import { G, Rect } from 'react-native-svg';
+import { Rect } from 'react-native-svg';
 
 export enum CrossTypes {
   Cross = 'Cross',
@@ -14,6 +14,8 @@ export default (
   thickness = 15,
   percentage = 50,
   crossType?: CrossTypes,
+  repeatX = 1,
+  repeatY = 1,
 ): JSX.Element => {
   thickness *= Math.round(height / 100);
   percentage /= 100;
@@ -32,9 +34,9 @@ export default (
   }
 
   return (
-    <G>
+    <>
       <Rect x={x} y={startY} height={height} width={thickness} fill={colour} />
       <Rect x={startX} y={y} height={thickness} width={width} fill={colour} />
-    </G>
+    </>
   );
 };

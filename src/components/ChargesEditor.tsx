@@ -44,6 +44,22 @@ const properties = [
       step: 15,
     },
   },
+  {
+    name: 'repeatX',
+    label: 'Repeat (Horiz.)',
+    options: {
+      min: 1,
+      step: 1,
+    },
+  },
+  {
+    name: 'repeatY',
+    label: 'Repeat (Vert.)',
+    options: {
+      min: 1,
+      step: 1,
+    },
+  },
 ];
 
 export default ({

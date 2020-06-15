@@ -10,6 +10,8 @@ export type ChargeType = {
   percentage?: number;
   rotation?: number;
   points?: number;
+  repeatX?: number;
+  repeatY?: number;
 };
 
 export type ChargesStateType = {

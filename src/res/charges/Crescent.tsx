@@ -7,6 +7,8 @@ export default (
   colour: string,
   percentage = 50,
   rotation = 0,
+  repeatX = 1,
+  repeatY = 1,
 ): JSX.Element => {
   percentage /= 100;
   const size = Math.round(height * percentage);

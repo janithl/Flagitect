@@ -1,7 +1,7 @@
 import React from 'react';
-import { Polygon } from 'react-native-svg';
+import { Defs, Pattern, Polygon, Rect } from 'react-native-svg';
 
-import { coord } from '@lib/utils';
+import { coord, toDP } from '@lib/utils';
 
 export enum PileTypes {
   Pile = 'Pile',
@@ -10,11 +10,14 @@ export enum PileTypes {
 }
 
 export default (
+  id: string,
   height: number,
   width: number,
   colour: string,
   pileType = PileTypes.Pile,
   percentage = 50,
+  repeatX = 1,
+  repeatY = 1,
 ): JSX.Element => {
   percentage /= 100;
 
@@ -38,5 +41,18 @@ export default (
       points.push(coord(midX, Math.round(height * percentage)));
       break;
   }
-  return <Polygon points={points.join(' ')} fill={colour} />;
+  return (
+    <>
+      <Defs>
+        <Pattern
+          id={id}
+          viewBox={[0, 0, width, height].join(' ')}
+          height={`${toDP(100 / repeatY, 2)}%`}
+          width={`${toDP(100 / repeatX, 2)}%`}>
+          <Polygon points={points.join(' ')} fill={colour} />
+        </Pattern>
+      </Defs>
+      <Rect height={height} width={width} x={0} y={0} fill={`url(#${id})`} />
+    </>
+  );
 };
