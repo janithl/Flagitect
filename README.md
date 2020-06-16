@@ -2,7 +2,28 @@
 
 # Flagitect
 
-A simple mobile app to design flags
+A simple mobile app to design flags. It's completely Free and Open Source software,
+released under the MIT license. It's written using React Native with the following
+libraries:
+
+- [react-native-svg](https://github.com/react-native-community/react-native-svg)
+- [rn-fetch-blob](https://github.com/joltup/rn-fetch-blob)
+- [react-native-device-info](https://github.com/react-native-community/react-native-device-info)
+- [React Native Async Storage](https://github.com/react-native-community/async-storage)
+
+## Features
+
+Flagitect allows you to design flags with ease.
+
+- Set up a basic flag with proportions, divisions and colours.
+- Export your design as SVGs or PNGs.
+- Add charges. Everything from stars to piles to crosses and saltires.
+- Repeat your charges to create pretty patterns!
+
+## Links
+
+- [Flagitect on Google Play](https://play.google.com/store/apps/details?id=com.flagitect)
+- [Flagitect Subreddit](https://www.reddit.com/r/Flagitect)
 
 ## License
 

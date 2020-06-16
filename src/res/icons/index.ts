@@ -1,5 +1,6 @@
 export { default as Add } from './Add';
 export { default as Clear } from './Clear';
+export { default as Copy } from './Copy';
 export { default as Delete } from './Delete';
 export { default as Download } from './Download';
 export { default as Edit } from './Edit';

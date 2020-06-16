@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
+import { Alert, Share } from 'react-native';
 
 const childToWeb = (child: JSX.Element) => {
   const { type, props } = child;
@@ -54,4 +55,12 @@ export const makeID = (): string =>
 export const toDP = (x: number, decimalPlace = 2): number => {
   x *= Math.pow(10, decimalPlace);
   return Math.round(x) / Math.pow(10, decimalPlace);
+};
+
+export const share = async (message: string): Promise<void> => {
+  try {
+    await Share.share({ message });
+  } catch (error) {
+    Alert.alert('Share Failed', error.message);
+  }
 };

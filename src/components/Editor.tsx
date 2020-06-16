@@ -8,7 +8,7 @@ import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
-import { addHTML, addXML, serialiseSVG } from '@lib/utils';
+import { addHTML, addXML, share, serialiseSVG } from '@lib/utils';
 import renderCharges from '@res/charges';
 import colours from 'res/colours';
 
@@ -94,7 +94,7 @@ export default ({
           );
         break;
       case FileTypes.SVG:
-        saveFile(filename, fileType, addXML(getSVG()));
+        share(addXML(getSVG()));
         break;
       case FileTypes.HTML:
         saveFile(filename, fileType, addHTML(getSVG()));

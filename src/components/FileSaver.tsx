@@ -5,7 +5,7 @@ import { ListItem } from '@components';
 import { FileTypes } from '@lib/files';
 
 import colours from '@res/colours';
-import { Download } from '@res/icons';
+import { Download, Share } from '@res/icons';
 
 export default ({ onSave }: OwnProps): JSX.Element => (
   <View>
@@ -24,15 +24,15 @@ export default ({ onSave }: OwnProps): JSX.Element => (
     />
     <ListItem
       arrow={false}
-      title="Save SVG"
-      onPress={() => onSave(FileTypes.SVG)}
+      title="Save Webpage"
+      onPress={() => onSave(FileTypes.HTML)}
       icon={<Download fill={colours.primaryBlue} size={32} />}
     />
     <ListItem
       arrow={false}
-      title="Save Webpage"
-      onPress={() => onSave(FileTypes.HTML)}
-      icon={<Download fill={colours.primaryBlue} size={32} />}
+      title="Share SVG"
+      onPress={() => onSave(FileTypes.SVG)}
+      icon={<Share fill={colours.primaryBlue} size={32} />}
     />
   </View>
 );
