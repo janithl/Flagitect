@@ -3,7 +3,6 @@ import { Platform, StyleSheet, useWindowDimensions, View } from 'react-native';
 import { G, Rect, Svg } from 'react-native-svg';
 
 import Actions from '@lib/actions';
-import { DivisionList, renderDivisions } from '@lib/divisions';
 import { saveFile, FileTypes } from '@lib/files';
 import { ProportionsList } from '@lib/proportions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
@@ -11,6 +10,7 @@ import { ReducerAction } from '@lib/state';
 import { addHTML, addXML, share, serialiseSVG } from '@lib/utils';
 import renderCharges from '@res/charges';
 import colours from 'res/colours';
+import renderDivisions, { DivisionList } from '@res/divisions';
 
 const margins = {
   vertical: Platform.OS === 'android' ? 75 : 100,

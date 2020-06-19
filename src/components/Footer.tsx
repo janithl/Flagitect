@@ -2,12 +2,12 @@ import React from 'react';
 import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 
 import { Text, Row } from '@components';
-import { DivisionList } from '@lib/divisions';
 import { ProportionsList } from '@lib/proportions';
 import Actions from '@lib/actions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
+import { DivisionList } from '@res/divisions';
 
 export const FooterButton = ({
   title,
