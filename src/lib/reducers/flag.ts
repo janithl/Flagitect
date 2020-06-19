@@ -1,7 +1,7 @@
 import Actions from '@lib/actions';
-import { DivisionList } from '@lib/divisions';
 import { ProportionsList } from '@lib/proportions';
 import colours, { initialColours } from '@res/colours';
+import { DivisionList } from '@res/divisions';
 
 type BorderType = {
   heightPercentage: number;
