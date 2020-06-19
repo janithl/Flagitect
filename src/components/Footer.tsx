@@ -18,7 +18,7 @@ export const FooterButton = ({
   <TouchableOpacity style={styles.footerButton} onPress={onPress}>
     <Text colour={colours.white}>{title}</Text>
     <View style={styles.footerValue}>
-      <Text colour={colours.white} H3={short} H5={!short}>
+      <Text colour={colours.white} H3={short} H5={!short} numberOfLines={1}>
         {value}
       </Text>
     </View>

@@ -39,7 +39,9 @@ export default ({ type, value, setValue, ...props }: OwnProps): JSX.Element => {
           </Button>
         </View>
         <View style={styles.item}>
-          <Text colour={props.colour}>{props.label}</Text>
+          <Text colour={props.colour} numberOfLines={1}>
+            {props.label}
+          </Text>
           <View style={styles.value}>
             <Text colour={props.colour} H3>
               {props?.list ? String(props?.list[value]) : String(value)}
