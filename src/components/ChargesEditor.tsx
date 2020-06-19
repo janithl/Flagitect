@@ -23,7 +23,7 @@ const properties = [
     label: 'Thickness (%)',
     options: {
       min: 5,
-      max: 50,
+      max: 70,
       step: 5,
     },
   },
