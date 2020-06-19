@@ -10,6 +10,7 @@ export default ({
   H5 = false,
   colour,
   textAlign,
+  numberOfLines,
   children = [],
 }: OwnProps): JSX.Element => {
   let style = styles.paragraph;
@@ -36,7 +37,14 @@ export default ({
   if (textAlign) {
     textStyle.textAlign = textAlign;
   }
-  return <Text style={[style, textStyle]}>{children}</Text>;
+  return (
+    <Text
+      style={[style, textStyle]}
+      numberOfLines={numberOfLines}
+      ellipsizeMode="middle">
+      {children}
+    </Text>
+  );
 };
 
 type OwnProps = {
@@ -47,6 +55,7 @@ type OwnProps = {
   H5?: boolean;
   colour?: string;
   textAlign?: string;
+  numberOfLines?: number;
   children?: JSX.Element[] | JSX.Element | string;
 };
 
