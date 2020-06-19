@@ -105,6 +105,7 @@ export const renderCharge = (
         width,
         charge.colour,
         charge.percentage,
+        charge.thickness,
         charge.points,
         charge.rotation,
       );

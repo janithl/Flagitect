@@ -8,51 +8,39 @@ export default (
   width: number,
   colour: string,
   percentage = 50,
+  thickness = 50,
   points = 5,
   rotation = 0,
 ): JSX.Element => {
-  const segment = (2 * Math.PI) / points;
-  const r = Math.round((height * percentage) / 200);
-  const getPointCoordinates = (point: number, radius = r): string => {
-    const x = Math.round(width / 2 + radius * Math.cos(point * segment));
-    const y = Math.round(height / 2 + radius * Math.sin(point * segment));
-    return coord(x, y);
+  thickness /= 100;
+  percentage /= 100;
+
+  const halfSegment = Math.PI / points;
+  const radiusLarge = Math.round((height * percentage) / 2);
+  const radiusSmall = Math.round((height * percentage * thickness) / 2);
+  const midpoint = {
+    x: Math.round(width / 2),
+    y: Math.round(height / 2),
   };
+
+  const getPointCoordinates = (radius: number, theta: number): string => {
+    return coord(
+      toDP(midpoint.x + radius * Math.sin(theta), 1),
+      toDP(midpoint.y + radius * Math.cos(theta), 1),
+    );
+  };
+
+  const nodes = [];
+  for (let i = 1; i < points * 2; i += 2) {
+    nodes.push(getPointCoordinates(radiusSmall, halfSegment * i));
+    nodes.push(getPointCoordinates(radiusLarge, halfSegment * (i + 1)));
+  }
+
   const rotateCoords = [rotation, toDP(width / 2, 1), toDP(height / 2, 1)];
 
-  let i = 0;
-  if (points % 2 === 0) {
-    /** for even number of points */
-    const polygon1: string[] = [];
-    const polygon2: string[] = [];
-    while (polygon1.length < points) {
-      polygon1.push(getPointCoordinates(i));
-      polygon1.push(getPointCoordinates(i + 1, r / 2));
-      polygon2.push(getPointCoordinates(i, r / 2));
-      polygon2.push(getPointCoordinates(i + 1));
-      i += 2;
-    }
-
-    return (
-      <G transform={`rotate(${rotateCoords.join(' ')})`}>
-        <Polygon fill={colour} points={polygon1.join(' ')} />
-        <Polygon fill={colour} points={polygon2.join(' ')} />
-      </G>
-    );
-  }
-
-  /** for odd number of points */
-  const pointCoords: string[] = [];
-  while (pointCoords.length < points) {
-    pointCoords.push(getPointCoordinates(i));
-    i += Math.floor(points / 2);
-  }
-
   return (
-    <Polygon
-      fill={colour}
-      transform={`rotate(${rotateCoords.join(' ')})`}
-      points={pointCoords.join(' ')}
-    />
+    <G transform={`rotate(${rotateCoords.join(' ')})`}>
+      <Polygon fill={colour} points={nodes.join(' ')} />
+    </G>
   );
 };

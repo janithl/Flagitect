@@ -15,7 +15,7 @@ export default (
   colour: string,
   bendType = BendTypes.Bend,
   thickness = 20,
-  flip: false,
+  flip = false,
 ): JSX.Element => {
   thickness /= 100;
 
