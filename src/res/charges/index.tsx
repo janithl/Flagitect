@@ -115,6 +115,7 @@ export const renderCharge = (
         width,
         charge.colour,
         charge.percentage,
+        charge.thickness,
         charge.rotation,
       );
     case BendTypes.Bend:

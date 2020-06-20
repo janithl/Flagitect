@@ -17,8 +17,14 @@ export default (
   crossType?: CrossTypes,
 ): JSX.Element => {
   const size = { height, width };
-  thickness *= Math.round(height / 100);
+  thickness /= 100;
   percentage /= 100;
+
+  if (crossType === CrossTypes.Greek) {
+    thickness = height * percentage * thickness;
+  } else {
+    thickness = height * thickness;
+  }
 
   const y = Math.round((height - thickness) / 2);
   const x =
