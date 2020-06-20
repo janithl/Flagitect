@@ -46,41 +46,49 @@ export default ({
   charges,
 }: OwnProps): JSX.Element => {
   const flag = useRef(null);
-  const size = calculateSize(
+  const screenCanvas = calculateSize(
     useWindowDimensions().height,
     useWindowDimensions().width,
     ProportionsList[proportion].ratio,
   );
-  const borderWidth = Math.floor((size.height * border.heightPercentage) / 100);
+  const exportCanvas = {
+    height: 1920 * ProportionsList[proportion].ratio,
+    width: 1920,
+  };
 
-  const renderFlag = () => (
-    <Svg
-      xmlns="http://www.w3.org/2000/svg"
-      height={size.height}
-      width={size.width}
-      ref={flag}>
-      <Rect height={size.height} width={size.width} fill={border.colour} />
-      <G translate={borderWidth}>
-        {renderDivisions(
-          DivisionList[division],
-          selectedColours,
-          size.height - borderWidth * 2,
-          size.width - borderWidth * 2,
-        )}
-        {renderCharges(
-          Object.values(charges),
-          size.height - borderWidth * 2,
-          size.width - borderWidth * 2,
-        )}
-      </G>
-    </Svg>
+  const renderFlag = (height: number, width: number) => {
+    const borderPercentage = border.heightPercentage / 100;
+    const borderWidth = Math.floor(height * borderPercentage);
+
+    return (
+      <Svg
+        xmlns="http://www.w3.org/2000/svg"
+        height={height}
+        width={width}
+        viewBox={[0, 0, width, height].join(' ')}
+        ref={flag}>
+        <Rect height={height} width={width} fill={border.colour} />
+        <G transform={`translate(${borderWidth},${borderWidth})`}>
+          {renderDivisions(
+            DivisionList[division],
+            selectedColours,
+            height - borderWidth * 2,
+            width - borderWidth * 2,
+          )}
+          {renderCharges(
+            Object.values(charges),
+            height - borderWidth * 2,
+            width - borderWidth * 2,
+          )}
+        </G>
+      </Svg>
+    );
+  };
+
+  const getSVG = useCallback(
+    () => serialiseSVG(renderFlag(exportCanvas.height, exportCanvas.width)),
+    [division, selectedColours, exportCanvas],
   );
-
-  const getSVG = useCallback(() => serialiseSVG(renderFlag()), [
-    division,
-    selectedColours,
-    size,
-  ]);
 
   useEffect(() => {
     if (fileType === FileTypes.NONE) return;
@@ -112,7 +120,7 @@ export default ({
         styles.editor,
         modalAction === ModalActions.None ? null : styles.editorSmall,
       ]}>
-      {renderFlag()}
+      {renderFlag(screenCanvas.height, screenCanvas.width)}
     </View>
   );
 };
