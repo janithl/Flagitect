@@ -112,6 +112,7 @@ const getChargeOptions = (charge: Charges) => {
       break;
     case ComplexTypes.Crescent:
       options.rotation = 90;
+      options.thickness = 30;
       break;
   }
 
