@@ -1,7 +1,7 @@
 import React from 'react';
-import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 
-import { Text } from '@components';
+import { Button, Text } from '@components';
 import Actions from '@lib/actions';
 import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
@@ -16,11 +16,13 @@ import {
 import colours from '@res/colours';
 
 const ChargeItem = ({ title, onPress }: ChargeItemProps) => (
-  <TouchableOpacity onPress={onPress} style={styles.chargeItem}>
-    <Text colour={colours.white} textAlign="center" H4>
-      {title}
-    </Text>
-  </TouchableOpacity>
+  <View style={styles.chargeItem}>
+    <Button onPress={onPress} height={100} width={100}>
+      <Text colour={colours.white} textAlign="center" H4>
+        {title}
+      </Text>
+    </Button>
+  </View>
 );
 
 type ChargeItemProps = {
@@ -55,18 +57,15 @@ type OwnProps = {
 
 const styles = StyleSheet.create({
   chargeItem: {
-    width: 100,
-    height: 100,
-    padding: 5,
-    borderRadius: 10,
-    backgroundColor: colours.secondaryBlue,
+    width: 120,
+    height: 120,
     justifyContent: 'center',
     alignItems: 'center',
   },
   columnStyle: {
     flex: 1,
     justifyContent: 'space-evenly',
-    marginVertical: 20,
+    marginBottom: 10,
   },
 });
 
@@ -99,7 +98,7 @@ const getChargeOptions = (charge: Charges) => {
       delete options.percentage;
       delete options.repeatX;
       delete options.repeatY;
-      options.thickness = 10;
+      options.thickness = 20;
       options.flip = false;
       break;
     case CrossTypes.Greek:

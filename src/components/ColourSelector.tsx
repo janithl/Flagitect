@@ -24,7 +24,7 @@ export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => {
       numColumns={5}
       columnWrapperStyle={styles.columnStyle}
       ListFooterComponent={
-        <Button onPress={addColours}>
+        <Button onPress={addColours} height={48}>
           <Text colour={colours.white} H4>
             Add Colours
           </Text>

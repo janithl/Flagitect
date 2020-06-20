@@ -27,7 +27,7 @@ export default ({ type, value, setValue, ...props }: OwnProps): JSX.Element => {
   return (
     <View style={styles.container}>
       <Row>
-        <View style={styles.item}>
+        <View style={styles.buttonContainer}>
           <Button
             onPress={() => setValue(nextValue(value - step))}
             padded={false}>
@@ -38,7 +38,7 @@ export default ({ type, value, setValue, ...props }: OwnProps): JSX.Element => {
             )}
           </Button>
         </View>
-        <View style={styles.item}>
+        <View style={styles.valueContainer}>
           <Text colour={props.colour} numberOfLines={1}>
             {props.label}
           </Text>
@@ -48,7 +48,7 @@ export default ({ type, value, setValue, ...props }: OwnProps): JSX.Element => {
             </Text>
           </View>
         </View>
-        <View style={styles.item}>
+        <View style={styles.buttonContainer}>
           <Button
             onPress={() => setValue(nextValue(value + step))}
             padded={false}>
@@ -90,8 +90,11 @@ const styles = StyleSheet.create({
     borderBottomColor: colours.grey,
     borderBottomWidth: 1,
   },
-  item: {
-    padding: 10,
+  buttonContainer: {
+    alignItems: 'center',
+  },
+  valueContainer: {
+    paddingVertical: 12,
     alignItems: 'center',
   },
   value: {
