@@ -1,26 +1,33 @@
-import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
 
 import colours from '@res/colours';
-import { Add, Clear } from '@res/icons';
 
-export default ({ colour, add = false, onPress }: OwnProps): JSX.Element => (
-  <View style={styles.swatchContainer} accessibilityHint="colourSwatch">
-    <View style={[styles.swatch, { backgroundColor: colour }]} />
-    <TouchableOpacity
-      style={[
-        styles.swatchButton,
-        { backgroundColor: add ? colours.secondaryBlue : colours.salmon },
-      ]}
-      onPress={onPress}>
-      {add ? <Add fill={colours.white} /> : <Clear fill={colours.white} />}
-    </TouchableOpacity>
-  </View>
-);
+export default ({ colour, onPress }: OwnProps): JSX.Element => {
+  const [border, setBorder] = useState(5);
+  return (
+    <View style={styles.swatchContainer} accessibilityHint="colourSwatch">
+      <TouchableWithoutFeedback
+        onPress={onPress}
+        onPressIn={() => setBorder(1)}
+        onPressOut={() => setBorder(5)}>
+        <View
+          style={[
+            styles.swatch,
+            {
+              backgroundColor: colour,
+              marginTop: 6 - border,
+              borderBottomWidth: border,
+            },
+          ]}
+        />
+      </TouchableWithoutFeedback>
+    </View>
+  );
+};
 
 type OwnProps = {
   colour: string;
-  add?: boolean;
   onPress?: () => void;
 };
 
@@ -29,8 +36,9 @@ const styles = StyleSheet.create({
     height: 48,
     width: 48,
     padding: 8,
-    borderRadius: 12,
     borderWidth: 1,
+    borderRadius: 10,
+    borderColor: colours.primaryBlue,
   },
   swatchButton: {
     position: 'absolute',
@@ -43,6 +51,8 @@ const styles = StyleSheet.create({
     borderColor: colours.white,
   },
   swatchContainer: {
-    padding: 7,
+    flex: 1,
+    height: 54,
+    alignItems: 'center',
   },
 });
