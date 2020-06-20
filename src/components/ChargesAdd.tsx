@@ -91,7 +91,7 @@ const getChargeOptions = (charge: Charges) => {
       delete options.percentage;
       delete options.repeatX;
       delete options.repeatY;
-      options.thickness = 10;
+      options.thickness = 20;
       break;
     case BendTypes.Bend:
     case BendTypes.Enhanced:
@@ -103,7 +103,7 @@ const getChargeOptions = (charge: Charges) => {
       options.flip = false;
       break;
     case CrossTypes.Greek:
-      options.thickness = 15;
+      options.thickness = 30;
       break;
     case ComplexTypes.Star:
       options.rotation = 180;

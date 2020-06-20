@@ -20,8 +20,8 @@ export default (
   thickness /= 100;
 
   const points: string[] = [coord(0, 0)];
-  const edgeX = Math.round(width * thickness);
-  const edgeY = Math.round(height * thickness);
+  const edgeX = Math.round((width * thickness) / 2);
+  const edgeY = Math.round((height * thickness) / 2);
   switch (bendType) {
     case BendTypes.Enhanced:
       points.push(coord(edgeX, 0));
