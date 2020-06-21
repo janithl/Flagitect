@@ -132,8 +132,8 @@ android {
         applicationId "com.flagitect"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 010000 // xxyyzz where x, y, z are zero-padded major, minor, bugfix
-        versionName "1.0.0" // major.minor.bugfix
+        versionCode 010100 // xxyyzz where x, y, z are zero-padded major, minor, bugfix
+        versionName "1.1.0" // major.minor.bugfix
     }
     splits {
         abi {
