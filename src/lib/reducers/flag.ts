@@ -12,6 +12,7 @@ export type FlagStateType = {
   division: number;
   proportion: number;
   selectedColours: string[];
+  selectedEditColour: null | number;
   border: BorderType;
 };
 
@@ -19,6 +20,7 @@ const initialState: FlagStateType = {
   division: 2,
   proportion: 2,
   selectedColours: initialColours,
+  selectedEditColour: null,
   border: {
     heightPercentage: 0,
     colour: colours.white,
@@ -53,9 +55,30 @@ export default (
       };
 
     case Actions.ADD_COLOUR:
+      /** if edit colour is selected, replace that colour */
+      if (state.selectedEditColour !== null) {
+        const selectedColours = [...state.selectedColours];
+        selectedColours.splice(
+          state.selectedEditColour,
+          1,
+          String(action.payload),
+        );
+        return {
+          ...state,
+          selectedColours,
+          selectedEditColour: null,
+        };
+      }
+      /** else append to selected colours */
       return {
         ...state,
         selectedColours: [...state.selectedColours, String(action.payload)],
+      };
+
+    case Actions.UPDATE_COLOUR:
+      return {
+        ...state,
+        selectedEditColour: Number(action.payload),
       };
 
     case Actions.REMOVE_COLOUR:

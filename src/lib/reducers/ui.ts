@@ -8,7 +8,8 @@ export enum ModalActions {
   EditCharge = 'Edit Charge',
   SelectColourBorder = 'Select Border Colour',
   SelectColourCharge = 'Select Charge Colour',
-  SelectColourDivision = 'Select Division Colour',
+  SelectColourDivision = 'Add Division Colour',
+  ChangeColourDivision = 'Change Division Colour',
   None = '',
 }
 

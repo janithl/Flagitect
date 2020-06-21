@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, ToastAndroid, View } from 'react-native';
 
 import { ColourSwatch, Spinner, SpinnerTypes } from '@components';
 import Actions from '@lib/actions';
@@ -58,6 +58,14 @@ export default ({
           type: Actions.ADD_COLOUR,
           payload,
         });
+        ToastAndroid.show('Colour added!', ToastAndroid.SHORT);
+        break;
+      case ModalActions.ChangeColourDivision:
+        dispatch({
+          type: Actions.ADD_COLOUR,
+          payload,
+        });
+        openModal(dispatch, ModalActions.EditColours);
         break;
     }
   };
