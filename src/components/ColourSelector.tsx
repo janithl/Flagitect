@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, StyleSheet } from 'react-native';
+import { Alert, FlatList, StyleSheet } from 'react-native';
 
 import { Button, ColourSwatch, Text } from '@components';
 import Actions from '@lib/actions';
@@ -10,15 +10,38 @@ import colours from '@res/colours';
 export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => {
   const onRemove = (payload: number) =>
     dispatch({ type: Actions.REMOVE_COLOUR, payload });
+  const onEdit = (payload: number) => {
+    dispatch({ type: Actions.UPDATE_COLOUR, payload });
+    openModal(dispatch, ModalActions.ChangeColourDivision);
+  };
 
   const addColours = () =>
     openModal(dispatch, ModalActions.SelectColourDivision);
+
+  const colourAlert = (index: number) =>
+    Alert.alert(
+      'Change Colour',
+      'What would you like to do?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+        },
+        {
+          text: 'Remove',
+          onPress: () => onRemove(index),
+          style: 'cancel',
+        },
+        { text: 'Change', onPress: () => onEdit(index) },
+      ],
+      { cancelable: false },
+    );
 
   return (
     <FlatList
       data={selectedColours}
       renderItem={({ item, index }) => (
-        <ColourSwatch colour={item} onPress={() => onRemove(index)} />
+        <ColourSwatch colour={item} onPress={() => colourAlert(index)} />
       )}
       keyExtractor={(item) => item}
       numColumns={5}

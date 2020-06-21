@@ -14,6 +14,7 @@ export default ({
   const margin = padded ? 20 : 6;
   return (
     <TouchableWithoutFeedback
+      hitSlop={{ bottom: 5, left: 5, right: 5, top: 10 }}
       onPress={onPress}
       onPressIn={() => setBorder(1)}
       onPressOut={() => setBorder(5)}>

@@ -1,17 +1,39 @@
-import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, StyleSheet, ToastAndroid, View } from 'react-native';
 
-import { ColourSwatch } from '@components';
+import { ColourSwatch, Spinner, SpinnerTypes } from '@components';
 import Actions from '@lib/actions';
 import { ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
+import { HSVtoRGB } from '@lib/utils';
 import { gnomePalette } from '@res/colours';
+
+enum PaletteTypes {
+  Gnome = 'Gnome',
+  Custom = 'Custom',
+}
+const PaletteTypeList = [PaletteTypes.Gnome, PaletteTypes.Custom];
+
+/** create palette based on hue selected */
+const getPalette = (hue: number) => {
+  const palette: string[] = [];
+  for (let sat = 1; sat >= 0; sat -= 0.2) {
+    for (let val = 0.28; val <= 1; val += 0.16) {
+      palette.push(HSVtoRGB(hue, sat, val));
+    }
+  }
+  return palette;
+};
 
 export default ({
   selectAction,
   selectedCharge,
   dispatch,
 }: OwnProps): JSX.Element => {
+  const [palette, setPalette] = useState(0);
+  const [hue, setHue] = useState(180);
+  const paletteType = PaletteTypeList[palette];
+
   const onSelect = (payload: string) => {
     switch (selectAction) {
       case ModalActions.SelectColourBorder:
@@ -36,20 +58,54 @@ export default ({
           type: Actions.ADD_COLOUR,
           payload,
         });
+        ToastAndroid.show('Colour added!', ToastAndroid.SHORT);
+        break;
+      case ModalActions.ChangeColourDivision:
+        dispatch({
+          type: Actions.ADD_COLOUR,
+          payload,
+        });
+        openModal(dispatch, ModalActions.EditColours);
         break;
     }
   };
 
+  const paletteSelector = () => (
+    <>
+      <Spinner
+        type={SpinnerTypes.List}
+        label={'Palette'}
+        list={PaletteTypeList}
+        value={palette}
+        setValue={setPalette}
+      />
+      {paletteType === PaletteTypes.Custom && (
+        <Spinner
+          type={SpinnerTypes.Number}
+          label={'Hue'}
+          value={hue}
+          setValue={(value: number) => setHue(value % 360)}
+          step={15}
+          min={0}
+          max={360}
+        />
+      )}
+    </>
+  );
+
   return (
     <FlatList
-      data={gnomePalette}
+      data={
+        paletteType === PaletteTypes.Custom ? getPalette(hue) : gnomePalette
+      }
       renderItem={({ item }) => (
-        <ColourSwatch colour={item} add={true} onPress={() => onSelect(item)} />
+        <ColourSwatch colour={item} onPress={() => onSelect(item)} />
       )}
       keyExtractor={(item) => item}
       numColumns={5}
       columnWrapperStyle={styles.columnStyle}
       ListFooterComponent={<View style={styles.footer} />}
+      ListHeaderComponent={paletteSelector}
     />
   );
 };

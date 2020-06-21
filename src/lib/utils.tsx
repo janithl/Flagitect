@@ -64,3 +64,43 @@ export const share = async (message: string): Promise<void> => {
     Alert.alert('Share Failed', error.message);
   }
 };
+
+/**
+ * Convert HSV values to RGB Hex string
+ * Formulae from https://en.wikipedia.org/wiki/HSL_and_HSV#HSV_to_RGB
+ * @param hue
+ * @param saturation
+ * @param value
+ * @returns RGB Hex string
+ */
+export const HSVtoRGB = (
+  hue: number,
+  saturation: number,
+  value: number,
+): string => {
+  enum colours {
+    Red = 5,
+    Green = 3,
+    Blue = 1,
+  }
+
+  const k = (n: number) => (n + hue / 60) % 6;
+  const f = (n: colours) =>
+    value -
+    value * saturation * Math.max(0, Math.min(1, Math.min(k(n), 4 - k(n))));
+
+  /** convert 0 - 1 RGB value to Hex code */
+  const toHex = (colour: number) =>
+    Math.round(255 * colour)
+      .toString(16)
+      .padStart(2, '0');
+
+  return [
+    '#',
+    toHex(f(colours.Red)),
+    toHex(f(colours.Green)),
+    toHex(f(colours.Blue)),
+  ]
+    .join('')
+    .toUpperCase();
+};

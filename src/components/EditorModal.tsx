@@ -32,6 +32,7 @@ export default ({
       case ModalActions.SelectColourBorder:
       case ModalActions.SelectColourCharge:
       case ModalActions.SelectColourDivision:
+      case ModalActions.ChangeColourDivision:
         return (
           <Palette
             selectAction={modalAction}
@@ -80,6 +81,7 @@ export default ({
         openModal(dispatch, ModalActions.EditCharge);
         break;
       case ModalActions.SelectColourDivision:
+      case ModalActions.ChangeColourDivision:
         openModal(dispatch, ModalActions.EditColours);
         break;
       default:
