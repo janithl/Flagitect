@@ -34,7 +34,7 @@ const minimumColours = 2;
 
 export type FlagReducerAction = {
   type: Actions;
-  payload?: string | number;
+  payload?: string | number | null;
 };
 
 export default (
@@ -78,7 +78,8 @@ export default (
     case Actions.UPDATE_COLOUR:
       return {
         ...state,
-        selectedEditColour: Number(action.payload),
+        selectedEditColour:
+          action.payload === null ? null : Number(action.payload),
       };
 
     case Actions.REMOVE_COLOUR:

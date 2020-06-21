@@ -10,13 +10,16 @@ import colours from '@res/colours';
 export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => {
   const onRemove = (payload: number) =>
     dispatch({ type: Actions.REMOVE_COLOUR, payload });
+
   const onEdit = (payload: number) => {
     dispatch({ type: Actions.UPDATE_COLOUR, payload });
     openModal(dispatch, ModalActions.ChangeColourDivision);
   };
 
-  const addColours = () =>
+  const onAdd = () => {
+    dispatch({ type: Actions.UPDATE_COLOUR, payload: null });
     openModal(dispatch, ModalActions.SelectColourDivision);
+  };
 
   const colourAlert = (index: number) =>
     Alert.alert(
@@ -47,7 +50,7 @@ export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => {
       numColumns={5}
       columnWrapperStyle={styles.columnStyle}
       ListFooterComponent={
-        <Button onPress={addColours} height={48}>
+        <Button onPress={onAdd} height={48}>
           <Text colour={colours.white} H4>
             Add Colours
           </Text>
