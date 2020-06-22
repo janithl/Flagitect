@@ -12,6 +12,8 @@ import renderPile, { PileTypes } from './Pile';
 import renderCrescent from './Crescent';
 import renderDiamond from './Diamond';
 import renderStar from './Star';
+import renderSerrate from './Serrate';
+import renderWave from './Wave';
 
 export enum SimpleTypes {
   Canton = 'Canton',
@@ -22,7 +24,9 @@ export enum SimpleTypes {
 
 export enum ComplexTypes {
   Crescent = 'Crescent',
+  Serrate = 'Serrate',
   Star = 'Star',
+  Wave = 'Wave',
 }
 
 export type Charges =
@@ -149,6 +153,10 @@ export const renderCharge = (
           )}
         </>
       );
+    case ComplexTypes.Serrate:
+      return renderSerrate(height, width, charge.colour, charge.thickness);
+    case ComplexTypes.Wave:
+      return renderWave(height, width, charge.colour, charge.thickness);
     default:
       return <G />;
   }
@@ -193,6 +201,8 @@ export const ChargesList = [
   SimpleTypes.Disc,
   ComplexTypes.Star,
   ComplexTypes.Crescent,
+  ComplexTypes.Serrate,
+  ComplexTypes.Wave,
 ];
 
 export {

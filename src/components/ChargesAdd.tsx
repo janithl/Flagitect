@@ -113,6 +113,13 @@ const getChargeOptions = (charge: Charges) => {
       options.rotation = 90;
       options.thickness = 30;
       break;
+    case ComplexTypes.Serrate:
+    case ComplexTypes.Wave:
+      delete options.percentage;
+      options.thickness = 30;
+      options.repeatX = 10;
+      options.repeatY = 8;
+      break;
   }
 
   return options;
