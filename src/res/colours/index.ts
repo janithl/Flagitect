@@ -1,4 +1,4 @@
-export default {
+const appColours = {
   primaryBlue: '#1C2F52',
   secondaryBlue: '#2A4D6A',
   offWhite: '#FAF7F2',
@@ -9,8 +9,6 @@ export default {
   black: '#000000',
   grey: '#C5C5C5',
 };
-
-export const initialColours = ['#1A5FB4', '#FFFFFF', '#A51D2D'];
 
 export const gnomePalette = [
   '#99C1F1',
@@ -59,3 +57,16 @@ export const gnomePalette = [
   '#241F31',
   '#000000',
 ];
+
+export const getRandomColour = (): string => {
+  const i = Math.floor(Math.random() * gnomePalette.length - 1);
+  return gnomePalette[i];
+};
+
+export const initialColours = [
+  getRandomColour(),
+  appColours.white,
+  getRandomColour(),
+];
+
+export default appColours;

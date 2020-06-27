@@ -12,8 +12,9 @@ import {
   ComplexTypes,
   CrossTypes,
   SimpleTypes,
+  StripedTypes,
 } from '@res/charges/index';
-import colours from '@res/colours';
+import colours, { getRandomColour } from '@res/colours';
 
 const ChargeItem = ({ title, onPress }: ChargeItemProps) => (
   <View style={styles.chargeItem}>
@@ -72,7 +73,7 @@ const styles = StyleSheet.create({
 const getChargeOptions = (charge: Charges) => {
   const options: Partial<ChargeType> = {
     type: charge,
-    colour: colours.white,
+    colour: getRandomColour(),
     percentage: 50,
     repeatX: 1,
     repeatY: 1,
@@ -112,6 +113,17 @@ const getChargeOptions = (charge: Charges) => {
     case ComplexTypes.Crescent:
       options.rotation = 90;
       options.thickness = 30;
+      break;
+    case ComplexTypes.Pall:
+      delete options.percentage;
+      options.thickness = 30;
+      break;
+    case StripedTypes.Serrated:
+    case StripedTypes.Wavy:
+      delete options.percentage;
+      options.thickness = 30;
+      options.repeatX = 10;
+      options.repeatY = 8;
       break;
   }
 

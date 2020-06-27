@@ -23,9 +23,10 @@ export default (
     Math.round((height - size) / 2),
   ];
   const rotateCoords = [rotation, toDP(size / 2, 1), toDP(size / 2, 1)];
-  const transform =
-    `translate(${translateCoords.join(' ')})` +
-    `rotate(${rotateCoords.join(' ')}) `;
+  const transform = [
+    `translate(${translateCoords.join(' ')})`,
+    `rotate(${rotateCoords.join(' ')}) `,
+  ].join(' ');
 
   return (
     <G transform={transform}>
