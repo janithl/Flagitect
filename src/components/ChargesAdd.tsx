@@ -12,6 +12,7 @@ import {
   ComplexTypes,
   CrossTypes,
   SimpleTypes,
+  StripedTypes,
 } from '@res/charges/index';
 import colours from '@res/colours';
 
@@ -113,8 +114,8 @@ const getChargeOptions = (charge: Charges) => {
       options.rotation = 90;
       options.thickness = 30;
       break;
-    case ComplexTypes.Serrate:
-    case ComplexTypes.Wave:
+    case StripedTypes.Serrated:
+    case StripedTypes.Wavy:
       delete options.percentage;
       options.thickness = 30;
       options.repeatX = 10;
