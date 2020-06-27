@@ -80,7 +80,8 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
                   />
                 </View>
                 <View style={styles.title}>
-                  <Text H1>{`Flagitect ${getVersion()}`}</Text>
+                  <Text H1>Flagitect</Text>
+                  <Text>{`v${getVersion()}`}</Text>
                 </View>
               </View>
               <SectionHeading title="Links" />
