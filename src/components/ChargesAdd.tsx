@@ -114,6 +114,10 @@ const getChargeOptions = (charge: Charges) => {
       options.rotation = 90;
       options.thickness = 30;
       break;
+    case ComplexTypes.Pall:
+      delete options.percentage;
+      options.thickness = 30;
+      break;
     case StripedTypes.Serrated:
     case StripedTypes.Wavy:
       delete options.percentage;

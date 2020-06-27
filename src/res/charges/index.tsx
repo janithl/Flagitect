@@ -12,6 +12,7 @@ import renderPile, { PileTypes } from './Pile';
 import renderCrescent from './Crescent';
 import renderDiamond from './Diamond';
 import renderStar from './Star';
+import renderPall from './Pall';
 import renderStripes, { StripedTypes } from './Stripes';
 
 export enum SimpleTypes {
@@ -24,6 +25,7 @@ export enum SimpleTypes {
 export enum ComplexTypes {
   Crescent = 'Crescent',
   Star = 'Star',
+  Pall = 'Pall',
 }
 
 export type Charges =
@@ -120,6 +122,8 @@ export const renderCharge = (
         charge.thickness,
         charge.rotation,
       );
+    case ComplexTypes.Pall:
+      return renderPall(height, width, charge.colour, charge.thickness);
     case BendTypes.Bend:
     case BendTypes.Enhanced:
     case BendTypes.Reduced:
@@ -206,6 +210,7 @@ export const ChargesList = [
   ComplexTypes.Crescent,
   StripedTypes.Serrated,
   StripedTypes.Wavy,
+  ComplexTypes.Pall,
 ];
 
 export {
