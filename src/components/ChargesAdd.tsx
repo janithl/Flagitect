@@ -14,7 +14,7 @@ import {
   SimpleTypes,
   StripedTypes,
 } from '@res/charges/index';
-import colours from '@res/colours';
+import colours, { getRandomColour } from '@res/colours';
 
 const ChargeItem = ({ title, onPress }: ChargeItemProps) => (
   <View style={styles.chargeItem}>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
 const getChargeOptions = (charge: Charges) => {
   const options: Partial<ChargeType> = {
     type: charge,
-    colour: colours.white,
+    colour: getRandomColour(),
     percentage: 50,
     repeatX: 1,
     repeatY: 1,
