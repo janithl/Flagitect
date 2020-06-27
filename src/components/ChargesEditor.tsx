@@ -1,12 +1,12 @@
 import React from 'react';
-import { Alert, ScrollView, View } from 'react-native';
+import { Alert, ScrollView, ToastAndroid, View } from 'react-native';
 
 import { ListItem, SectionHeading, Spinner, SpinnerTypes } from '@components';
 import Actions from '@lib/actions';
 import { ChargeType, openModal, ModalActions } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
-import { Delete, Paint } from '@res/icons';
+import { Copy, Delete, Paint } from '@res/icons';
 
 const properties = [
   {
@@ -99,6 +99,17 @@ export default ({
     });
   };
 
+  const cloneCharge = () => {
+    dispatch({
+      type: Actions.CLONE_CHARGE,
+      payload: selectedCharge,
+    });
+    ToastAndroid.show(
+      `${charges[selectedCharge]?.type} cloned!`,
+      ToastAndroid.SHORT,
+    );
+  };
+
   return (
     <ScrollView>
       <SectionHeading title={`${charges[selectedCharge]?.type} Properties`} />
@@ -122,6 +133,12 @@ export default ({
         title="Set Colour"
         icon={<Paint fill={charges[selectedCharge]?.colour} size={32} />}
         onPress={() => openModal(dispatch, ModalActions.SelectColourCharge)}
+      />
+      <ListItem
+        title="Clone"
+        icon={<Copy fill={colours.primaryBlue} size={32} />}
+        onPress={cloneCharge}
+        arrow={false}
       />
       <ListItem
         title="Remove"

@@ -116,6 +116,8 @@ const getChargeOptions = (charge: Charges) => {
       break;
     case ComplexTypes.Pall:
       delete options.percentage;
+      delete options.repeatX;
+      delete options.repeatY;
       options.thickness = 30;
       break;
     case StripedTypes.Serrated:

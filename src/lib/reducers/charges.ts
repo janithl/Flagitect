@@ -38,6 +38,7 @@ export default (
         ...state,
         [id]: { ...charge, ...(action?.payload as ChargeType) },
       };
+
     case Actions.REMOVE_CHARGE:
       if (!action?.payload) return state;
 
@@ -45,6 +46,18 @@ export default (
       return {
         ...rest,
       };
+
+    case Actions.CLONE_CHARGE:
+      if (!action?.payload) return state;
+
+      const newCharge = { ...state[action?.payload as string] };
+      const newID = makeID();
+      newCharge.id = newID;
+      return {
+        ...state,
+        [newID]: newCharge,
+      };
+
     default:
       return state;
   }
