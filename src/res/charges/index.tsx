@@ -12,8 +12,7 @@ import renderPile, { PileTypes } from './Pile';
 import renderCrescent from './Crescent';
 import renderDiamond from './Diamond';
 import renderStar from './Star';
-import renderStripesSerrated from './StripesSerrated';
-import renderStripesWavy from './StripesWavy';
+import renderStripes, { StripedTypes } from './Stripes';
 
 export enum SimpleTypes {
   Canton = 'Canton',
@@ -27,18 +26,13 @@ export enum ComplexTypes {
   Star = 'Star',
 }
 
-export enum StripedTypes {
-  Serrated = 'Stripes Serrated',
-  Wavy = 'Stripes Wavy',
-}
-
 export type Charges =
   | SimpleTypes
   | BendTypes
   | CrossTypes
   | PileTypes
-  | StripedTypes
-  | ComplexTypes;
+  | ComplexTypes
+  | StripedTypes;
 
 export default (
   charges: ChargeType[],
@@ -158,14 +152,14 @@ export const renderCharge = (
         </>
       );
     case StripedTypes.Serrated:
-      return renderStripesSerrated(
+    case StripedTypes.Wavy:
+      return renderStripes(
         height,
         width,
         charge.colour,
+        charge.type,
         charge.thickness,
       );
-    case StripedTypes.Wavy:
-      return renderStripesWavy(height, width, charge.colour, charge.thickness);
     default:
       return <G />;
   }
@@ -221,4 +215,5 @@ export {
   BendTypes,
   CrossTypes,
   PileTypes,
+  StripedTypes,
 };
