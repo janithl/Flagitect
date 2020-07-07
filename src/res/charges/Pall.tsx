@@ -1,5 +1,5 @@
 import React from 'react';
-import { G, Rect } from 'react-native-svg';
+import { Rect, Svg } from 'react-native-svg';
 
 export default (
   height: number,
@@ -18,7 +18,7 @@ export default (
   const diagonal = Math.sqrt(midpoint.x ** 2 + midpoint.y ** 2);
 
   return (
-    <G>
+    <Svg width={width} height={height}>
       <Rect
         x={midpoint.x}
         y={midpoint.y - chargeHeight / 2}
@@ -42,6 +42,6 @@ export default (
         fill={colour}
         transform={`rotate(${[180 - angle, midpoint.x, midpoint.y].join(' ')})`}
       />
-    </G>
+    </Svg>
   );
 };
