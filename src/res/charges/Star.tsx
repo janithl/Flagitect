@@ -1,7 +1,7 @@
 import React from 'react';
 import { G, Polygon } from 'react-native-svg';
 
-import { coord, toDP } from '@lib/utils';
+import { coord, getMidpoint, toDP } from '@lib/utils';
 
 export default (
   height: number,
@@ -14,14 +14,11 @@ export default (
 ): JSX.Element => {
   thickness /= 100;
   percentage /= 100;
+  const midpoint = getMidpoint(width, height);
 
   const halfSegment = Math.PI / points;
   const radiusLarge = Math.round((height * percentage) / 2);
   const radiusSmall = Math.round((height * percentage * thickness) / 2);
-  const midpoint = {
-    x: Math.round(width / 2),
-    y: Math.round(height / 2),
-  };
 
   const getPointCoordinates = (radius: number, theta: number): string => {
     return coord(

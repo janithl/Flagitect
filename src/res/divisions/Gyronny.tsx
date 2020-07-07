@@ -1,17 +1,14 @@
 import React from 'react';
 import { G, Polygon, Rect } from 'react-native-svg';
 
-import { coord } from '@lib/utils';
+import { coord, getMidpoint } from '@lib/utils';
 
 export default (
   divColours: string[],
   height: number,
   width: number,
 ): JSX.Element => {
-  const midpoint = {
-    x: Math.round(width / 2),
-    y: Math.round(height / 2),
-  };
+  const midpoint = getMidpoint(width, height);
 
   return (
     <G>

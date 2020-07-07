@@ -1,6 +1,8 @@
 import React from 'react';
 import { Rect, Svg } from 'react-native-svg';
 
+import { getMidpoint } from '@lib/utils';
+
 export default (
   height: number,
   width: number,
@@ -8,12 +10,9 @@ export default (
   thickness = 20,
 ): JSX.Element => {
   thickness /= 100;
+  const midpoint = getMidpoint(width, height);
 
   const chargeHeight = height * thickness;
-  const midpoint = {
-    x: Math.round(width / 2),
-    y: Math.round(height / 2),
-  };
   const angle = (180 * Math.atan(height / width)) / Math.PI;
   const diagonal = Math.sqrt(midpoint.x ** 2 + midpoint.y ** 2);
 

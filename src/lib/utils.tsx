@@ -104,3 +104,11 @@ export const HSVtoRGB = (
     .join('')
     .toUpperCase();
 };
+
+export const getMidpoint = (
+  width: number,
+  height: number,
+): { x: number; y: number } => ({
+  x: Math.round(width / 2),
+  y: Math.round(height / 2),
+});
