@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Charges renders Diamond correctly 1`] = `
+<React.Fragment>
+  <G
+    id="charge-diamond-1"
+  >
+    <Polygon
+      fill="#c00"
+      points="150,200 300,100 450,200 300,300"
+    />
+  </G>
+</React.Fragment>
+`;
+
+exports[`Charges renders Pall correctly 1`] = `
+<React.Fragment>
+  <G
+    id="charge-pall-1"
+  >
+    <Polygon
+      fill="#0c0"
+      points="0,0 75,0 300,162.5 600,162.5 600,237.5 300,237.5 75,400 0,400 0,350 225,200 0,50"
+    />
+  </G>
+</React.Fragment>
+`;
+
+exports[`Charges renders Star correctly 1`] = `
+<React.Fragment>
+  <G
+    id="charge-star-5"
+  >
+    <G
+      transform="rotate(90 300 200)"
+    >
+      <Polygon
+        fill="#0c0"
+        points="323.5,232.4 395.1,230.9 338,187.6 358.8,119.1 300,160 241.2,119.1 262,187.6 204.9,230.9 276.5,232.4 300,300"
+      />
+    </G>
+  </G>
+</React.Fragment>
+`;
+
+exports[`Charges renders Star correctly 2`] = `
+<React.Fragment>
+  <G
+    id="charge-star-8"
+  >
+    <G
+      transform="rotate(0 300 200)"
+    >
+      <Polygon
+        fill="#0c0"
+        points="323,255.4 370.7,270.7 355.4,223 400,200 355.4,177 370.7,129.3 323,144.6 300,100 277,144.6 229.3,129.3 244.6,177 200,200 244.6,223 229.3,270.7 277,255.4 300,300"
+      />
+    </G>
+  </G>
+</React.Fragment>
+`;
+
+exports[`Charges renders Stripes correctly 1`] = `
+<React.Fragment>
+  <G
+    id="charge-stripes-serrated"
+  >
+    <G
+      transform="translate(0 -100)"
+    >
+      <Svg
+        height={600}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 400 400"
+        width={600}
+      >
+        <Polygon
+          fill="#00c"
+          points="0,150 100,125 200,150 300,175 400,150 400,250 300,275 200,250 100,225 0,250"
+        />
+      </Svg>
+    </G>
+  </G>
+</React.Fragment>
+`;
+
+exports[`Charges renders Stripes correctly 2`] = `
+<React.Fragment>
+  <G
+    id="charge-stripes-wavy"
+  >
+    <G
+      transform="translate(0 -100)"
+    >
+      <Svg
+        height={600}
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 400 400"
+        width={600}
+      >
+        <Path
+          d="M 0 150 A 200 200 0 0 1 200 150 A 200 200 0 0 0 400 150 L 400 250 A 200 200 0 0 1 200 250 A 200 200 0 0 0 0 250 Z"
+          fill="#c00"
+        />
+      </Svg>
+    </G>
+  </G>
+</React.Fragment>
+`;

@@ -1,0 +1,749 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Divisions renders Checked correctly 1`] = `
+<G>
+  <G>
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={0}
+      y={0}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={100}
+      y={0}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={200}
+      y={0}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={300}
+      y={0}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={400}
+      y={0}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={500}
+      y={0}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={0}
+      y={50}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={100}
+      y={50}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={200}
+      y={50}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={300}
+      y={50}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={400}
+      y={50}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={500}
+      y={50}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={0}
+      y={100}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={100}
+      y={100}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={200}
+      y={100}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={300}
+      y={100}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={400}
+      y={100}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={500}
+      y={100}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={0}
+      y={150}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={100}
+      y={150}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={200}
+      y={150}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={300}
+      y={150}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={400}
+      y={150}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={500}
+      y={150}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={0}
+      y={200}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={100}
+      y={200}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={200}
+      y={200}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={300}
+      y={200}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={400}
+      y={200}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={500}
+      y={200}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={0}
+      y={250}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={100}
+      y={250}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={200}
+      y={250}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={300}
+      y={250}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={400}
+      y={250}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={500}
+      y={250}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={0}
+      y={300}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={100}
+      y={300}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={200}
+      y={300}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={300}
+      y={300}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={400}
+      y={300}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={500}
+      y={300}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={0}
+      y={350}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={100}
+      y={350}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={200}
+      y={350}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={300}
+      y={350}
+    />
+    <Rect
+      fill="#00c"
+      height={50}
+      width={100}
+      x={400}
+      y={350}
+    />
+    <Rect
+      fill="#c00"
+      height={50}
+      width={100}
+      x={500}
+      y={350}
+    />
+  </G>
+</G>
+`;
+
+exports[`Divisions renders Checked correctly 2`] = `
+<G>
+  <G>
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={0}
+      y={0}
+    />
+    <Rect
+      fill="#00c"
+      height={100}
+      width={100}
+      x={100}
+      y={0}
+    />
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={200}
+      y={0}
+    />
+    <Rect
+      fill="#00c"
+      height={100}
+      width={100}
+      x={300}
+      y={0}
+    />
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={400}
+      y={0}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#00c"
+      height={100}
+      width={100}
+      x={0}
+      y={100}
+    />
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={100}
+      y={100}
+    />
+    <Rect
+      fill="#00c"
+      height={100}
+      width={100}
+      x={200}
+      y={100}
+    />
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={300}
+      y={100}
+    />
+    <Rect
+      fill="#00c"
+      height={100}
+      width={100}
+      x={400}
+      y={100}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={0}
+      y={200}
+    />
+    <Rect
+      fill="#00c"
+      height={100}
+      width={100}
+      x={100}
+      y={200}
+    />
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={200}
+      y={200}
+    />
+    <Rect
+      fill="#00c"
+      height={100}
+      width={100}
+      x={300}
+      y={200}
+    />
+    <Rect
+      fill="#c00"
+      height={100}
+      width={100}
+      x={400}
+      y={200}
+    />
+  </G>
+</G>
+`;
+
+exports[`Divisions renders Diagonal correctly 1`] = `
+<G>
+  <Polygon
+    fill="#c00"
+    points="0,0 0,400 600,400"
+  />
+  <Polygon
+    fill="#00c"
+    points="0,0 600,0 600,400"
+  />
+</G>
+`;
+
+exports[`Divisions renders DiagonalToLeft correctly 1`] = `
+<G>
+  <Polygon
+    fill="#c00"
+    points="0,400 600,400 600,0"
+  />
+  <Polygon
+    fill="#00c"
+    points="0,400 0,0 600,0"
+  />
+</G>
+`;
+
+exports[`Divisions renders Gyronny correctly 1`] = `
+<G>
+  <Rect
+    fill="#c00"
+    height={400}
+    width={600}
+    x="0"
+    y="0"
+  />
+  <Polygon
+    fill="#00c"
+    points="0,0 300,200 0,200"
+  />
+  <Polygon
+    fill="#00c"
+    points="0,400 300,200 300,400"
+  />
+  <Polygon
+    fill="#00c"
+    points="600,400 300,200 600,200"
+  />
+  <Polygon
+    fill="#00c"
+    points="600,0 300,200 300,0"
+  />
+</G>
+`;
+
+exports[`Divisions renders Horizontal correctly 1`] = `
+<G>
+  <Rect
+    fill="#c00"
+    height={100}
+    width={500}
+    x="0"
+    y={0}
+  />
+  <Rect
+    fill="#00c"
+    height={100}
+    width={500}
+    x="0"
+    y={100}
+  />
+  <Rect
+    fill="#ccc"
+    height={100}
+    width={500}
+    x="0"
+    y={200}
+  />
+</G>
+`;
+
+exports[`Divisions renders Horizontal correctly 2`] = `
+<G>
+  <Rect
+    fill="#c00"
+    height={30}
+    width={300}
+    x="0"
+    y={0}
+  />
+  <Rect
+    fill="#00c"
+    height={30}
+    width={300}
+    x="0"
+    y={30}
+  />
+  <Rect
+    fill="#ccc"
+    height={30}
+    width={300}
+    x="0"
+    y={60}
+  />
+  <Rect
+    fill="#00c"
+    height={30}
+    width={300}
+    x="0"
+    y={90}
+  />
+  <Rect
+    fill="#c00"
+    height={30}
+    width={300}
+    x="0"
+    y={120}
+  />
+</G>
+`;
+
+exports[`Divisions renders PerSaltire correctly 1`] = `
+<G>
+  <Polygon
+    fill="#c00"
+    points="0,400 300,200 0,0"
+  />
+  <Polygon
+    fill="#00c"
+    points="0,0 300,200 600,0"
+  />
+  <Polygon
+    fill="#c00"
+    points="600,0 300,200 600,400"
+  />
+  <Polygon
+    fill="#00c"
+    points="600,400 300,200 0,400"
+  />
+</G>
+`;
+
+exports[`Divisions renders PerSaltire correctly 2`] = `
+<G>
+  <Polygon
+    fill="#c00"
+    points="0,400 300,200 0,0"
+  />
+  <Polygon
+    fill="#00c"
+    points="0,0 300,200 600,0"
+  />
+  <Polygon
+    fill="#ccc"
+    points="600,0 300,200 600,400"
+  />
+  <Polygon
+    fill="#0c0"
+    points="600,400 300,200 0,400"
+  />
+</G>
+`;
+
+exports[`Divisions renders Quartered correctly 1`] = `
+<G>
+  <G>
+    <Rect
+      fill="#c00"
+      height={200}
+      width={300}
+      x={0}
+      y={0}
+    />
+    <Rect
+      fill="#00c"
+      height={200}
+      width={300}
+      x={300}
+      y={0}
+    />
+  </G>
+  <G>
+    <Rect
+      fill="#00c"
+      height={200}
+      width={300}
+      x={0}
+      y={200}
+    />
+    <Rect
+      fill="#c00"
+      height={200}
+      width={300}
+      x={300}
+      y={200}
+    />
+  </G>
+</G>
+`;
+
+exports[`Divisions renders Solid correctly 1`] = `
+<Rect
+  fill="#c00"
+  height={400}
+  width={600}
+  x="0"
+  y="0"
+/>
+`;
+
+exports[`Divisions renders Vertical correctly 1`] = `
+<G>
+  <Rect
+    fill="#c00"
+    height={400}
+    width={200}
+    x={0}
+    y="0"
+  />
+  <Rect
+    fill="#00c"
+    height={400}
+    width={200}
+    x={200}
+    y="0"
+  />
+  <Rect
+    fill="#ccc"
+    height={400}
+    width={200}
+    x={400}
+    y="0"
+  />
+</G>
+`;
+
+exports[`Divisions renders Vertical correctly 2`] = `
+<G>
+  <Rect
+    fill="#c00"
+    height={300}
+    width={100}
+    x={0}
+    y="0"
+  />
+  <Rect
+    fill="#00c"
+    height={300}
+    width={100}
+    x={100}
+    y="0"
+  />
+  <Rect
+    fill="#ccc"
+    height={300}
+    width={100}
+    x={200}
+    y="0"
+  />
+  <Rect
+    fill="#00c"
+    height={300}
+    width={100}
+    x={300}
+    y="0"
+  />
+  <Rect
+    fill="#c00"
+    height={300}
+    width={100}
+    x={400}
+    y="0"
+  />
+</G>
+`;
