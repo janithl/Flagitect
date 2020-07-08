@@ -18,10 +18,35 @@ exports[`Charges renders Pall correctly 1`] = `
   <G
     id="charge-pall-1"
   >
-    <Polygon
-      fill="#0c0"
-      points="0,0 75,0 300,162.5 600,162.5 600,237.5 300,237.5 75,400 0,400 0,350 225,200 0,50"
-    />
+    <Svg
+      height={400}
+      preserveAspectRatio="xMidYMid meet"
+      width={600}
+    >
+      <Rect
+        fill="#0c0"
+        height={100}
+        width={300}
+        x={300}
+        y={150}
+      />
+      <Rect
+        fill="#0c0"
+        height={100}
+        transform="rotate(213.69006752597977 300 200)"
+        width={360.5551275463989}
+        x={300}
+        y={150}
+      />
+      <Rect
+        fill="#0c0"
+        height={100}
+        transform="rotate(146.30993247402023 300 200)"
+        width={360.5551275463989}
+        x={300}
+        y={150}
+      />
+    </Svg>
   </G>
 </React.Fragment>
 `;
