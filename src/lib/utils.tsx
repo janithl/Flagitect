@@ -141,7 +141,7 @@ export const getMidpoint = (
  * @param y y coord of the center of the circle
  * @param radius radius of the circle
  * @param theta angle of the point in radians
- * @returns Object with x and y coordinates of point rounded to nearest integer
+ * @returns Object with x and y coordinates of point rounded to nearest decimal place
  */
 export const getPointCoordinates = (
   x: number,

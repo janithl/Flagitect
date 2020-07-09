@@ -106,6 +106,7 @@ const getChargeOptions = (charge: Charges) => {
       options.thickness = 30;
       break;
     case ComplexTypes.Star:
+    case ComplexTypes.Flower:
       options.rotation = 180;
       options.points = 5;
       options.thickness = 40;
