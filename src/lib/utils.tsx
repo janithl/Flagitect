@@ -42,8 +42,18 @@ export const chunkArray = (array: string[], chunkSize: number): string[][] => {
   return result;
 };
 
+/**
+ * Join x and y coordinates into a string with a comma: x,y
+ * @param x x coordinate
+ * @param y y coordinate
+ * @returns String x,y
+ */
 export const coord = (x: number, y: number): string => [x, y].join(',');
 
+/**
+ * Make a random alphanumeric ID
+ * @returns Alphanumeric ID
+ */
 export const makeID = (): string =>
   [
     new Date().getTime().toString(32),
@@ -52,6 +62,12 @@ export const makeID = (): string =>
     .join('-')
     .toUpperCase();
 
+/**
+ * Get required decimal places from number
+ * @param x number
+ * @param decimalPlace number of decimal places
+ * @returns Number rounded to requisite decimal places
+ */
 export const toDP = (x: number, decimalPlace = 2): number => {
   x *= Math.pow(10, decimalPlace);
   return Math.round(x) / Math.pow(10, decimalPlace);
@@ -105,10 +121,34 @@ export const HSVtoRGB = (
     .toUpperCase();
 };
 
+/**
+ * Get the x and y coordinates for the middle of a rectangle of height and width
+ * @param width width of rectangle
+ * @param height height of rectangle
+ * @returns Object with x and y coordinates rounded to nearest integer
+ */
 export const getMidpoint = (
   width: number,
   height: number,
 ): { x: number; y: number } => ({
   x: Math.round(width / 2),
   y: Math.round(height / 2),
+});
+
+/**
+ * Get x and y coordinates of a point on the perimeter of a circle
+ * @param x x coord of the center of the circle
+ * @param y y coord of the center of the circle
+ * @param radius radius of the circle
+ * @param theta angle of the point in radians
+ * @returns Object with x and y coordinates of point rounded to nearest integer
+ */
+export const getPointCoordinates = (
+  x: number,
+  y: number,
+  radius: number,
+  theta: number,
+): { x: number; y: number } => ({
+  x: toDP(x + radius * Math.sin(theta), 1),
+  y: toDP(y + radius * Math.cos(theta), 1),
 });
