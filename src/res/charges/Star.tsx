@@ -1,7 +1,7 @@
 import React from 'react';
 import { G, Polygon } from 'react-native-svg';
 
-import { coord, getMidpoint, toDP } from '@lib/utils';
+import { coord, getMidpoint, getPointCoordinates } from '@lib/utils';
 
 export default (
   height: number,
@@ -15,17 +15,15 @@ export default (
   thickness /= 100;
   percentage /= 100;
   const midpoint = getMidpoint(width, height);
+  /** simplify call to getPointCoordinates by filling out the center coords */
+  const getStarPoints = (radius: number, theta: number) => {
+    const point = getPointCoordinates(midpoint.x, midpoint.y, radius, theta);
+    return coord(point.x, point.y);
+  };
 
   const halfSegment = Math.PI / points;
   const radiusLarge = Math.round((height * percentage) / 2);
   const radiusSmall = Math.round((height * percentage * thickness) / 2);
-
-  const getPointCoordinates = (radius: number, theta: number): string => {
-    return coord(
-      toDP(midpoint.x + radius * Math.sin(theta), 1),
-      toDP(midpoint.y + radius * Math.cos(theta), 1),
-    );
-  };
 
   /**
    * this algorithm uses two circles sharing a midpoint, one smaller than
@@ -33,8 +31,8 @@ export default (
    **/
   const nodes = [];
   for (let i = 1; i < points * 2; i += 2) {
-    nodes.push(getPointCoordinates(radiusSmall, halfSegment * i));
-    nodes.push(getPointCoordinates(radiusLarge, halfSegment * (i + 1)));
+    nodes.push(getStarPoints(radiusSmall, halfSegment * i));
+    nodes.push(getStarPoints(radiusLarge, halfSegment * (i + 1)));
   }
 
   return (
