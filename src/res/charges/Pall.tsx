@@ -1,7 +1,7 @@
 import React from 'react';
-import { Polygon } from 'react-native-svg';
+import { Rect, Svg } from 'react-native-svg';
 
-import { coord } from '@lib/utils';
+import { getMidpoint } from '@lib/utils';
 
 export default (
   height: number,
@@ -10,29 +10,40 @@ export default (
   thickness = 20,
 ): JSX.Element => {
   thickness /= 100;
+  const midpoint = getMidpoint(width, height);
 
-  const edge = {
-    x: Math.round(width * thickness * 0.5),
-    y: Math.round(height * thickness * 0.5),
-  };
-  const midpoint = {
-    x: Math.round(width / 2),
-    y: Math.round(height / 2),
-  };
+  const chargeHeight = height * thickness;
+  const angle = (180 * Math.atan(height / width)) / Math.PI;
+  const diagonal = Math.sqrt(midpoint.x ** 2 + midpoint.y ** 2);
 
-  const points = [
-    coord(0, 0),
-    coord(edge.x, 0),
-    coord(midpoint.x, midpoint.y - edge.x / 2),
-    coord(width, midpoint.y - edge.x / 2),
-    coord(width, midpoint.y + edge.x / 2),
-    coord(midpoint.x, midpoint.y + edge.x / 2),
-    coord(edge.x, height),
-    coord(0, height),
-    coord(0, height - edge.y),
-    coord(midpoint.x - edge.x, midpoint.y),
-    coord(0, edge.y),
-  ];
-
-  return <Polygon points={points.join(' ')} fill={colour} />;
+  return (
+    <Svg
+      width={width}
+      height={height}
+      viewBox={[0, 0, width, height].join(' ')}>
+      <Rect
+        x={midpoint.x}
+        y={midpoint.y - chargeHeight / 2}
+        width={midpoint.x}
+        height={chargeHeight}
+        fill={colour}
+      />
+      <Rect
+        x={midpoint.x}
+        y={midpoint.y - chargeHeight / 2}
+        width={diagonal}
+        height={chargeHeight}
+        fill={colour}
+        transform={`rotate(${[180 + angle, midpoint.x, midpoint.y].join(' ')})`}
+      />
+      <Rect
+        x={midpoint.x}
+        y={midpoint.y - chargeHeight / 2}
+        width={diagonal}
+        height={chargeHeight}
+        fill={colour}
+        transform={`rotate(${[180 - angle, midpoint.x, midpoint.y].join(' ')})`}
+      />
+    </Svg>
+  );
 };

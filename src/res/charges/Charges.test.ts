@@ -72,6 +72,24 @@ describe('Charges', () => {
         600,
       ),
     ).toMatchSnapshot();
+
+    expect(
+      renderCharges(
+        [
+          {
+            id: 'star-11',
+            type: ComplexTypes.Star,
+            colour: '#0c0',
+            thickness: 60,
+            percentage: 50,
+            points: 11,
+            rotation: 0,
+          },
+        ],
+        400,
+        600,
+      ),
+    ).toMatchSnapshot();
   });
 
   it('renders Stripes correctly', () => {
@@ -98,6 +116,80 @@ describe('Charges', () => {
             type: StripedTypes.Wavy,
             colour: '#c00',
             thickness: 25,
+          },
+        ],
+        400,
+        600,
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('renders Flower correctly', () => {
+    expect(
+      renderCharges(
+        [
+          {
+            id: 'flower-5',
+            type: ComplexTypes.Flower,
+            colour: '#0c0',
+            thickness: 40,
+            percentage: 50,
+            points: 5,
+            rotation: 90,
+          },
+        ],
+        400,
+        600,
+      ),
+    ).toMatchSnapshot();
+
+    expect(
+      renderCharges(
+        [
+          {
+            id: 'flower-8',
+            type: ComplexTypes.Flower,
+            colour: '#0c0',
+            thickness: 60,
+            percentage: 50,
+            points: 8,
+            rotation: 0,
+          },
+        ],
+        400,
+        600,
+      ),
+    ).toMatchSnapshot();
+
+    expect(
+      renderCharges(
+        [
+          {
+            id: 'flower-11',
+            type: ComplexTypes.Flower,
+            colour: '#0c0',
+            thickness: 60,
+            percentage: 50,
+            points: 11,
+            rotation: 0,
+          },
+        ],
+        400,
+        600,
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('renders Shield correctly', () => {
+    expect(
+      renderCharges(
+        [
+          {
+            id: 'shield',
+            type: ComplexTypes.Shield,
+            colour: '#0c0',
+            thickness: 40,
+            percentage: 50,
           },
         ],
         400,

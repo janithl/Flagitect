@@ -106,6 +106,7 @@ const getChargeOptions = (charge: Charges) => {
       options.thickness = 30;
       break;
     case ComplexTypes.Star:
+    case ComplexTypes.Flower:
       options.rotation = 180;
       options.points = 5;
       options.thickness = 40;
@@ -126,6 +127,11 @@ const getChargeOptions = (charge: Charges) => {
       options.thickness = 30;
       options.repeatX = 10;
       options.repeatY = 8;
+      break;
+    case ComplexTypes.Shield:
+      delete options.repeatX;
+      delete options.repeatY;
+      options.thickness = 30;
       break;
   }
 

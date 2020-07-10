@@ -1,7 +1,7 @@
 import React from 'react';
 import { G, Path, Polygon, Svg } from 'react-native-svg';
 
-import { coord } from '@lib/utils';
+import { coord, getMidpoint } from '@lib/utils';
 
 export enum StripedTypes {
   Serrated = 'Stripes Serrated',
@@ -17,33 +17,33 @@ export default (
 ): JSX.Element => {
   thickness /= 100;
 
-  const midpoint = height / 2;
-  const t = thickness * midpoint;
+  const midY = getMidpoint(width, height).y;
+  const t = thickness * midY;
 
   const renderStripes = () => {
     if (stripedType === StripedTypes.Serrated) {
       const points = [
-        coord(0, midpoint - t),
-        coord(midpoint * 0.5, midpoint - 1.5 * t),
-        coord(midpoint, midpoint - t),
-        coord(midpoint * 1.5, midpoint - 0.5 * t),
-        coord(height, midpoint - t),
-        coord(height, midpoint + t),
-        coord(midpoint * 1.5, midpoint + 1.5 * t),
-        coord(midpoint, midpoint + t),
-        coord(midpoint * 0.5, midpoint + 0.5 * t),
-        coord(0, midpoint + t),
+        coord(0, midY - t),
+        coord(midY * 0.5, midY - 1.5 * t),
+        coord(midY, midY - t),
+        coord(midY * 1.5, midY - 0.5 * t),
+        coord(height, midY - t),
+        coord(height, midY + t),
+        coord(midY * 1.5, midY + 1.5 * t),
+        coord(midY, midY + t),
+        coord(midY * 0.5, midY + 0.5 * t),
+        coord(0, midY + t),
       ];
 
       return <Polygon points={points.join(' ')} fill={colour} />;
     } else if (stripedType === StripedTypes.Wavy) {
       const points = [
-        ['M', 0, midpoint - t].join(' '),
-        ['A', midpoint, midpoint, '0 0 1', midpoint, midpoint - t].join(' '),
-        ['A', midpoint, midpoint, '0 0 0', height, midpoint - t].join(' '),
-        ['L', height, midpoint + t].join(' '),
-        ['A', midpoint, midpoint, '0 0 1', midpoint, midpoint + t].join(' '),
-        ['A', midpoint, midpoint, '0 0 0', 0, midpoint + t].join(' '),
+        ['M', 0, midY - t].join(' '),
+        ['A', midY, midY, '0 0 1', midY, midY - t].join(' '),
+        ['A', midY, midY, '0 0 0', height, midY - t].join(' '),
+        ['L', height, midY + t].join(' '),
+        ['A', midY, midY, '0 0 1', midY, midY + t].join(' '),
+        ['A', midY, midY, '0 0 0', 0, midY + t].join(' '),
         'Z',
       ];
 
