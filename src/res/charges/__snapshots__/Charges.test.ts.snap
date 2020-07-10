@@ -64,19 +64,6 @@ exports[`Charges renders Flower correctly 3`] = `
 </React.Fragment>
 `;
 
-exports[`Charges renders Flower correctly 4`] = `
-<React.Fragment>
-  <G
-    id="charge-shield"
-  >
-    <Path
-      d="M 234 116.66666666666667 L 234 193.33333333333331 Q 234,260 300.5,300 Q 367,260 367,193.33333333333331 L 367 116.66666666666667 Q 300.5,100 234,116.66666666666667"
-      fill="#0c0"
-    />
-  </G>
-</React.Fragment>
-`;
-
 exports[`Charges renders Pall correctly 1`] = `
 <React.Fragment>
   <G
@@ -85,6 +72,7 @@ exports[`Charges renders Pall correctly 1`] = `
     <Svg
       height={400}
       preserveAspectRatio="xMidYMid meet"
+      viewBox="0 0 600 400"
       width={600}
     >
       <Rect
@@ -111,6 +99,19 @@ exports[`Charges renders Pall correctly 1`] = `
         y={150}
       />
     </Svg>
+  </G>
+</React.Fragment>
+`;
+
+exports[`Charges renders Shield correctly 1`] = `
+<React.Fragment>
+  <G
+    id="charge-shield"
+  >
+    <Path
+      d="M 234 104.2 L 234 193.3 Q 234,260 300.5,300 Q 367,260 367,193.3 L 367 104.2 Q 300.5,95.8 234,104.2"
+      fill="#0c0"
+    />
   </G>
 </React.Fragment>
 `;

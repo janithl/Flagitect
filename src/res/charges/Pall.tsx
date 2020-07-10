@@ -17,7 +17,10 @@ export default (
   const diagonal = Math.sqrt(midpoint.x ** 2 + midpoint.y ** 2);
 
   return (
-    <Svg width={width} height={height}>
+    <Svg
+      width={width}
+      height={height}
+      viewBox={[0, 0, width, height].join(' ')}>
       <Rect
         x={midpoint.x}
         y={midpoint.y - chargeHeight / 2}

@@ -178,7 +178,9 @@ describe('Charges', () => {
         600,
       ),
     ).toMatchSnapshot();
+  });
 
+  it('renders Shield correctly', () => {
     expect(
       renderCharges(
         [

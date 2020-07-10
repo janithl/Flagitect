@@ -1,9 +1,8 @@
 import React from 'react';
-import { G, Path, Svg } from 'react-native-svg';
+import { Path } from 'react-native-svg';
 
-import { coord } from '@lib/utils';
+import { coord, toDP } from '@lib/utils';
 
-const baseSize = 100;
 export default (
   height: number,
   width: number,
@@ -24,22 +23,26 @@ export default (
     y: Math.round((height - size.y) / 2),
   };
 
-  const borderTop = origin.y + size.y / 12;
-  const startY = origin.y + (size.y / 3) * (1 + thickness);
-  const midcurveY = origin.y + (size.y / 3) * (2 + thickness);
-  const midX = origin.x + size.x / 2;
+  const borderTop = toDP(size.y / 48, 1);
+  const startY = toDP(origin.y + (size.y / 3) * (1 + thickness), 1);
+  const midcurveY = toDP(origin.y + (size.y / 3) * (2 + thickness), 1);
+  const midX = origin.x + toDP(size.x / 2, 1);
   const endX = origin.x + size.x;
   const endY = origin.y + size.y;
 
   return (
     <Path
       d={[
-        `M ${origin.x} ${borderTop}`,
+        `M ${origin.x} ${origin.y + borderTop}`,
         `L ${origin.x} ${startY}`,
         `Q ${coord(origin.x, midcurveY)} ${coord(midX, endY)}`,
         `Q ${coord(endX, midcurveY)} ${coord(endX, startY)}`,
-        `L ${endX} ${borderTop}`,
-        `Q ${coord(midX, origin.y)} ${coord(origin.x, borderTop)}`,
+        `L ${endX} ${origin.y + borderTop}`,
+        [
+          'Q',
+          coord(midX, origin.y - borderTop),
+          coord(origin.x, origin.y + borderTop),
+        ].join(' '),
       ].join(' ')}
       fill={colour}
     />
