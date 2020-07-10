@@ -32,15 +32,15 @@ export default (
    * the biggest and smallest, and with the curve on the middle circle
    **/
   const nodes = [`M ${getFlowerPoints(radiusLarge, 0)}`];
-  for (let i = 0; i < 2 * Math.PI; i += segment) {
+  for (let i = 0; i < points; i++) {
     nodes.push(
       [
         'Q',
-        getFlowerPoints(radiusMid, i + segment / 2),
-        getFlowerPoints(radiusSmall, i + segment / 2),
+        getFlowerPoints(radiusMid, (i + 0.5) * segment),
+        getFlowerPoints(radiusSmall, (i + 0.5) * segment),
         'Q',
-        getFlowerPoints(radiusMid, i + segment / 2),
-        getFlowerPoints(radiusLarge, i + segment),
+        getFlowerPoints(radiusMid, (i + 0.5) * segment),
+        getFlowerPoints(radiusLarge, (i + 1) * segment),
       ].join(' '),
     );
   }

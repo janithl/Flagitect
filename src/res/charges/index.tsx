@@ -15,6 +15,7 @@ import renderStar from './Star';
 import renderPall from './Pall';
 import renderStripes, { StripedTypes } from './Stripes';
 import renderFlower from './Flower';
+import renderShield from './Shield';
 
 export enum SimpleTypes {
   Canton = 'Canton',
@@ -28,6 +29,7 @@ export enum ComplexTypes {
   Star = 'Star',
   Pall = 'Pall',
   Flower = 'Flower',
+  Shield = 'Shield',
 }
 
 export type Charges =
@@ -176,6 +178,14 @@ export const renderCharge = (
         charge.points,
         charge.rotation,
       );
+    case ComplexTypes.Shield:
+      return renderShield(
+        height,
+        width,
+        charge.colour,
+        charge.percentage,
+        charge.thickness,
+      );
     default:
       return <G />;
   }
@@ -224,6 +234,7 @@ export const ChargesList = [
   StripedTypes.Wavy,
   ComplexTypes.Pall,
   ComplexTypes.Flower,
+  ComplexTypes.Shield,
 ];
 
 export {

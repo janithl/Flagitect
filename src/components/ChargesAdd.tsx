@@ -128,6 +128,11 @@ const getChargeOptions = (charge: Charges) => {
       options.repeatX = 10;
       options.repeatY = 8;
       break;
+    case ComplexTypes.Shield:
+      delete options.repeatX;
+      delete options.repeatY;
+      options.thickness = 30;
+      break;
   }
 
   return options;

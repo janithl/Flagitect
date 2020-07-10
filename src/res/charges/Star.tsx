@@ -30,9 +30,9 @@ export default (
    * the other, and polygon lines zig zagging between points on the two
    **/
   const nodes = [];
-  for (let i = 0; i < Math.PI * 2; i += segment) {
-    nodes.push(getStarPoints(radiusLarge, i));
-    nodes.push(getStarPoints(radiusSmall, i + segment / 2));
+  for (let i = 0; i < points; i++) {
+    nodes.push(getStarPoints(radiusLarge, i * segment));
+    nodes.push(getStarPoints(radiusSmall, (i + 0.5) * segment));
   }
 
   return (
