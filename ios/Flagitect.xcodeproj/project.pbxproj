@@ -8,21 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* FlagitectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FlagitectTests.m */; };
+		0F9A21B5378745B18CFB3CD2 /* FiraSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94BB07B727874CD6937EEB8D /* FiraSans-ExtraLight.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2B97CA68DD9A24387E606BEC /* libPods-Flagitect-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 82E364B5157B9C9BE40323C1 /* libPods-Flagitect-tvOS.a */; };
+		2C80555F5B404647A29D9E27 /* FiraSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95264C06B7424D3289EE1090 /* FiraSans-ExtraBold.ttf */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* FlagitectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* FlagitectTests.m */; };
 		2EF6BB775AD5006859F3E38E /* libPods-Flagitect.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EA6EB7868F0CC5C706C6F388 /* libPods-Flagitect.a */; };
 		860595FB7DEFB5ADA5A817D9 /* libPods-Flagitect-FlagitectTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D1FACE859FF3696BF687C3 /* libPods-Flagitect-FlagitectTests.a */; };
-		FF5D7D111C1A76C3DEF37178 /* libPods-Flagitect-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 183CE45FE112AA6FC72BC983 /* libPods-Flagitect-tvOSTests.a */; };
-		2C80555F5B404647A29D9E27 /* FiraSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 95264C06B7424D3289EE1090 /* FiraSans-ExtraBold.ttf */; };
-		0F9A21B5378745B18CFB3CD2 /* FiraSans-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94BB07B727874CD6937EEB8D /* FiraSans-ExtraLight.ttf */; };
 		8B0CEEA77D5F4E02BB4336DB /* FiraSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EADFDD80B6D94AB59BB57DC2 /* FiraSans-Regular.ttf */; };
+		FF5D7D111C1A76C3DEF37178 /* libPods-Flagitect-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 183CE45FE112AA6FC72BC983 /* libPods-Flagitect-tvOSTests.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,13 +66,13 @@
 		80F700E6CEDEA818C3A2409A /* Pods-Flagitect-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flagitect-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-Flagitect-tvOSTests/Pods-Flagitect-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		82E364B5157B9C9BE40323C1 /* libPods-Flagitect-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flagitect-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9482F4561FE6608A725EBE42 /* Pods-Flagitect-FlagitectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flagitect-FlagitectTests.debug.xcconfig"; path = "Target Support Files/Pods-Flagitect-FlagitectTests/Pods-Flagitect-FlagitectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		94BB07B727874CD6937EEB8D /* FiraSans-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraSans-ExtraLight.ttf"; path = "../assets/fonts/FiraSans-ExtraLight.ttf"; sourceTree = "<group>"; };
+		95264C06B7424D3289EE1090 /* FiraSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraSans-ExtraBold.ttf"; path = "../assets/fonts/FiraSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		D40E145492C99F0C29DFC405 /* Pods-Flagitect.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flagitect.debug.xcconfig"; path = "Target Support Files/Pods-Flagitect/Pods-Flagitect.debug.xcconfig"; sourceTree = "<group>"; };
 		EA6EB7868F0CC5C706C6F388 /* libPods-Flagitect.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Flagitect.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EADFDD80B6D94AB59BB57DC2 /* FiraSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "FiraSans-Regular.ttf"; path = "../assets/fonts/FiraSans-Regular.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		95264C06B7424D3289EE1090 /* FiraSans-ExtraBold.ttf */ = {isa = PBXFileReference; name = "FiraSans-ExtraBold.ttf"; path = "../assets/fonts/FiraSans-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		94BB07B727874CD6937EEB8D /* FiraSans-ExtraLight.ttf */ = {isa = PBXFileReference; name = "FiraSans-ExtraLight.ttf"; path = "../assets/fonts/FiraSans-ExtraLight.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		EADFDD80B6D94AB59BB57DC2 /* FiraSans-Regular.ttf */ = {isa = PBXFileReference; name = "FiraSans-Regular.ttf"; path = "../assets/fonts/FiraSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +171,17 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5E208BBF14444B7982E13B00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				95264C06B7424D3289EE1090 /* FiraSans-ExtraBold.ttf */,
+				94BB07B727874CD6937EEB8D /* FiraSans-ExtraLight.ttf */,
+				EADFDD80B6D94AB59BB57DC2 /* FiraSans-Regular.ttf */,
+			);
+			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,17 +216,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5E208BBF14444B7982E13B00 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				95264C06B7424D3289EE1090 /* FiraSans-ExtraBold.ttf */,
-				94BB07B727874CD6937EEB8D /* FiraSans-ExtraLight.ttf */,
-				EADFDD80B6D94AB59BB57DC2 /* FiraSans-Regular.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -227,6 +227,7 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				72EBC7D4178EC77762A61D08 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,6 +249,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				E558E1577C90DB2104932F30 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -432,6 +434,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
 		};
+		72EBC7D4178EC77762A61D08 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flagitect-FlagitectTests/Pods-Flagitect-FlagitectTests-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flagitect-FlagitectTests/Pods-Flagitect-FlagitectTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		75CA5A7FA03D746CF6113073 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -496,6 +516,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E558E1577C90DB2104932F30 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Flagitect/Pods-Flagitect-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Flagitect/Pods-Flagitect-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
