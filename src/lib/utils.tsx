@@ -77,7 +77,7 @@ export const share = async (message: string): Promise<void> => {
   try {
     await Share.share({ message });
   } catch (error) {
-    Alert.alert('Share Failed', error.message);
+    Alert.alert('Share Failed', error?.message);
   }
 };
 

@@ -6418,6 +6418,11 @@ react-native-device-info@^5.6.1:
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-5.6.1.tgz#3ae88d8659b7b64d204dbfc39f69126b769363d4"
   integrity sha512-FxjenoDZJKT53pp/Tl5gMsw5DA82Y5tOuySQlKS5AaDmw+Bu6EqEJjt0z4TRhJOVoqVJ35oCiZ3xViVbz/hB0w==
 
+react-native-scoped-storage@^1.9.5:
+  version "1.9.5"
+  resolved "https://registry.yarnpkg.com/react-native-scoped-storage/-/react-native-scoped-storage-1.9.5.tgz#79be31569acc5b878cc31404cec2b38f8813f251"
+  integrity sha512-XMlJowlOdNfNUhBI+y7hvP0+lJTqBubErm0gGOmRDnNZ8Uc2QanLL4DR2ZSsAp8e8+G7bgB6UQNAbWRgH0muvg==
+
 react-native-svg@^12.1.0:
   version "12.1.0"
   resolved "https://registry.yarnpkg.com/react-native-svg/-/react-native-svg-12.1.0.tgz#acfe48c35cd5fca3d5fd767abae0560c36cfc03d"
