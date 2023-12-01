@@ -63,31 +63,37 @@ const styles = StyleSheet.create({
   heading1: {
     fontFamily: 'FiraSans-ExtraBold',
     fontSize: 38,
+    lineHeight: 42,
     color: colours.black,
   },
   heading2: {
     fontFamily: 'FiraSans-ExtraBold',
     fontSize: 32,
+    lineHeight: 36,
     color: colours.black,
   },
   heading3: {
     fontFamily: 'FiraSans-ExtraBold',
     fontSize: 26,
+    lineHeight: 32,
     color: colours.black,
   },
   heading4: {
     fontFamily: 'FiraSans-ExtraBold',
     fontSize: 20,
+    lineHeight: 22,
     color: colours.black,
   },
   heading5: {
     fontFamily: 'FiraSans-ExtraBold',
     fontSize: 16,
+    lineHeight: 18,
     color: colours.black,
   },
   paragraph: {
     fontFamily: 'FiraSans-Regular',
     fontSize: 14,
+    lineHeight: 16,
     color: colours.black,
   },
 });
