@@ -14,7 +14,7 @@ module.exports = {
     },
   },
   extends: [
-    '@react-native-community',
+    '@react-native',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
     'plugin:prettier/recommended',
