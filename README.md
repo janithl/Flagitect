@@ -25,6 +25,13 @@ Flagitect allows you to design flags with ease.
 - [Flagitect on Google Play](https://play.google.com/store/apps/details?id=com.flagitect)
 - [Flagitect Subreddit](https://www.reddit.com/r/Flagitect)
 
+## Setup for Prod
+
+- Clone repo.
+- Copy upload keystore from Google Drive and paste it inside `android/app`
+- Update `android/gradle.properties` with keystore password from Google Drive.
+- Run `./gradlew assembleRelease` inside the `android` folder to get the `.aab` file, and upload it to Google Play!
+
 ## License
 
 Flagitect is released under the [MIT License](http://opensource.org/licenses/MIT).
