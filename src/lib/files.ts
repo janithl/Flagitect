@@ -1,4 +1,6 @@
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
+import { getSystemVersion } from 'react-native-device-info';
+import * as ScopedStorage from 'react-native-scoped-storage';
 import RNFetchBlob from 'rn-fetch-blob';
 
 const { android, fs, ios } = RNFetchBlob;
@@ -14,12 +16,14 @@ const mimeType = {
   [FileTypes.PNG]: 'image/png',
   [FileTypes.SVG]: 'image/svg+xml',
   [FileTypes.HTML]: 'text/html',
+  [FileTypes.NONE]: 'application/octet-stream',
 };
 
 const extension = {
   [FileTypes.PNG]: '.png',
   [FileTypes.SVG]: '.svg',
   [FileTypes.HTML]: '.html',
+  [FileTypes.NONE]: '',
 };
 
 export const saveFile = async (
@@ -38,6 +42,27 @@ export const saveFile = async (
     return;
   }
 
+  // For Android 11 and above, we need to use Scoped Storage
+  if (parseInt(getSystemVersion()) > 10) {
+    const dir = await ScopedStorage.openDocumentTree(true);
+    if (dir) {
+      try {
+        await ScopedStorage.writeFile(
+          dir?.uri,
+          contents,
+          `${filename}${extension[filetype]}`,
+          mimeType[filetype],
+          encoding,
+        );
+      } catch (err) {
+        Alert.alert('Error Saving File', err?.message);
+      }
+    } else {
+      Alert.alert('Error Saving File', 'User did not select a directory');
+    }
+    return;
+  }
+
   try {
     const granted = await PermissionsAndroid.request(
       PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
@@ -52,9 +77,9 @@ export const saveFile = async (
         .then(() => android.actionViewIntent(path, mimeType[filetype]))
         .catch(console.error);
     } else {
-      Alert.alert('Error Writing File', 'Permission Denied');
+      Alert.alert('Error Saving File', 'Permission Denied');
     }
   } catch (err) {
-    Alert.alert('Error Writing File', err.message);
+    Alert.alert('Error Saving File', err?.message);
   }
 };
