@@ -1,10 +1,11 @@
 import React from 'react';
-import { FlatList, StyleSheet, View } from 'react-native';
+import { FlatList, StyleSheet, ToastAndroid, View } from 'react-native';
 
 import { Button, Text } from '@components';
 import Actions from '@lib/actions';
-import { ChargeType, ModalActions, openModal } from '@lib/reducers';
+import { ChargeType } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
+import { makeID } from '@lib/utils';
 import {
   BendTypes,
   Charges,
@@ -31,26 +32,32 @@ type ChargeItemProps = {
   onPress: () => void;
 };
 
-export default ({ dispatch }: OwnProps): JSX.Element => (
-  <FlatList
-    data={ChargesList}
-    columnWrapperStyle={styles.columnStyle}
-    keyExtractor={(item) => item}
-    numColumns={3}
-    renderItem={({ item }) => (
-      <ChargeItem
-        title={item}
-        onPress={() => {
-          dispatch({
-            type: Actions.UPDATE_CHARGE,
-            payload: getChargeOptions(item),
-          });
-          openModal(dispatch, ModalActions.ChargesList);
-        }}
-      />
-    )}
-  />
-);
+export default ({ dispatch }: OwnProps): JSX.Element => {
+  const onAddCharge = (item: Charges) => {
+    const id = makeID();
+    dispatch({
+      type: Actions.UPDATE_CHARGE,
+      payload: { ...getChargeOptions(item), id },
+    });
+    dispatch({
+      type: Actions.SELECT_CHARGE,
+      payload: id,
+    });
+    ToastAndroid.show(`${item} added!`, ToastAndroid.SHORT);
+  };
+
+  return (
+    <FlatList
+      data={ChargesList}
+      columnWrapperStyle={styles.columnStyle}
+      keyExtractor={item => item}
+      numColumns={3}
+      renderItem={({ item }) => (
+        <ChargeItem title={item} onPress={() => onAddCharge(item)} />
+      )}
+    />
+  );
+};
 
 type OwnProps = {
   dispatch: (action: ReducerAction) => void;

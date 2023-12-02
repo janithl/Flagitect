@@ -97,6 +97,10 @@ export default ({
       type: Actions.SELECT_CHARGE,
       payload: '',
     });
+    ToastAndroid.show(
+      `${charges[selectedCharge]?.type} removed!`,
+      ToastAndroid.SHORT,
+    );
   };
 
   const cloneCharge = () => {
@@ -114,7 +118,7 @@ export default ({
     <ScrollView>
       <SectionHeading title={`${charges[selectedCharge]?.type} Properties`} />
       {charges[selectedCharge] &&
-        properties.map((item) =>
+        properties.map(item =>
           charges[selectedCharge][item.name] ? (
             <Spinner
               key={item.name}
