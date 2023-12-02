@@ -43,7 +43,7 @@ export default ({
       case ModalActions.SaveFlag:
         return (
           <FileSaver
-            onSave={(fileType) =>
+            onSave={fileType =>
               dispatch({
                 type: Actions.SAVE_FLAG,
                 payload: fileType,
@@ -75,6 +75,7 @@ export default ({
     switch (modalAction) {
       case ModalActions.SelectColourBorder:
       case ModalActions.EditCharge:
+      case ModalActions.AddCharge:
         openModal(dispatch, ModalActions.ChargesList);
         break;
       case ModalActions.SelectColourCharge:
