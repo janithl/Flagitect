@@ -8,6 +8,9 @@ const appColours = {
   white: '#FFFFFF',
   black: '#000000',
   grey: '#C5C5C5',
+
+  disabledBg: '#E0E0E0',
+  disabledFg: '#A0A0A0',
 };
 
 export const gnomePalette = [

@@ -9,6 +9,7 @@ import colours from '@res/colours';
 import { Add, Edit, Paint } from '@res/icons';
 
 export default ({ border, charges, dispatch }: OwnProps): JSX.Element => {
+  const disableBorderColour = border.heightPercentage === 0;
   const renderHeader = () => (
     <>
       <SectionHeading title="Border" />
@@ -25,8 +26,14 @@ export default ({ border, charges, dispatch }: OwnProps): JSX.Element => {
           }
         />
         <ListItem
-          title="Set Colour"
-          icon={<Paint fill={border.colour} size={32} />}
+          title="Set Border Colour"
+          icon={
+            <Paint
+              fill={disableBorderColour ? colours.disabledFg : border.colour}
+              size={32}
+            />
+          }
+          disabled={disableBorderColour}
           onPress={() => openModal(dispatch, ModalActions.SelectColourBorder)}
         />
       </View>

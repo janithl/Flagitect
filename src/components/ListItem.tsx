@@ -10,19 +10,26 @@ export default ({
   subtitle,
   colour = colours.primaryBlue,
   arrow = true,
+  disabled = false,
   onPress,
   icon,
 }: OwnProps): JSX.Element => (
-  <TouchableOpacity style={styles.container} onPress={onPress}>
+  <TouchableOpacity
+    style={[styles.container, disabled ? styles.containerDisabled : {}]}
+    onPress={disabled ? undefined : onPress}>
     <View style={styles.icon}>{icon}</View>
     <View style={styles.label}>
-      <Text colour={colour} H4>
+      <Text colour={disabled ? colours.disabledFg : colour} H4>
         {title}
       </Text>
-      {subtitle && <Text colour={colour}>{subtitle}</Text>}
+      {subtitle && (
+        <Text colour={disabled ? colours.disabledFg : colour}>{subtitle}</Text>
+      )}
     </View>
     <View style={styles.icon}>
-      {arrow && <Right fill={colour} size={48} />}
+      {arrow && (
+        <Right fill={disabled ? colours.disabledFg : colour} size={48} />
+      )}
     </View>
   </TouchableOpacity>
 );
@@ -34,6 +41,7 @@ type OwnProps = {
   colour?: string;
   icon?: JSX.Element;
   arrow?: boolean;
+  disabled?: boolean;
 };
 
 const styles = StyleSheet.create({
@@ -42,6 +50,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     flexDirection: 'row',
     height: 60,
+  },
+  containerDisabled: {
+    backgroundColor: colours.disabledBg,
   },
   label: {
     flex: 1,
