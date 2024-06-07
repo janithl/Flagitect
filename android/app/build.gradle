@@ -78,8 +78,8 @@ android {
         applicationId "com.flagitect"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 010400 // xxyyzz where x, y, z are zero-padded major, minor, bugfix
-        versionName "1.4.0" // major.minor.bugfix
+        versionCode 010401 // xxyyzz where x, y, z are zero-padded major, minor, bugfix
+        versionName "1.4.1" // major.minor.bugfix
     }
     signingConfigs {
         debug {
