@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactDOMServer from 'react-dom/server';
+// import ReactDOMServer from 'react-dom/server';
 import { Alert, Share } from 'react-native';
 
 const childToWeb = (child: JSX.Element) => {
@@ -13,8 +13,7 @@ const childToWeb = (child: JSX.Element) => {
 const toWeb = (children: JSX.Element[] | JSX.Element) =>
   React.Children.map(children, childToWeb);
 
-export const serialiseSVG = (element: JSX.Element): string =>
-  ReactDOMServer.renderToStaticMarkup(<>{toWeb(element)}</>);
+export const serialiseSVG = (element: JSX.Element): string => ''; //ReactDOMServer.renderToStaticMarkup(<>{toWeb(element)}</>);
 
 export const addHTML = (content: string): string => `<!doctype html>
 <html lang="en">
