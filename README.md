@@ -7,9 +7,9 @@ released under the MIT license. It's written using React Native with the followi
 libraries:
 
 - [react-native-svg](https://github.com/react-native-community/react-native-svg)
-- [rn-fetch-blob](https://github.com/joltup/rn-fetch-blob)
+- [react-native-blob-util](https://github.com/RonRadtke/react-native-blob-util)
 - [react-native-device-info](https://github.com/react-native-community/react-native-device-info)
-- [React Native Async Storage](https://github.com/react-native-community/async-storage)
+- [React Native Async Storage](https://github.com/react-native-async-storage/async-storage)
 
 ## Features
 

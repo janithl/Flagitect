@@ -1,5 +1,5 @@
 {
-  "extends": "@tsconfig/react-native/tsconfig.json",
+  "extends": "@react-native/typescript-config",
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
@@ -7,21 +7,22 @@
     "isolatedModules": true,
     "jsx": "react",
     "lib": ["es6"],
-    "moduleResolution": "node",
     "noEmit": true,
     "strict": true,
     "target": "esnext",
-    "baseUrl": ".",
+    "types": ["jest"],
     "paths": {
-      "*": ["src/*"],
-      "@components": ["src/components/index"],
-      "@components/*": ["src/components/*"],
-      "@res/*": ["src/res/*"],
-      "@lib/*": ["src/lib/*"]
+      "*": ["./src/*"],
+      "@components": ["./src/components/index"],
+      "@components/*": ["./src/components/*"],
+      "@res/*": ["./src/res/*"],
+      "@lib/*": ["./src/lib/*"]
     }
   },
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": [
-    "node_modules",
+    "**/node_modules", 
+    "**/Pods",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js"

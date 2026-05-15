@@ -1,9 +1,8 @@
 import { Alert, PermissionsAndroid, Platform } from 'react-native';
 import { getSystemVersion } from 'react-native-device-info';
-import * as ScopedStorage from 'react-native-scoped-storage';
-import RNFetchBlob from 'rn-fetch-blob';
+import ReactNativeBlobUtil from 'react-native-blob-util';
 
-const { android, fs, ios } = RNFetchBlob;
+const { android, fs, ios } = ReactNativeBlobUtil;
 
 export enum FileTypes {
   SVG = 'SVG',
@@ -44,23 +43,23 @@ export const saveFile = async (
 
   // For Android 11 and above, we need to use Scoped Storage
   if (parseInt(getSystemVersion()) > 10) {
-    const dir = await ScopedStorage.openDocumentTree(true);
-    if (dir) {
-      try {
-        await ScopedStorage.writeFile(
-          dir?.uri,
-          contents,
-          `${filename}${extension[filetype]}`,
-          mimeType[filetype],
-          encoding,
-        );
-      } catch (err) {
-        Alert.alert('Error Saving File', err?.message);
-      }
-    } else {
-      Alert.alert('Error Saving File', 'User did not select a directory');
-    }
-    return;
+    // const dir = await ScopedStorage.openDocumentTree(true);
+    // if (dir) {
+    //   try {
+    //     await ScopedStorage.writeFile(
+    //       dir?.uri,
+    //       contents,
+    //       `${filename}${extension[filetype]}`,
+    //       mimeType[filetype],
+    //       encoding,
+    //     );
+    //   } catch (err) {
+    //     Alert.alert('Error Saving File', err?.message);
+    //   }
+    // } else {
+    //   Alert.alert('Error Saving File', 'User did not select a directory');
+    // }
+    // return;
   }
 
   try {
