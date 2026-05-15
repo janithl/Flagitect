@@ -1,19 +1,33 @@
 import React from 'react';
-// import ReactDOMServer from 'react-dom/server';
 import { Alert, Share } from 'react-native';
 
-const childToWeb = (child: JSX.Element) => {
-  const { type, props } = child;
-  const name = type && type.displayName;
-  const webName = name && name[0].toLowerCase() + name.slice(1);
-  const Tag = webName ? webName : type;
-  return <Tag {...props}>{toWeb(props.children)}</Tag>;
+const serialiseProps = (props: any) =>
+  Object.entries(props)
+    .filter(([k]) => k !== 'children')
+    .map(([k, v]) => `${k}="${v}"`)
+    .join(' ');
+
+const serialiseNode = (node: any): string => {
+  if (!React.isValidElement(node)) {
+    return String(node ?? '');
+  }
+
+  const { type, props } = node;
+
+  const tag =
+    typeof type === 'string' ? type : type.displayName?.toLowerCase() ?? 'g';
+
+  const children = React.Children.toArray(props.children)
+    .map(serialiseNode)
+    .join('');
+
+  return `<${tag} ${serialiseProps(props)}>
+  ${children}
+</${tag}>`;
 };
 
-const toWeb = (children: JSX.Element[] | JSX.Element) =>
-  React.Children.map(children, childToWeb);
-
-export const serialiseSVG = (element: JSX.Element): string => ''; //ReactDOMServer.renderToStaticMarkup(<>{toWeb(element)}</>);
+export const serialiseSVG = (element: JSX.Element): string =>
+  serialiseNode(element);
 
 export const addHTML = (content: string): string => `<!doctype html>
 <html lang="en">
