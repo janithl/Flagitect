@@ -28,6 +28,7 @@ Flagitect allows you to design flags with ease.
 ## Setup for Prod
 
 - Clone repo.
+- Run `nvm use 22`, `yarn`, and `npx react-native-asset`
 - Copy upload keystore from Google Drive and paste it inside `android/app`
 - Update `android/gradle.properties` with keystore password from Google Drive.
 - Run `./gradlew assembleRelease` inside the `android` folder to get the `.aab` file, and upload it to Google Play!

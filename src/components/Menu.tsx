@@ -10,8 +10,10 @@ import {
   View,
   ViewStyle,
   Linking,
+  Platform,
 } from 'react-native';
 import { getVersion } from 'react-native-device-info';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ListItem, SectionHeading, Text } from '@components';
 import Actions from '@lib/actions';
@@ -44,6 +46,7 @@ type SlideInMenuProps = {
 };
 
 export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
+  const safeAreaInsets = useSafeAreaInsets();
   const width = useWindowDimensions().width;
   const toggleMenu = () =>
     dispatch({
@@ -65,7 +68,10 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
               transform: [{ translateX: -width }],
             },
           ]}>
-          <ScrollView>
+          <ScrollView
+            style={{
+              marginTop: Platform.OS == 'ios' ? safeAreaInsets.top : 0,
+            }}>
             <View style={styles.modalContent}>
               <TouchableOpacity onPress={toggleMenu}>
                 <Clear fill={colours.black} size={32} />
