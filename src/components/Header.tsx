@@ -19,8 +19,7 @@ const Header = ({ title, onSave, onOpenMenu }: OwnProps): JSX.Element => {
           height: styles.header.height + safeAreaInsets.top,
           paddingTop: safeAreaInsets.top,
         },
-      ]}
-    >
+      ]}>
       <View style={styles.headerContent}>
         <TouchableOpacity onPress={onOpenMenu}>
           <Menu fill={colours.white} size={32} />

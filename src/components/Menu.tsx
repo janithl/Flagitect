@@ -55,8 +55,7 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
       transparent={true}
       hardwareAccelerated={true}
       visible={menuOpen}
-      onRequestClose={toggleMenu}
-    >
+      onRequestClose={toggleMenu}>
       <View style={styles.container}>
         <SlideInMenu
           style={[
@@ -65,8 +64,7 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
               width,
               transform: [{ translateX: -width }],
             },
-          ]}
-        >
+          ]}>
           <ScrollView>
             <View style={styles.modalContent}>
               <TouchableOpacity onPress={toggleMenu}>

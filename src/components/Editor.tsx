@@ -66,8 +66,7 @@ export default ({
         height={height}
         width={width}
         viewBox={[0, 0, width, height].join(' ')}
-        ref={flag}
-      >
+        ref={flag}>
         <Rect height={height} width={width} fill={border.colour} />
         <G transform={`translate(${borderWidth},${borderWidth})`}>
           {renderDivisions(
@@ -119,8 +118,7 @@ export default ({
       style={[
         styles.editor,
         modalAction === ModalActions.None ? null : styles.editorSmall,
-      ]}
-    >
+      ]}>
       {renderFlag(screenCanvas.height, screenCanvas.width)}
     </View>
   );

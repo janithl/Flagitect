@@ -46,8 +46,7 @@ export default ({
         {
           marginBottom: safeAreaInsets.bottom,
         },
-      ]}
-    >
+      ]}>
       <Row>
         <FooterButton
           title="Division"
