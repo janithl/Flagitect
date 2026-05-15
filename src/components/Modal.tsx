@@ -21,7 +21,7 @@ export default ({
     <View style={styles.modalBody}>
       <View style={styles.modalHeading}>
         <View style={styles.modalHeadingContent}>
-          <Text colour={colours.white} H4>
+          <Text colour={colours.white} H4 numberOfLines={1}>
             {title}
           </Text>
         </View>
