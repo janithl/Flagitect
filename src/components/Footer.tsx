@@ -8,6 +8,7 @@ import { ChargeType, ModalActions, openModal } from '@lib/reducers';
 import { ReducerAction } from '@lib/state';
 import colours from '@res/colours';
 import { DivisionList } from '@res/divisions';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const FooterButton = ({
   title,
@@ -37,8 +38,16 @@ export default ({
   charges,
   dispatch,
 }: OwnProps): JSX.Element => {
+  const safeAreaInsets = useSafeAreaInsets();
   return (
-    <View style={styles.footer}>
+    <View
+      style={[
+        styles.footer,
+        {
+          marginBottom: safeAreaInsets.bottom,
+        },
+      ]}
+    >
       <Row>
         <FooterButton
           title="Division"

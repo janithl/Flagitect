@@ -1,4 +1,5 @@
 import React from 'react';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import {
   AppState,
@@ -10,11 +11,13 @@ import {
 } from '@components';
 
 export default (): JSX.Element => (
-  <AppState>
-    <EditorHeader />
-    <Editor />
-    <Footer />
-    <EditorModal />
-    <Menu />
-  </AppState>
+  <SafeAreaProvider>
+    <AppState>
+      <EditorHeader />
+      <Editor />
+      <Footer />
+      <EditorModal />
+      <Menu />
+    </AppState>
+  </SafeAreaProvider>
 );

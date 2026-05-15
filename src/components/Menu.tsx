@@ -3,7 +3,6 @@ import {
   Animated,
   Image,
   Modal,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -56,7 +55,8 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
       transparent={true}
       hardwareAccelerated={true}
       visible={menuOpen}
-      onRequestClose={toggleMenu}>
+      onRequestClose={toggleMenu}
+    >
       <View style={styles.container}>
         <SlideInMenu
           style={[
@@ -65,51 +65,50 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
               width,
               transform: [{ translateX: -width }],
             },
-          ]}>
-          <SafeAreaView>
-            <ScrollView>
-              <View style={styles.modalContent}>
-                <TouchableOpacity onPress={toggleMenu}>
-                  <Clear fill={colours.black} size={32} />
-                </TouchableOpacity>
+          ]}
+        >
+          <ScrollView>
+            <View style={styles.modalContent}>
+              <TouchableOpacity onPress={toggleMenu}>
+                <Clear fill={colours.black} size={32} />
+              </TouchableOpacity>
 
-                <View style={styles.logoContainer}>
-                  <Image
-                    style={styles.logo}
-                    source={require('res/app_icon.png')}
-                  />
-                </View>
-                <View style={styles.title}>
-                  <Text H1>Flagitect</Text>
-                  <Text>{`v${getVersion()}`}</Text>
-                </View>
+              <View style={styles.logoContainer}>
+                <Image
+                  style={styles.logo}
+                  source={require('res/app_icon.png')}
+                />
               </View>
-              <SectionHeading title="Links" />
-              <ListItem
-                title="Source Code"
-                subtitle="github.com/janithl/Flagitect"
-                colour={colours.black}
-                icon={<Link fill={colours.black} size={32} />}
-                onPress={() =>
-                  Linking.openURL('https://github.com/janithl/Flagitect')
-                }
-              />
-              <ListItem
-                title="Subreddit"
-                subtitle="reddit.com/r/Flagitect"
-                colour={colours.black}
-                icon={<Link fill={colours.black} size={32} />}
-                onPress={() =>
-                  Linking.openURL('https://www.reddit.com/r/Flagitect')
-                }
-              />
-              <SectionHeading title="License" />
-              <View style={styles.modalContent}>
-                <Text>{`Copyright (c) ${new Date().getFullYear()} Flagitect Developers`}</Text>
-                <Text textAlign="justify">{license}</Text>
+              <View style={styles.title}>
+                <Text H1>Flagitect</Text>
+                <Text>{`v${getVersion()}`}</Text>
               </View>
-            </ScrollView>
-          </SafeAreaView>
+            </View>
+            <SectionHeading title="Links" />
+            <ListItem
+              title="Source Code"
+              subtitle="github.com/janithl/Flagitect"
+              colour={colours.black}
+              icon={<Link fill={colours.black} size={32} />}
+              onPress={() =>
+                Linking.openURL('https://github.com/janithl/Flagitect')
+              }
+            />
+            <ListItem
+              title="Subreddit"
+              subtitle="reddit.com/r/Flagitect"
+              colour={colours.black}
+              icon={<Link fill={colours.black} size={32} />}
+              onPress={() =>
+                Linking.openURL('https://www.reddit.com/r/Flagitect')
+              }
+            />
+            <SectionHeading title="License" />
+            <View style={styles.modalContent}>
+              <Text>{`Copyright (c) ${new Date().getFullYear()} Flagitect Developers`}</Text>
+              <Text textAlign="justify">{license}</Text>
+            </View>
+          </ScrollView>
         </SlideInMenu>
       </View>
     </Modal>

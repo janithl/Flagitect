@@ -7,17 +7,26 @@ buildscript {
         ndkVersion = "27.1.12297006"
         kotlinVersion = "2.1.20"
     }
+
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri(project(":react-native-async-storage_async-storage").file("local_repo"))
-        }
     }
+    
     dependencies {
         classpath("com.android.tools.build:gradle")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+    }
+}
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google()
+        maven {
+            url = uri(project(":react-native-async-storage_async-storage").file("local_repo"))
+        }
     }
 }
 

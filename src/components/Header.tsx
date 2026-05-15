@@ -1,9 +1,6 @@
 import React from 'react';
 import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { Text } from '@components';
 import Actions from '@lib/actions';
@@ -15,8 +12,16 @@ import { Download, Menu } from '@res/icons';
 const Header = ({ title, onSave, onOpenMenu }: OwnProps): JSX.Element => {
   const safeAreaInsets = useSafeAreaInsets();
   return (
-    <View style={styles.header}>
-      <View style={[styles.headerContent, { paddingTop: safeAreaInsets.top }]}>
+    <View
+      style={[
+        styles.header,
+        {
+          height: styles.header.height + safeAreaInsets.top,
+          paddingTop: safeAreaInsets.top,
+        },
+      ]}
+    >
+      <View style={styles.headerContent}>
         <TouchableOpacity onPress={onOpenMenu}>
           <Menu fill={colours.white} size={32} />
         </TouchableOpacity>
@@ -40,22 +45,20 @@ type OwnProps = {
 };
 
 export const EditorHeader = ({ dispatch }: EditorHeaderProps): JSX.Element => (
-  <SafeAreaProvider>
-    <Header
-      title={'Flagitect'}
-      onSave={() =>
-        dispatch({
-          type: Actions.SET_MODAL_ACTION,
-          payload: ModalActions.SaveFlag,
-        })
-      }
-      onOpenMenu={() =>
-        dispatch({
-          type: Actions.TOGGLE_MENU,
-        })
-      }
-    />
-  </SafeAreaProvider>
+  <Header
+    title={'Flagitect'}
+    onSave={() =>
+      dispatch({
+        type: Actions.SET_MODAL_ACTION,
+        payload: ModalActions.SaveFlag,
+      })
+    }
+    onOpenMenu={() =>
+      dispatch({
+        type: Actions.TOGGLE_MENU,
+      })
+    }
+  />
 );
 
 type EditorHeaderProps = {
