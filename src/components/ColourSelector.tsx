@@ -46,12 +46,12 @@ export default ({ selectedColours, dispatch }: OwnProps): JSX.Element => {
       renderItem={({ item, index }) => (
         <ColourSwatch colour={item} onPress={() => colourAlert(index)} />
       )}
-      keyExtractor={(item) => item}
+      keyExtractor={item => item}
       numColumns={5}
       columnWrapperStyle={styles.columnStyle}
       ListFooterComponent={
         <Button onPress={onAdd} height={48}>
-          <Text colour={colours.white} H4>
+          <Text colour={colours.white} H4 numberOfLines={1}>
             Add Colours
           </Text>
         </Button>

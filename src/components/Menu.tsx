@@ -3,7 +3,6 @@ import {
   Animated,
   Image,
   Modal,
-  SafeAreaView,
   ScrollView,
   StyleSheet,
   TouchableOpacity,
@@ -11,8 +10,10 @@ import {
   View,
   ViewStyle,
   Linking,
+  Platform,
 } from 'react-native';
 import { getVersion } from 'react-native-device-info';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { ListItem, SectionHeading, Text } from '@components';
 import Actions from '@lib/actions';
@@ -45,6 +46,7 @@ type SlideInMenuProps = {
 };
 
 export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
+  const safeAreaInsets = useSafeAreaInsets();
   const width = useWindowDimensions().width;
   const toggleMenu = () =>
     dispatch({
@@ -66,50 +68,51 @@ export default ({ ui: { menuOpen }, dispatch }: OwnProps): JSX.Element => {
               transform: [{ translateX: -width }],
             },
           ]}>
-          <SafeAreaView>
-            <ScrollView>
-              <View style={styles.modalContent}>
-                <TouchableOpacity onPress={toggleMenu}>
-                  <Clear fill={colours.black} size={32} />
-                </TouchableOpacity>
+          <ScrollView
+            style={{
+              marginTop: Platform.OS == 'ios' ? safeAreaInsets.top : 0,
+            }}>
+            <View style={styles.modalContent}>
+              <TouchableOpacity onPress={toggleMenu}>
+                <Clear fill={colours.black} size={32} />
+              </TouchableOpacity>
 
-                <View style={styles.logoContainer}>
-                  <Image
-                    style={styles.logo}
-                    source={require('res/app_icon.png')}
-                  />
-                </View>
-                <View style={styles.title}>
-                  <Text H1>Flagitect</Text>
-                  <Text>{`v${getVersion()}`}</Text>
-                </View>
+              <View style={styles.logoContainer}>
+                <Image
+                  style={styles.logo}
+                  source={require('res/app_icon.png')}
+                />
               </View>
-              <SectionHeading title="Links" />
-              <ListItem
-                title="Source Code"
-                subtitle="github.com/janithl/Flagitect"
-                colour={colours.black}
-                icon={<Link fill={colours.black} size={32} />}
-                onPress={() =>
-                  Linking.openURL('https://github.com/janithl/Flagitect')
-                }
-              />
-              <ListItem
-                title="Subreddit"
-                subtitle="reddit.com/r/Flagitect"
-                colour={colours.black}
-                icon={<Link fill={colours.black} size={32} />}
-                onPress={() =>
-                  Linking.openURL('https://www.reddit.com/r/Flagitect')
-                }
-              />
-              <SectionHeading title="License" />
-              <View style={styles.modalContent}>
-                <Text>{`Copyright (c) ${new Date().getFullYear()} Flagitect Developers`}</Text>
-                <Text textAlign="justify">{license}</Text>
+              <View style={styles.title}>
+                <Text H1>Flagitect</Text>
+                <Text>{`v${getVersion()}`}</Text>
               </View>
-            </ScrollView>
-          </SafeAreaView>
+            </View>
+            <SectionHeading title="Links" />
+            <ListItem
+              title="Source Code"
+              subtitle="github.com/janithl/Flagitect"
+              colour={colours.black}
+              icon={<Link fill={colours.black} size={32} />}
+              onPress={() =>
+                Linking.openURL('https://github.com/janithl/Flagitect')
+              }
+            />
+            <ListItem
+              title="Subreddit"
+              subtitle="reddit.com/r/Flagitect"
+              colour={colours.black}
+              icon={<Link fill={colours.black} size={32} />}
+              onPress={() =>
+                Linking.openURL('https://www.reddit.com/r/Flagitect')
+              }
+            />
+            <SectionHeading title="License" />
+            <View style={styles.modalContent}>
+              <Text>{`Copyright (c) ${new Date().getFullYear()} Flagitect Developers`}</Text>
+              <Text textAlign="justify">{license}</Text>
+            </View>
+          </ScrollView>
         </SlideInMenu>
       </View>
     </Modal>

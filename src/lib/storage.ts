@@ -1,11 +1,11 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { StateType } from '@lib/state';
 
 export const getState = async (): Promise<StateType | undefined> => {
   try {
     const jsonValue = await AsyncStorage.getItem('@app_state');
-    return jsonValue ? JSON.parse(jsonValue) : null;
+    return jsonValue ? JSON.parse(jsonValue) : undefined;
   } catch (e) {
     console.error(e);
   }
